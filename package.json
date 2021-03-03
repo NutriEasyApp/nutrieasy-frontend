@@ -1,0 +1,22 @@
+{
+  "name": "nutri-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NutrIA-Artificial-Intelligence-App/nutri-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NutrIA-Artificial-Intelligence-App/nutri-app/issues"
+  },
+  "homepage": "https://github.com/NutrIA-Artificial-Intelligence-App/nutri-app#readme",
+  "dependencies": {
+    "vue": "^2.6.12"
+  }
+}
