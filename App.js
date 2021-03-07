@@ -72,7 +72,7 @@ export default function App() {
             width: logo.x,
             height: logo.y
           }}
-          source={require('./src/assets/logo.png')}>
+          source={require('./assets/logo.png')}>
 
         </Animated.Image>
         <StatusBar style="auto" />
@@ -106,12 +106,14 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     alignItems: 'center',
-    justifyCenter: 'center',
-    backgroundColor: '#191919'
+    justifyContent: 'center',
+    //backgroundColor: '#191919'
+    backgroundColor: '#fff'
   },
   containerLogo: {
     flex: 1,
     justifyContent: 'center',
+    marginBottom: -350
   },
   container: {
     flex: 1,
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
     paddingBottom: 50
   },
   input: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#f9f9f9',
     width: '90%',
     marginBottom: 15,
     color: '#222',
@@ -130,11 +132,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   btnSubmit: {
-    backgroundColor: '#35AAFF',
+    backgroundColor: '#90cc0c',
     width: '90%',
     height: 45,
     alignItems: 'center',
-    justifyCenter: 'center',
+    justifyContent: 'center',
     borderRadius: 7,
   },
   submitText: {
@@ -145,7 +147,6 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   registerText: {
-    color: '#FFF',
-
+    color: '#3b3b3b',
   }
 });
