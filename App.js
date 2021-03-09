@@ -9,8 +9,9 @@ import {
   TextInput,
   TouchableOpacity,
   Animated,
-  Keyboard
+  Keyboard,
 } from 'react-native';
+
 
 export default function App() {
 
@@ -72,7 +73,7 @@ export default function App() {
             width: logo.x,
             height: logo.y
           }}
-          source={require('./assets/logo.png')}>
+          source={require('./assets/images/logo.png')}>
 
         </Animated.Image>
         <StatusBar style="auto" />
