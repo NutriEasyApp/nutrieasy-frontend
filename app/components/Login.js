@@ -72,7 +72,7 @@ export default function Login() {
             width: logo.x,
             height: logo.y
           }}
-          source={require('./assets/logo.png')}>
+          source={require('./assets/images/logo.png')}>
 
         </Animated.Image>
         <StatusBar style="auto" />
