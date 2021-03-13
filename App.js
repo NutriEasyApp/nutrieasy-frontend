@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -16,7 +16,7 @@ export default function App() {
       <View style={styles.containerLogo}>
         <Image style={styles.logoImg} source={require('./assets/images/logo.png')}></Image>
       </View>
-
+      
       <View style={styles.container}>
         <TextInput style={styles.input} placeholder="Email" autoCorrect={false} onChangeText={() => { }}></TextInput>
         <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} onChangeText={() => { }}></TextInput>
