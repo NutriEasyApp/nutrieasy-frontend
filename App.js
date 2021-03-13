@@ -12,8 +12,14 @@ import {
   Keyboard,
 } from 'react-native';
 
+import { Button, Menu, Divider, Provider } from 'react-native-paper';
+
 
 export default function App() {
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
 
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 80 }));
   const [opacity] = useState(new Animated.Value(0));
@@ -66,40 +72,51 @@ export default function App() {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.background}>
-      <View style={styles.containerLogo}>
-        <Animated.Image
-          style={{
-            width: logo.x,
-            height: logo.y
-          }}
-          source={require('./assets/images/logo.png')}>
+    <Provider>
+      <KeyboardAvoidingView style={styles.background}>
+        <View style={styles.containerLogo}>
+          <Animated.Image
+            style={{
+              width: logo.x,
+              height: logo.y
+            }}
+            source={require('./assets/images/logo.png')}>
 
-        </Animated.Image>
-        <StatusBar style="auto" />
-      </View>
-      <Animated.View style={[styles.container, {
-        opacity: opacity,
-        transform: [
-          {
-            translateY: offset.y
-          }
-        ]
-      }]}>
-        <TextInput style={styles.input} placeholder="Email" autoCorrect={false} onChangeText={() => { }}></TextInput>
-        <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} onChangeText={() => { }}></TextInput>
-        <TouchableOpacity style={styles.btnSubmit}>
-          <Text style={styles.submitText}>
-            Acessar
+          </Animated.Image>
+          <StatusBar style="auto" />
+        </View>
+        <Animated.View style={[styles.container, {
+          opacity: opacity,
+          transform: [
+            {
+              translateY: offset.y
+            }
+          ]
+        }]}>
+          <TextInput style={styles.input} placeholder="Email" autoCorrect={false} onChangeText={() => { }}></TextInput>
+          <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} onChangeText={() => { }}></TextInput>
+          <TouchableOpacity style={styles.btnSubmit}>
+            <Text style={styles.submitText}>
+              Acessar
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnRegister}>
-          <Text style={styles.registerText}>
-            Criar Conta
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnRegister}>
+            <Text style={styles.registerText}>
+              Criar Conta
           </Text>
-        </TouchableOpacity>
-      </Animated.View>
-    </KeyboardAvoidingView>
+          </TouchableOpacity>
+        </Animated.View>
+      </KeyboardAvoidingView>
+      <Menu
+        visible={visible}
+        onDismiss={closeMenu}
+        anchor={<Button onPress={openMenu}>Show menu</Button>}>
+        <Menu.Item onPress={() => { }} title="Item 1" />
+        <Menu.Item onPress={() => { }} title="Item 2" />
+        <Divider /> 
+        <Menu.Item onPress={() => { }} title="Item 3" />
+      </Menu>
+    </Provider>
   );
 }
 
