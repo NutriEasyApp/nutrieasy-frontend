@@ -7,6 +7,7 @@ import Diet from './pages/Diet';
 import Foods from './pages/Foods';
 import Graphics from './pages/Graphics';
 import Login from './pages/Login';
+import SignUp from './pages/Login';
 import Main from './pages/Main';
 import Profile from './pages/Profile';
 import Recipes from './pages/Recipes';
@@ -23,6 +24,7 @@ export default function Routes(){
                  <Route path="/foods" exact component={Foods}></Route>
                  <Route path="/graphics" exact component={Graphics}></Route>
                  <Route path="/login" exact component={Login}></Route>
+                 <Route path="/signup" exact component={SignUp}></Route>
                  <Route path="/" exact component={Main}></Route>
                  <Route path="/profile" exact component={Profile}></Route>
                  <Route path="/recipes" exact component={Recipes}></Route>
