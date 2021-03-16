@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     background: {
         flex: 1,
         alignItems: 'center',
@@ -10,27 +10,30 @@ const styles = StyleSheet.create({
     containerLogo: {
         flex: 1,
         justifyContent: 'center',
-        marginBottom: -250
+        marginBottom: 0,
+        marginTop: 840
     },
     logoImg: {
-        width: 180,
-        height: 180
+        width: 220,
+        height: 220
     },
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
-        paddingBottom: 50
+        paddingBottom: 50,
+        marginTop: 220
     },
     input: {
         backgroundColor: '#f9f9f9',
         width: '90%',
         marginBottom: 15,
         color: '#222',
-        fontSize: 17,
+        fontSize: 16,
         borderRadius: 7,
-        padding: 10,
+        padding: 15,
+        height: 55
     },
     btnSubmit: {
         backgroundColor: '#90cc0c',

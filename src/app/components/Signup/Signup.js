@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { styles } from './SignUp.style';
+
 import {
-  StyleSheet,
   Text,
   View,
   KeyboardAvoidingView,
@@ -9,14 +10,13 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import { styles } from './Signup.style';
 
-export default function App() {
+export default function Signup() {
 
   return (
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.containerLogo}>
-        <Image style={styles.logoImg} source={require('./assets/images/logo.png')}></Image>
+        <Image style={styles.logoImg} source={require('../../../assets/images/logo.png')}></Image>
       </View>
 
       <View style={styles.container}>
