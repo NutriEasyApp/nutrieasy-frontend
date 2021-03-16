@@ -22,7 +22,7 @@ export default function Signup() {
       <View style={styles.container}>
         <TextInput style={styles.input} placeholder="Nome completo" autoCorrect={false} onChangeText={() => { }}></TextInput>
         <TextInput style={styles.input} placeholder="Email" autoCorrect={false} onChangeText={() => { }}></TextInput>
-        <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} onChangeText={() => { }}></TextInput>
+        <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" autoCorrect={false} onChangeText={() => { }}></TextInput>
         <TouchableOpacity style={styles.btnSubmit}>
           <Text style={styles.submitText}>
             Cadastrar conta

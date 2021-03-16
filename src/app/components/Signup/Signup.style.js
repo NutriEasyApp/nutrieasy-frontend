@@ -2,28 +2,25 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     background: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff'
     },
     containerLogo: {
-        flex: 1,
         justifyContent: 'center',
-        marginBottom: 0,
-        marginTop: 840
+        marginBottom: -20,
+        marginTop: 200
     },
     logoImg: {
         width: 220,
         height: 220
     },
     container: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
         paddingBottom: 50,
-        marginTop: 220
+        marginTop: 0
     },
     input: {
         backgroundColor: '#f9f9f9',
