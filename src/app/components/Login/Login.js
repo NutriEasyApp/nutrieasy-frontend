@@ -19,9 +19,9 @@ export default function Login() {
         <Image style={styles.logoImg} source={require('../../../assets/images/logo.png')}></Image>
       </View>
 
-      <View style={styles.container}>
-        <TextInput style={styles.input} placeholder="Email" autoCorrect={false} onChangeText={() => { }}></TextInput>
-        <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} onChangeText={() => { }}></TextInput>
+      <View style={styles.container}>    
+        <TextInput style={styles.input} placeholder="Email" autoCorrect={false} placeholderTextColor="#222" onChangeText={() => { }}></TextInput>
+        <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} placeholderTextColor="#222" onChangeText={() => { }}></TextInput>
         <TouchableOpacity style={styles.btnSubmit}>
           <Text style={styles.submitText}>
             Acessar
@@ -33,6 +33,7 @@ export default function Login() {
           </Text>
         </TouchableOpacity>
       </View>
+      
     </KeyboardAvoidingView>
   );
 }
