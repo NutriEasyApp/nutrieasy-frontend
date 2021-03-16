@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { NativeRouter} from "react-router-native";
 
 import AboutApp from './pages/AboutApp';
 import Diet from './pages/Diet';
@@ -15,7 +16,7 @@ import SideDish from './pages/SideDish';
 
 export default function Routes(){
     return(
-        <BrowserRouter>
+        <NativeRouter>
              <Switch>
                  <Route path="/about-app" exact component={AboutApp}></Route>
                  <Route path="/diet" exact component={Diet}></Route>
@@ -28,6 +29,6 @@ export default function Routes(){
                  <Route path="/reports" exact component={Reports}></Route>
                  <Route path="/side-dish" exact component={SideDish}></Route>
              </Switch>
-        </BrowserRouter>
+        </NativeRouter>
     );  
 };
