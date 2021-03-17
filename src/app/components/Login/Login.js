@@ -27,6 +27,7 @@ export default function Login() {
           <Text style={styles.submitText}>
             Acessar
           </Text>
+
         </TouchableOpacity>
         <TouchableOpacity style={styles.btnRegister}>
           <Text style={styles.registerText}>

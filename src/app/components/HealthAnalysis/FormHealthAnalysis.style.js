@@ -1,25 +1,27 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     background: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff'
     },
     container: {
-        flex: 1,
-        alignItems: 'center',
         justifyContent: 'center',
-        width: '90%',
-        paddingBottom: 50
+        width: '80%',
+        paddingBottom: 50,
+        marginTop: 100
     },
     radioButton: {
         color: '#0000',
     },
+    radioButtonTitle:{
+        fontSize: 17,
+        marginBottom: 5
+    },
     input: {
         backgroundColor: '#f9f9f9',
-        width: '90%',
+        width: '100%',
         marginBottom: 15,
         color: '#222',
         fontSize: 17,
@@ -28,11 +30,12 @@ const styles = StyleSheet.create({
     },
     btnSubmit: {
         backgroundColor: '#90cc0c',
-        width: '90%',
+        width: '100%',
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 7,
+        marginTop: 20
     },
     submitText: {
         color: "#FFF",
