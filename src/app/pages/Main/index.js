@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container } from './styles';
-import Login  from '../../components/Login/Login';
+import Menu  from '../../components/Menu/Menu';
 
 export default function Main() {
     return (
-        <Login />
+        <Menu />
     );
 }
