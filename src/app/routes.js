@@ -2,18 +2,21 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { NativeRouter} from "react-router-native";
 
-import AboutApp from './pages/AboutApp';
-import Diet from './pages/Diet';
-import Foods from './pages/Foods';
-import Graphics from './pages/Graphics';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import Main from './pages/Main';
-import Profile from './pages/Profile';
-import Recipes from './pages/Recipes';
-import Reports from './pages/Reports';
-import SideDish from './pages/SideDish';
+import AboutApp from './pages/AboutApp/index';
+import Diet from './pages/Diet/index';
+import Foods from './pages/Foods/index';
+import Graphics from './pages/Graphics/index';
+import Menu from './pages/Menu/index';
+import Login from './pages/Login/index';
+import SignUp from './pages/SignUp/index';
+import Main from './pages/Main/index';
+import Profile from './pages/Profile/index';
+import Recipes from './pages/Recipes/index';
+import Reports from './pages/Reports/index';
+import SideDish from './pages/SideDish/index';
 
+//NativeRouter -> Expo Mobile
+//BrowserRouter -> Expo Web
 
 export default function Routes(){
     return(
@@ -23,6 +26,7 @@ export default function Routes(){
                  <Route path="/diet" exact component={Diet}></Route>
                  <Route path="/foods" exact component={Foods}></Route>
                  <Route path="/graphics" exact component={Graphics}></Route>
+                 <Route path="/menu" exact component={Menu}></Route>
                  <Route path="/login" exact component={Login}></Route>
                  <Route path="/signup" exact component={SignUp}></Route>
                  <Route path="/" exact component={Main}></Route>

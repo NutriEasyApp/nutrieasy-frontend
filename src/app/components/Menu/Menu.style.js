@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     background: {
         flex: 1,
         alignItems: 'center',
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     containerLogo: {
         flex: 1,
         justifyContent: 'center',
-        marginBottom: -250
+        marginBottom: 0
     },
     logoImg: {
         width: 180,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
-        paddingBottom: 50
+        paddingBottom: 0
     },
     input: {
         backgroundColor: '#f9f9f9',

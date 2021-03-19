@@ -1,130 +1,78 @@
 import * as React from 'react';
-
-import { styles } from './Menu.style';
-
-/* Menu Navigation */
-import 'react-native-gesture-handler';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
-
-import {
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  Button
-} from 'react-native';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 
-function Inicio({ navigation }) {
+import SignUp from '../../pages/SignUp/';
+import AboutApp from '../../pages/AboutApp/';
+
+
+function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button title="Abrir Menu" onPress={() => navigation.openDrawer()} />
+      <Text style={{color: '#000'}}>Home!</Text>
     </View>
   );
 }
 
-function MeuPerfil() {
+function SignUpScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Meu Perfil</Text>
-    </View>
+    <SignUp />
   );
 }
 
-function Acompanhamento() {
+function AboutAppScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Acompanhamento</Text>
-    </View>
-  );
-}
-
-function Receitas() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Receitas</Text>
-    </View>
+    <AboutApp />
   );
 }
 
 
-function Alimentos() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Alimentos</Text>
-    </View>
-  );
-}
+const Tab = createMaterialBottomTabNavigator();
 
-function ImprimirRelatorios() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Imprimir Relatorios</Text>
-    </View>
-  );
-}
-
-
-function Graficos() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Gráficos</Text>
-    </View>
-  );
-}
-
-
-function Dieta() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Dieta</Text>
-    </View>
-  );
-}
-
-
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Fechar menu"
-        onPress={() => props.navigation.closeDrawer()}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Inicio" component={Inicio} />
-      <Drawer.Screen name="Meu Perfil" component={MeuPerfil} />
-      <Drawer.Screen name="Acompanhamento" component={Acompanhamento} />
-      <Drawer.Screen name="Receitas" component={Receitas} />
-      <Drawer.Screen name="Alimentos" component={Alimentos} />
-      <Drawer.Screen name="Imprimir Relatórios" component={ImprimirRelatorios} />
-      <Drawer.Screen name="Gráficos" component={Graficos} />
-      <Drawer.Screen name="Dieta" component={Dieta} />
-    </Drawer.Navigator>
-  );
-}
-
-export default function App() {
+export default function Menu() {
   return (
     <NavigationContainer>
-      <MyDrawer />
+     <Tab.Navigator
+      initialRouteName="Feed"
+      tabBarOptions={{
+        activeTintColor: '#e91e63',
+      }}
+    >
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="signup"
+        component={SignUpScreen}
+        options={{
+          tabBarLabel: 'Registrar Usuário',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="about-app"
+        component={AboutAppScreen}
+        options={{
+          tabBarLabel: 'Sobre o aplicativo',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
     </NavigationContainer>
   );
 }
