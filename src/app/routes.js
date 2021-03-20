@@ -20,7 +20,7 @@ import SideDish from './pages/SideDish/index';
 
 export default function Routes(){
     return(
-        <NativeRouter>
+        <NativeRouter >
              <Switch>
                  <Route path="/about-app" exact component={AboutApp}></Route>
                  <Route path="/diet" exact component={Diet}></Route>

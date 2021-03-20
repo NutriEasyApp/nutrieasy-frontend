@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     background: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff'
-    },
+    },    
     containerLogo: {
         justifyContent: 'center',
         marginBottom: -20,
@@ -14,14 +15,14 @@ export const styles = StyleSheet.create({
     logoImg: {
         width: 220,
         height: 220
-    },
+    },    
     container: {
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
         paddingBottom: 50,
-        marginTop: 0
-    },
+        marginTop: 0,
+    },    
     input: {
         backgroundColor: '#f9f9f9',
         width: '90%',
@@ -31,7 +32,7 @@ export const styles = StyleSheet.create({
         borderRadius: 7,
         padding: 15,
         height: 55
-    },
+    },    
     btnSubmit: {
         backgroundColor: '#90cc0c',
         width: '90%',

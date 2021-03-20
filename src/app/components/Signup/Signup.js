@@ -10,24 +10,30 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+const logoImg = require('../../../assets/images/logo.png');
 
 export default function Signup() {
 
   return (
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.containerLogo}>
-        <Image style={styles.logoImg} source={require('../../../assets/images/logo.png')}></Image>
+        <Image style={styles.logoImg} source={logoImg}></Image>
       </View>
 
       <View style={styles.container}>
+
         <TextInput style={styles.input} placeholder="Nome completo" autoCorrect={false} onChangeText={() => { }}></TextInput>
-        <TextInput style={styles.input} placeholder="Email" autoCorrect={false} onChangeText={() => { }}></TextInput>
+
+        <TextInput style={styles.input} placeholder="E-mail" autoCorrect={false} onChangeText={() => { }}></TextInput>
+
         <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" autoCorrect={false} onChangeText={() => { }}></TextInput>
+
         <TouchableOpacity style={styles.btnSubmit}>
           <Text style={styles.submitText}>
             Cadastrar conta
           </Text>
         </TouchableOpacity>
+
       </View>
     </KeyboardAvoidingView>
   );

@@ -47,6 +47,8 @@ export default function Menu() {
   return (
     <NavigationContainer theme={MyTheme}>
       <Tab.Navigator
+        activeColor="#fff"
+        inactiveColor="#fff"
         initialRouteName="Feed"
         tabBarOptions={{
           activeTintColor: '#fff',
@@ -62,10 +64,10 @@ export default function Menu() {
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={'#fff'} size={18} />
+              <MaterialCommunityIcons name="home" color={'#fff'} size={20} />
             ),
           }}
-         
+
         />
 
         <Tab.Screen
@@ -74,7 +76,7 @@ export default function Menu() {
           options={{
             tabBarLabel: 'Registrar Usuário',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account-plus" color={'#fff'} size={18} />
+              <MaterialCommunityIcons name="account-plus" color={'#fff'} size={20} />
             ),
           }}
         />
@@ -85,7 +87,7 @@ export default function Menu() {
           options={{
             tabBarLabel: 'Sobre o aplicativo',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="information-variant" color={'#fff'} size={18} />
+              <MaterialCommunityIcons name="information-variant" color={'#fff'} size={20} />
             ),
           }}
         />
@@ -96,7 +98,7 @@ export default function Menu() {
           options={{
             tabBarLabel: 'Mais',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="dots-horizontal" color={'#fff'} size={18} />
+              <MaterialCommunityIcons name="dots-horizontal" color={'#fff'} size={20} />
             ),
           }}
         />
