@@ -5,16 +5,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-
 import SignUp from '../../pages/SignUp/';
 import AboutApp from '../../pages/AboutApp/';
+import Home from '../../pages/Home';
+
+const MyTheme = {
+  colors: {
+    primary: "#90cc0c",
+  },
+};
 
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{color: '#000'}}>Home!</Text>
-    </View>
+    <Home />
   );
 }
 
@@ -30,49 +34,74 @@ function AboutAppScreen() {
   );
 }
 
+function MoreScreen() {
+  return (
+    <Text>Mais informações</Text>
+  );
+}
+
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function Menu() {
   return (
-    <NavigationContainer>
-     <Tab.Navigator
-      initialRouteName="Feed"
-      tabBarOptions={{
-        activeTintColor: '#e91e63',
-      }}
-    >
-      <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
+    <NavigationContainer theme={MyTheme}>
+      <Tab.Navigator
+        initialRouteName="Feed"
+        tabBarOptions={{
+          activeTintColor: '#fff',
+          labelStyle: {
+            color: "#fff",
+          }
         }}
-      />
-      <Tab.Screen
-        name="signup"
-        component={SignUpScreen}
-        options={{
-          tabBarLabel: 'Registrar Usuário',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="about-app"
-        component={AboutAppScreen}
-        options={{
-          tabBarLabel: 'Sobre o aplicativo',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+      >
+
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={'#fff'} size={18} />
+            ),
+          }}
+         
+        />
+
+        <Tab.Screen
+          name="SignUp"
+          component={SignUpScreen}
+          options={{
+            tabBarLabel: 'Registrar Usuário',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="account-plus" color={'#fff'} size={18} />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name="About"
+          component={AboutAppScreen}
+          options={{
+            tabBarLabel: 'Sobre o aplicativo',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="information-variant" color={'#fff'} size={18} />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name="More"
+          component={MoreScreen}
+          options={{
+            tabBarLabel: 'Mais',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="dots-horizontal" color={'#fff'} size={18} />
+            ),
+          }}
+        />
+
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

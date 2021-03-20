@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     containerLogo: {
         justifyContent: 'center',
         marginBottom: -20,
-        marginTop: 200
+        marginTop: 0
     },
     logoImg: {
         width: 220,
