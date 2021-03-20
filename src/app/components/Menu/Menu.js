@@ -6,8 +6,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import SignUp from '../../pages/SignUp/';
-import AboutApp from '../../pages/AboutApp/';
 import Home from '../../pages/Home';
+import FormHealthAnalysis from '../../pages/FormHealthAnalysis';
+import AboutApp from '../../pages/AboutApp/';
+import DietProposal from '../../pages/DietProposal';
 
 const MyTheme = {
   colors: {
@@ -28,15 +30,27 @@ function SignUpScreen() {
   );
 }
 
-function AboutAppScreen() {
+function FormHealthAnalysisScreen(){
   return (
-    <AboutApp />
+    <FormHealthAnalysis />
+  );
+}
+
+function DietProposalScreen(){
+  return (
+    <DietProposal />
   );
 }
 
 function MoreScreen() {
   return (
     <Text>Mais informações</Text>
+  );
+}
+
+function AboutAppScreen() {
+  return (
+    <AboutApp />
   );
 }
 
@@ -81,7 +95,30 @@ export default function Menu() {
           }}
         />
 
+
         <Tab.Screen
+          name="Ficha de Análise de Saúde"
+          component={FormHealthAnalysisScreen}
+          options={{
+            tabBarLabel: 'Análise de Saúde',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="hospital-box" color={'#fff'} size={20} />
+            ),
+          }}
+        />
+
+      <Tab.Screen
+          name="Proposta de Dieta"
+          component={DietProposalScreen}
+          options={{
+            tabBarLabel: 'Proposta de Dieta',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="receipt" color={'#fff'} size={20} />
+            ),
+          }}
+        />
+
+        {/*<Tab.Screen
           name="About"
           component={AboutAppScreen}
           options={{
@@ -90,9 +127,9 @@ export default function Menu() {
               <MaterialCommunityIcons name="information-variant" color={'#fff'} size={20} />
             ),
           }}
-        />
+        />*/}
 
-        <Tab.Screen
+        {/*<Tab.Screen
           name="More"
           component={MoreScreen}
           options={{
@@ -101,7 +138,7 @@ export default function Menu() {
               <MaterialCommunityIcons name="dots-horizontal" color={'#fff'} size={20} />
             ),
           }}
-        />
+        />*/}
 
       </Tab.Navigator>
     </NavigationContainer>

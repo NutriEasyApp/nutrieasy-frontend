@@ -6,37 +6,40 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff'
-    },
-    container: {
+    },    
+    containerLogo: {
         justifyContent: 'center',
-        width: '80%',
-        paddingBottom: 0,
+        marginBottom: -20,
         marginTop: 0
     },
-    radioButton: {
-        color: '#0000',
-    },
-    radioButtonTitle:{
-        fontSize: 17,
-        marginBottom: 5
-    },
+    logoImg: {
+        width: 220,
+        height: 220
+    },    
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '90%',
+        paddingBottom: 50,
+        marginTop: 0,
+    },    
     input: {
         backgroundColor: '#f9f9f9',
-        width: '100%',
+        width: '90%',
         marginBottom: 15,
         color: '#222',
-        fontSize: 17,
+        fontSize: 16,
         borderRadius: 7,
-        padding: 10,
-    },
+        padding: 15,
+        height: 55
+    },    
     btnSubmit: {
         backgroundColor: '#90cc0c',
-        width: '100%',
+        width: '90%',
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 7,
-        marginTop: 20
     },
     submitText: {
         color: "#FFF",
