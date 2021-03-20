@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-export default function Graphics() {
+export default function GraphicsIndex() {
     return (
         <View />
     );

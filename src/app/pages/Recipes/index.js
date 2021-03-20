@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-export default function Recipes() {
+export default function RecipesIndex() {
     return (
         <View />
     );
