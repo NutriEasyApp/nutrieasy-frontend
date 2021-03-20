@@ -29,7 +29,7 @@ export default function Routes(){
                  <Route path="/menu" exact component={Menu}></Route>
                  <Route path="/login" exact component={Login}></Route>
                  <Route path="/signup" exact component={SignUp}></Route>
-                 <Route path="/" exact component={Main}></Route>
+                 <Route path="/" component={Main}></Route>
                  <Route path="/profile" exact component={Profile}></Route>
                  <Route path="/recipes" exact component={Recipes}></Route>
                  <Route path="/reports" exact component={Reports}></Route>
