@@ -62,8 +62,7 @@ export default function Home() {
     return (
         <Container>
             <Top style={{textAlign: 'center', justifyContent: "center", alignItems: "center"}}>
-                <Logo source={logo} />
-                <Title style={{color: '#fff', fontSize: 23, fontWeight: 500}}>NutriEasy App</Title>
+                <Title style={{color: '#fff', fontSize: 23}}>NutriEasy App</Title>
             </Top>
             <Icon name="keyboard-arrow-down" size={25} color="#fff" style={{textAlign: 'center', justifyContent: "center", alignItems: "center", marginBottom: 20}}/>
             <Content>
