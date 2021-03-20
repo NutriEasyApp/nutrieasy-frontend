@@ -4,8 +4,6 @@ import Routes from  './src/app/routes';
 
 export default function App() {
   return (
-      <View>
         <Routes />
-      </View>
   );
 }
