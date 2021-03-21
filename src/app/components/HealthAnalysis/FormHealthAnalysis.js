@@ -4,6 +4,7 @@ import RadioGroup from 'react-native-radio-buttons-group';
 import {
   Text,
   View,
+  Button,
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity
@@ -11,7 +12,9 @@ import {
 
 import { RadioButton } from 'react-native-paper';
 
-const radioButtonsData = [{
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+const radioButtonsDataGender = [{
   id: '1',
   label: 'Masculino',
   value: 'male'
@@ -21,49 +24,118 @@ const radioButtonsData = [{
   value: 'female'
 }]
 
+
+const radioButtonsDataCorporalBiotype = [{
+  id: '1',
+  label: 'Ectomorfo',
+  value: 'ectomorfo'
+}, {
+  id: '2',
+  label: 'Endomorfo',
+  value: 'endomorfo'
+}, {
+  id: '3',
+  label: 'Mesomorfo',
+  value: 'mesomorfo'
+}]
+
 export default function HealthAnalysis() {
 
+  const [radioButtonsGender, setradioButtonsGender] = useState(radioButtonsDataGender)
+  const [radioButtonsCorporalBiotype, setradioButtonsCorporalBiotype] = useState(radioButtonsDataCorporalBiotype)
 
-    const [radioButtons, setRadioButtons] = useState(radioButtonsData)
+  function onPressRadioButtonGender(radioButtonsArrayGender) {
+    setradioButtonsGender(radioButtonsArrayGender);
+  }
 
-    function onPressRadioButton(radioButtonsArray) {
-        setRadioButtons(radioButtonsArray);
-    }
-
+  function onPressRadioButtonCorporalBiotype(radioButtonsArrayCorporalBiotype) {
+    setradioButtonsCorporalBiotype(radioButtonsArrayCorporalBiotype);
+  }
 
   const [checked, setChecked] = React.useState('first');
+
+  /* Date Picker */
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
 
   return (
 
     <KeyboardAvoidingView style={styles.background}>
 
       <View style={styles.container}>
-        <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 30, marginBottom: 15 }}>Ficha de Análise de Saúde:</Text>
 
-        <TextInput style={styles.input} placeholder="Idade" autoCorrect={false} onChangeText={() => { }}></TextInput>
+        <Text style={{ fontSize: 23, fontWeight: '700', marginTop: 30, marginBottom: 15 }}>Preencha abaixo a ficha de análise de saúde:</Text>
 
-        <TextInput style={styles.input} placeholder="Peso" autoCorrect={false} onChangeText={() => { }}></TextInput>
+        <View>
+          <View>
+            <TouchableOpacity style={styles.inputTouchableOpacity} onPress={showDatepicker}>
+              <Text style={styles.textTouchableOpacity}>Qual é a sua Data de Nascimento?</Text>
+            </TouchableOpacity>
+          </View>
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+            />
+          )}
+        </View>
 
-        <TextInput style={styles.input} placeholder="Altura" autoCorrect={false} onChangeText={() => { }}></TextInput>
+        <TextInput style={styles.input} placeholder="Qual é o seu Peso?" autoCorrect={false} onChangeText={() => { }}></TextInput>
 
-        <TextInput style={styles.input} placeholder="Qual é o seu tipo físico?" autoCorrect={false} onChangeText={() => { }}></TextInput>
+        <TextInput style={styles.input} placeholder="Qual é a sua Altura?" autoCorrect={false} onChangeText={() => { }}></TextInput>
 
-        <TextInput style={styles.input} placeholder="Qual é o seu porcentual de gordura?" autoCorrect={false} onChangeText={() => { }}></TextInput>
+        <View>
+          <Text style={styles.radioButtonTitle}>Qual é o seu Biotipo Físico?</Text>
+          <RadioGroup
+            radioButtons={radioButtonsCorporalBiotype}
+            onPress={onPressRadioButtonCorporalBiotype}
+            layout='row'
+          />
+        </View>
+
+        <View>
+          <Text style={styles.radioButtonTitle}>Qual é o seu Gênero?</Text>
+          <RadioGroup
+            radioButtons={radioButtonsGender}
+            onPress={onPressRadioButtonGender}
+            layout='row'
+          />
+        </View>
+
+
+        {/*<TextInput style={styles.input} placeholder="Qual é o seu porcentual de gordura?" autoCorrect={false} onChangeText={() => { }}></TextInput>
 
         <TextInput style={styles.input} placeholder="Qual é a sua massa muscular?" autoCorrect={false} onChangeText={() => { }}></TextInput>
 
-        <TextInput style={styles.input} placeholder="Qual é seus hábitos alimentares?" autoCorrect={false} onChangeText={() => { }}></TextInput>
+          <TextInput style={styles.input} placeholder="Qual é seus hábitos alimentares?" autoCorrect={false} onChangeText={() => { }}></TextInput>*/}
 
-        <Text style={styles.radioButtonTitle}>Gênero</Text>
 
-        <RadioGroup 
-            radioButtons={radioButtons} 
-            onPress={onPressRadioButton}
-            layout='row'
-        />
-        
         <TouchableOpacity style={styles.btnSubmit}>
-          <Text style={styles.submitText}>Cadastrar Ficha</Text>
+          <Text style={styles.submitText}>Cadastrar dados</Text>
         </TouchableOpacity>
 
       </View>

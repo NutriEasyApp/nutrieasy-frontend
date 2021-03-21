@@ -18,16 +18,30 @@ export const styles = StyleSheet.create({
     },
     radioButtonTitle:{
         fontSize: 17,
-        marginBottom: 5
+        marginBottom: 10,
+        marginTop: 20
     },
     input: {
         backgroundColor: '#f9f9f9',
         width: '100%',
-        marginBottom: 15,
         color: '#222',
         fontSize: 17,
         borderRadius: 7,
         padding: 10,
+        marginTop: 20
+    },
+    inputTouchableOpacity:{
+        backgroundColor: '#f9f9f9',
+        width: '100%',
+        marginBottom: 0,
+        color: '#222',
+        fontSize: 17,
+        borderRadius: 7,
+        padding: 15,
+    },
+    textTouchableOpacity:{
+        color: '#999999',
+        fontSize: 17,
     },
     btnSubmit: {
         backgroundColor: '#90cc0c',
@@ -47,5 +61,11 @@ export const styles = StyleSheet.create({
     },
     registerText: {
         color: '#3b3b3b',
+    },
+    dateComponent:{
+        width: 350,
+    },
+    btnBirthday:{
+        backgroundColor: "#000"
     }
 });
