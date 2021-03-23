@@ -13,47 +13,33 @@ import DietProposal from '../../pages/DietProposal';
 
 const MyTheme = {
   colors: {
-    primary: "#90cc0c",
+    primary: '#90cc0c',
   },
 };
 
-
 function HomeScreen() {
-  return (
-    <Home />
-  );
+  return <Home />;
 }
 
 function SignUpScreen() {
-  return (
-    <SignUp />
-  );
+  return <SignUp />;
 }
 
-function FormHealthAnalysisScreen(){
-  return (
-    <FormHealthAnalysis />
-  );
+function FormHealthAnalysisScreen() {
+  return <FormHealthAnalysis />;
 }
 
-function DietProposalScreen(){
-  return (
-    <DietProposal />
-  );
+function DietProposalScreen() {
+  return <DietProposal />;
 }
 
 function MoreScreen() {
-  return (
-    <Text>Mais informações</Text>
-  );
+  return <Text>Mais informações</Text>;
 }
 
 function AboutAppScreen() {
-  return (
-    <AboutApp />
-  );
+  return <AboutApp />;
 }
-
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -67,11 +53,10 @@ export default function Menu() {
         tabBarOptions={{
           activeTintColor: '#fff',
           labelStyle: {
-            color: "#fff",
-          }
+            color: '#fff',
+          },
         }}
       >
-
         <Tab.Screen
           name="Home"
           component={HomeScreen}
@@ -81,20 +66,18 @@ export default function Menu() {
               <MaterialCommunityIcons name="home" color={'#fff'} size={20} />
             ),
           }}
-
         />
 
-        <Tab.Screen
-          name="SignUp"
-          component={SignUpScreen}
-          options={{
-            tabBarLabel: 'Registrar Usuário',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account-plus" color={'#fff'} size={20} />
-            ),
-          }}
-        />
-
+        {/*<Tab.Screen*/}
+        {/*  name="SignUp"*/}
+        {/*  component={SignUpScreen}*/}
+        {/*  options={{*/}
+        {/*    tabBarLabel: 'Registrar Usuário',*/}
+        {/*    tabBarIcon: ({ color, size }) => (*/}
+        {/*      <MaterialCommunityIcons name="account-plus" color={'#fff'} size={20} />*/}
+        {/*    ),*/}
+        {/*  }}*/}
+        {/*/>*/}
 
         <Tab.Screen
           name="Ficha de Análise de Saúde"
@@ -102,21 +85,40 @@ export default function Menu() {
           options={{
             tabBarLabel: 'Análise de Saúde',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="hospital-box" color={'#fff'} size={20} />
+              <MaterialCommunityIcons
+                name="hospital-box"
+                color={'#fff'}
+                size={20}
+              />
             ),
           }}
         />
 
-      <Tab.Screen
-          name="Proposta de Dieta"
-          component={DietProposalScreen}
+        <Tab.Screen
+          name="Gráfico de Evolução"
+          component={FormHealthAnalysisScreen}
           options={{
-            tabBarLabel: 'Proposta de Dieta',
+            tabBarLabel: 'Gráfico de Evolução',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="receipt" color={'#fff'} size={20} />
+              <MaterialCommunityIcons
+                name="chart-areaspline"
+                color={'#fff'}
+                size={20}
+              />
             ),
           }}
         />
+
+        {/*<Tab.Screen*/}
+        {/*    name="Proposta de Dieta"*/}
+        {/*    component={DietProposalScreen}*/}
+        {/*    options={{*/}
+        {/*      tabBarLabel: 'Proposta de Dieta',*/}
+        {/*      tabBarIcon: ({ color, size }) => (*/}
+        {/*        <MaterialCommunityIcons name="receipt" color={'#fff'} size={20} />*/}
+        {/*      ),*/}
+        {/*    }}*/}
+        {/*  />*/}
 
         {/*<Tab.Screen
           name="About"
@@ -139,7 +141,6 @@ export default function Menu() {
             ),
           }}
         />*/}
-
       </Tab.Navigator>
     </NavigationContainer>
   );
