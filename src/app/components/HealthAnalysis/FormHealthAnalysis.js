@@ -7,42 +7,52 @@ import {
   Button,
   KeyboardAvoidingView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 import { RadioButton } from 'react-native-paper';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const radioButtonsDataGender = [{
-  id: '1',
-  label: 'Masculino',
-  value: 'male'
-}, {
-  id: '2',
-  label: 'Feminino',
-  value: 'female'
-}]
+const radioButtonsDataGender = [
+  {
+    id: '1',
+    label: 'Masculino',
+    value: 'male',
+  },
+  {
+    id: '2',
+    label: 'Feminino',
+    value: 'female',
+  },
+];
 
-
-const radioButtonsDataCorporalBiotype = [{
-  id: '1',
-  label: 'Ectomorfo',
-  value: 'ectomorfo'
-}, {
-  id: '2',
-  label: 'Endomorfo',
-  value: 'endomorfo'
-}, {
-  id: '3',
-  label: 'Mesomorfo',
-  value: 'mesomorfo'
-}]
+const radioButtonsDataCorporalBiotype = [
+  {
+    id: '1',
+    label: 'Ectomorfo',
+    value: 'ectomorfo',
+  },
+  {
+    id: '2',
+    label: 'Endomorfo',
+    value: 'endomorfo',
+  },
+  {
+    id: '3',
+    label: 'Mesomorfo',
+    value: 'mesomorfo',
+  },
+];
 
 export default function HealthAnalysis() {
-
-  const [radioButtonsGender, setradioButtonsGender] = useState(radioButtonsDataGender)
-  const [radioButtonsCorporalBiotype, setradioButtonsCorporalBiotype] = useState(radioButtonsDataCorporalBiotype)
+  const [radioButtonsGender, setradioButtonsGender] = useState(
+    radioButtonsDataGender
+  );
+  const [
+    radioButtonsCorporalBiotype,
+    setradioButtonsCorporalBiotype,
+  ] = useState(radioButtonsDataCorporalBiotype);
 
   function onPressRadioButtonGender(radioButtonsArrayGender) {
     setradioButtonsGender(radioButtonsArrayGender);
@@ -65,7 +75,7 @@ export default function HealthAnalysis() {
     setDate(currentDate);
   };
 
-  const showMode = (currentMode) => {
+  const showMode = currentMode => {
     setShow(true);
     setMode(currentMode);
   };
@@ -79,17 +89,28 @@ export default function HealthAnalysis() {
   };
 
   return (
-
     <KeyboardAvoidingView style={styles.background}>
-
       <View style={styles.container}>
-
-        <Text style={{ fontSize: 23, fontWeight: '700', marginTop: 30, marginBottom: 15 }}>Preencha abaixo a ficha de análise de saúde:</Text>
+        <Text
+          style={{
+            fontSize: 23,
+            fontWeight: '700',
+            marginTop: 30,
+            marginBottom: 15,
+          }}
+        >
+          Preencha abaixo a ficha de análise de saúde:
+        </Text>
 
         <View>
           <View>
-            <TouchableOpacity style={styles.inputTouchableOpacity} onPress={showDatepicker}>
-              <Text style={styles.textTouchableOpacity}>Qual é a sua Data de Nascimento?</Text>
+            <TouchableOpacity
+              style={styles.inputTouchableOpacity}
+              onPress={showDatepicker}
+            >
+              <Text style={styles.textTouchableOpacity}>
+                Qual é a sua Data de Nascimento?
+              </Text>
             </TouchableOpacity>
           </View>
           {show && (
@@ -104,16 +125,28 @@ export default function HealthAnalysis() {
           )}
         </View>
 
-        <TextInput style={styles.input} placeholder="Qual é o seu Peso?" autoCorrect={false} onChangeText={() => { }}></TextInput>
+        <TextInput
+          style={styles.input}
+          placeholder="Qual é o seu Peso?"
+          autoCorrect={false}
+          onChangeText={() => {}}
+        ></TextInput>
 
-        <TextInput style={styles.input} placeholder="Qual é a sua Altura?" autoCorrect={false} onChangeText={() => { }}></TextInput>
+        <TextInput
+          style={styles.input}
+          placeholder="Qual é a sua Altura?"
+          autoCorrect={false}
+          onChangeText={() => {}}
+        ></TextInput>
 
         <View>
-          <Text style={styles.radioButtonTitle}>Qual é o seu Biotipo Físico?</Text>
+          <Text style={styles.radioButtonTitle}>
+            Qual é o seu Biotipo Físico?
+          </Text>
           <RadioGroup
             radioButtons={radioButtonsCorporalBiotype}
             onPress={onPressRadioButtonCorporalBiotype}
-            layout='row'
+            layout="row"
           />
         </View>
 
@@ -122,10 +155,9 @@ export default function HealthAnalysis() {
           <RadioGroup
             radioButtons={radioButtonsGender}
             onPress={onPressRadioButtonGender}
-            layout='row'
+            layout="row"
           />
         </View>
-
 
         {/*<TextInput style={styles.input} placeholder="Qual é o seu porcentual de gordura?" autoCorrect={false} onChangeText={() => { }}></TextInput>
 
@@ -133,13 +165,10 @@ export default function HealthAnalysis() {
 
           <TextInput style={styles.input} placeholder="Qual é seus hábitos alimentares?" autoCorrect={false} onChangeText={() => { }}></TextInput>*/}
 
-
         <TouchableOpacity style={styles.btnSubmit}>
           <Text style={styles.submitText}>Cadastrar dados</Text>
         </TouchableOpacity>
-
       </View>
-
     </KeyboardAvoidingView>
   );
 }

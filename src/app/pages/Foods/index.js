@@ -2,7 +2,5 @@ import React from 'react';
 import { View } from 'react-native';
 
 export default function FoodsIndex() {
-    return (
-        <View />
-    );
+  return <View />;
 }

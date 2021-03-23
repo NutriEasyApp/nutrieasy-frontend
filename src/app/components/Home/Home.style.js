@@ -1,6 +1,5 @@
-import {Animated} from 'react-native';
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-
 
 export const Top = styled.View`
   flex-direction: row;
@@ -9,7 +8,6 @@ export const Top = styled.View`
 `;
 
 export const Logo = styled.Image``;
-
 
 export const Container = styled.View`
   flex: 1;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { NativeRouter} from "react-router-native";
+import { NativeRouter } from 'react-router-native';
 
 import AboutApp from './pages/AboutApp';
 import Foods from './pages/Foods';
@@ -19,24 +19,27 @@ import SideDish from './pages/SideDish';
 //NativeRouter -> Expo Mobile
 //BrowserRouter -> Expo Web
 
-export default function Routes(){
-    return(
-        <NativeRouter >
-             <Switch>
-                 <Route path="/about-app" component={AboutApp}></Route>
-                 <Route path="/foods"  component={Foods}></Route>
-                 <Route path="/graphics" component={Graphics}></Route>
-                 <Route path="/menu"  component={Menu}></Route>
-                 <Route path="/login" component={Login}></Route>
-                 <Route path="/signup" component={SignUp}></Route>
-                 <Route path="/formhealthanalysis" component={FormHealthAnalysis}></Route>
-                 <Route path="/dietproposal" component={DietProposal}></Route>
-                 <Route path="/" component={Main}></Route>
-                 <Route path="/profile" component={Profile}></Route>
-                 <Route path="/recipes"component={Recipes}></Route>
-                 <Route path="/reports" component={Reports}></Route>
-                 <Route path="/side-dish" component={SideDish}></Route>
-             </Switch>
-        </NativeRouter>
-    );  
-};
+export default function Routes() {
+  return (
+    <NativeRouter>
+      <Switch>
+        <Route path="/about-app" component={AboutApp}></Route>
+        <Route path="/foods" component={Foods}></Route>
+        <Route path="/graphics" component={Graphics}></Route>
+        <Route path="/menu" component={Menu}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/signup" component={SignUp}></Route>
+        <Route
+          path="/formhealthanalysis"
+          component={FormHealthAnalysis}
+        ></Route>
+        <Route path="/dietproposal" component={DietProposal}></Route>
+        <Route path="/" component={Main}></Route>
+        <Route path="/profile" component={Profile}></Route>
+        <Route path="/recipes" component={Recipes}></Route>
+        <Route path="/reports" component={Reports}></Route>
+        <Route path="/side-dish" component={SideDish}></Route>
+      </Switch>
+    </NativeRouter>
+  );
+}
