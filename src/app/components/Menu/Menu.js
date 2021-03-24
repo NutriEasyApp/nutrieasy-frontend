@@ -68,16 +68,6 @@ export default function Menu() {
           }}
         />
 
-        {/*<Tab.Screen*/}
-        {/*  name="SignUp"*/}
-        {/*  component={SignUpScreen}*/}
-        {/*  options={{*/}
-        {/*    tabBarLabel: 'Registrar Usuário',*/}
-        {/*    tabBarIcon: ({ color, size }) => (*/}
-        {/*      <MaterialCommunityIcons name="account-plus" color={'#fff'} size={20} />*/}
-        {/*    ),*/}
-        {/*  }}*/}
-        {/*/>*/}
 
         <Tab.Screen
           name="Ficha de Análise de Saúde"
@@ -94,7 +84,20 @@ export default function Menu() {
           }}
         />
 
-        <Tab.Screen
+
+        {/*<Tab.Screen*/}
+        {/*  name="SignUp"*/}
+        {/*  component={SignUpScreen}*/}
+        {/*  options={{*/}
+        {/*    tabBarLabel: 'Registrar Usuário',*/}
+        {/*    tabBarIcon: ({ color, size }) => (*/}
+        {/*      <MaterialCommunityIcons name="account-plus" color={'#fff'} size={20} />*/}
+        {/*    ),*/}
+        {/*  }}*/}
+        {/*/>*/}
+
+
+        {/*<Tab.Screen
           name="Gráfico de Evolução"
           component={FormHealthAnalysisScreen}
           options={{
@@ -107,7 +110,8 @@ export default function Menu() {
               />
             ),
           }}
-        />
+        />*/}
+
 
         {/*<Tab.Screen*/}
         {/*    name="Proposta de Dieta"*/}
@@ -120,6 +124,7 @@ export default function Menu() {
         {/*    }}*/}
         {/*  />*/}
 
+
         {/*<Tab.Screen
           name="About"
           component={AboutAppScreen}
@@ -130,6 +135,7 @@ export default function Menu() {
             ),
           }}
         />*/}
+
 
         {/*<Tab.Screen
           name="More"
