@@ -1,6 +1,8 @@
 import React, { Component, useState } from 'react';
 import { styles } from './FormHealthAnalysis.style';
 import RadioGroup from 'react-native-radio-buttons-group';
+import Slider from '@react-native-community/slider';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   Text,
   View,
@@ -8,11 +10,15 @@ import {
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
-
 import { RadioButton } from 'react-native-paper';
-
 import DateTimePicker from '@react-native-community/datetimepicker';
+
+import SliderRangeHeight from '../Slider/SliderHeight';
+import SliderRangeWeight from '../Slider/SliderWeight';
+
+var Locale = require('react-native-locale');
 
 const radioButtonsDataGender = [
   {
@@ -45,14 +51,62 @@ const radioButtonsDataCorporalBiotype = [
   },
 ];
 
+
+const radioButtonsDataObjectivePhysical = [
+  {
+    id: '1',
+    label: 'Ganhar',
+    value: 'GAIN',
+  },
+  {
+    id: '2',
+    label: 'Perder',
+    value: 'LOSE',
+  }
+];
+
+
+const radioButtonsDataEatingHabits = [
+  {
+    id: '1',
+    label: 'Hábitos Alimentares',
+    value: 'JUNK-FOOD',
+  },
+  {
+    id: '2',
+    label: 'Comida Saudável',
+    value: 'HEALTH-FOOD',
+  }
+];
+
+
+
+
 export default function HealthAnalysis() {
+
+
+  /* Radio Button */
   const [radioButtonsGender, setradioButtonsGender] = useState(
     radioButtonsDataGender
   );
+
   const [
     radioButtonsCorporalBiotype,
     setradioButtonsCorporalBiotype,
   ] = useState(radioButtonsDataCorporalBiotype);
+
+
+  const [
+    radioButtonsObjectivePhysical,
+    setradioButtonsObjectivePhysical,
+  ] = useState(radioButtonsDataObjectivePhysical);
+
+
+  const [
+    radioButtonsEatingHabits,
+    setradioButtonsEatingHabits,
+  ] = useState(radioButtonsDataEatingHabits);
+
 
   function onPressRadioButtonGender(radioButtonsArrayGender) {
     setradioButtonsGender(radioButtonsArrayGender);
@@ -62,7 +116,19 @@ export default function HealthAnalysis() {
     setradioButtonsCorporalBiotype(radioButtonsArrayCorporalBiotype);
   }
 
+  function onPressRadioButtonObjectivePhysical(radioButtonsArrayObjectivePhysical) {
+    setradioButtonsObjectivePhysical(radioButtonsArrayObjectivePhysical);
+  }
+
+  function onPressRadioButtonEatingHabits(radioButtonsArrayEatingHabits) {
+    setradioButtonsEatingHabits(radioButtonsArrayEatingHabits);
+  }
+
+
   const [checked, setChecked] = React.useState('first');
+
+
+
 
   /* Date Picker */
   const [date, setDate] = useState(new Date(1598051730000));
@@ -88,87 +154,67 @@ export default function HealthAnalysis() {
     showMode('time');
   };
 
+
   return (
-    <KeyboardAvoidingView style={styles.background}>
-      <View style={styles.container}>
-        <Text
-          style={{
-            fontSize: 23,
-            fontWeight: '700',
-            marginTop: 30,
-            marginBottom: 15,
-          }}
-        >
-          Preencha abaixo a ficha de análise de saúde:
-        </Text>
-
-        <View>
+    <ScrollView>
+      <KeyboardAvoidingView style={styles.background}>
+        <View style={styles.container}>
+          <Text style={styles.titlePage}>Ficha de Análise de Saúde</Text>
           <View>
-            <TouchableOpacity
-              style={styles.inputTouchableOpacity}
-              onPress={showDatepicker}
-            >
-              <Text style={styles.textTouchableOpacity}>
-                Qual é a sua Data de Nascimento?
-              </Text>
-            </TouchableOpacity>
+            <View style={styles.viewBirthDay}>
+              <TouchableOpacity style={styles.inputTouchableOpacity} onPress={showDatepicker}>
+                <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                  <MaterialCommunityIcons style={{ textAlign: "right", }} name="calendar-month" color={'#000'} size={30} />
+                  <Text style={styles.textTouchableOpacity}> Data de Nascimento</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            {show && (
+              <DateTimePicker maximumDate={new Date(2014, 12, 30)} testID="dateTimePicker" value={date} mode={mode} is24Hour={true} display="default" onChange={onChange} />
+            )}
           </View>
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="default"
-              onChange={onChange}
-            />
-          )}
+
+          <View>
+            <Text style={styles.textRadioBottom}>Qual é o seu Peso? </Text>
+            <SliderRangeWeight />
+            {/*<Text style={{ marginBottom: 15, color: '#90cc0c', fontWeight: '700' }}>30</Text>
+            <Slider style={styles.sliderForm} step={1} value={100} minimumValue={10} maximumValue={200} minimumTrackTintColor="#90cc0c" maximumTrackTintColor="#000000" thumbTintColor="#90cc0c"/>*/}
+          </View>
+
+          <View>
+            <Text style={styles.textRadioBottom}>Qual é a sua Altura? </Text>
+            <SliderRangeHeight />
+            {/*
+            <Text style={{ marginBottom: 15, color: '#90cc0c', fontWeight: '700' }}>30</Text>
+            <Slider style={styles.sliderForm} step={1} value={200} minimumValue={30} maximumValue={400} minimumTrackTintColor="#90cc0c" maximumTrackTintColor="#000000" thumbTintColor="#90cc0c"/>*/}
+          </View>
+
+          <View style={{ alignItems: "flex-start", }}>
+            <Text style={styles.radioButtonTitle}> Qual é o seu Biotipo Físico?</Text>
+            <RadioGroup radioButtons={radioButtonsCorporalBiotype} onPress={onPressRadioButtonCorporalBiotype} layout="column" />
+          </View>
+
+          <View style={{ marginTop: 10 }}>
+            <Text style={styles.radioButtonTitle}>Quais são seus hábitos alimentares?</Text>
+            <RadioGroup radioButtons={radioButtonsEatingHabits} onPress={onPressRadioButtonEatingHabits} layout="row" />
+          </View>
+
+          <View style={{ marginTop: 10 }}>
+            <Text style={styles.radioButtonTitle}>Qual é o seu Gênero?</Text>
+            <RadioGroup radioButtons={radioButtonsGender} onPress={onPressRadioButtonGender} layout="row" />
+          </View>
+
+          <View style={{ marginTop: 10 }}>
+            <Text style={styles.radioButtonTitle}>Qual é o seu objetivo físico?</Text>
+            <RadioGroup radioButtons={radioButtonsObjectivePhysical} onPress={onPressRadioButtonObjectivePhysical} layout="row" />
+          </View>
+
+          <TouchableOpacity style={styles.btnSubmit}>
+            <Text style={styles.submitText}>Cadastrar dados</Text>
+          </TouchableOpacity>
+
         </View>
-
-        <TextInput
-          style={styles.input}
-          placeholder="Qual é o seu Peso?"
-          autoCorrect={false}
-          onChangeText={() => {}}
-        ></TextInput>
-
-        <TextInput
-          style={styles.input}
-          placeholder="Qual é a sua Altura?"
-          autoCorrect={false}
-          onChangeText={() => {}}
-        ></TextInput>
-
-        <View>
-          <Text style={styles.radioButtonTitle}>
-            Qual é o seu Biotipo Físico?
-          </Text>
-          <RadioGroup
-            radioButtons={radioButtonsCorporalBiotype}
-            onPress={onPressRadioButtonCorporalBiotype}
-            layout="row"
-          />
-        </View>
-
-        <View>
-          <Text style={styles.radioButtonTitle}>Qual é o seu Gênero?</Text>
-          <RadioGroup
-            radioButtons={radioButtonsGender}
-            onPress={onPressRadioButtonGender}
-            layout="row"
-          />
-        </View>
-
-        {/*<TextInput style={styles.input} placeholder="Qual é o seu porcentual de gordura?" autoCorrect={false} onChangeText={() => { }}></TextInput>
-
-        <TextInput style={styles.input} placeholder="Qual é a sua massa muscular?" autoCorrect={false} onChangeText={() => { }}></TextInput>
-
-          <TextInput style={styles.input} placeholder="Qual é seus hábitos alimentares?" autoCorrect={false} onChangeText={() => { }}></TextInput>*/}
-
-        <TouchableOpacity style={styles.btnSubmit}>
-          <Text style={styles.submitText}>Cadastrar dados</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
