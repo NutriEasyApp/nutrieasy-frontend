@@ -10,16 +10,31 @@ export const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     width: '80%',
-    paddingBottom: 0,
-    marginTop: 0,
+  },
+  titlePage:{
+    fontSize: 25,
+    fontWeight: '700',
+    marginTop: 60,
+    marginBottom: 20,
+    alignSelf: 'center'
+  },
+  sliderForm:{
+    width: '100%',
+    height: 40
+  },
+  viewBirthDay:{
+    marginBottom: 15,
+    borderColor: '#000',
+    borderWidth: 2,
+    borderRadius: 7,
   },
   radioButton: {
     color: '#0000',
   },
   radioButtonTitle: {
-    fontSize: 17,
+    fontSize: 16,
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 1,
   },
   input: {
     backgroundColor: '#f9f9f9',
@@ -33,15 +48,20 @@ export const styles = StyleSheet.create({
   inputTouchableOpacity: {
     backgroundColor: '#f9f9f9',
     width: '100%',
-    marginBottom: 0,
     color: '#222',
     fontSize: 17,
     borderRadius: 7,
-    padding: 15,
+    padding: 5,
   },
   textTouchableOpacity: {
-    color: '#999999',
-    fontSize: 17,
+    marginLeft: 5,
+    color: '#000',
+    fontSize: 16,
+    textAlignVertical: 'center'
+  },
+  textRadioBottom:{
+    fontSize: 16,
+    color: "#000"
   },
   btnSubmit: {
     backgroundColor: '#90cc0c',
