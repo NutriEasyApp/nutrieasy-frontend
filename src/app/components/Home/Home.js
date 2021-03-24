@@ -67,14 +67,7 @@ export default function Home() {
     }
   }
 
-  // useEffect(() => {
-  //     async function getDiet() {
-  //         const response = await api.get('/nutrieasy/diet/06c35b1-9342-467c-a028-23348f9b2a47');
-  //         setDiet(response.data);
-  //     };
-  //     getDiet();
-  // }, [diet])
-  // console.log(diet)
+
   useEffect(() => {
     api
       .get('/nutrieasy/diet/b06c35b1-9342-467c-a028-23348f9b2a47')
@@ -89,28 +82,24 @@ export default function Home() {
           textAlign: 'center',
           justifyContent: 'center',
           alignItems: 'center',
+          marginBottom: 5
         }}
       >
-        <Title style={{ color: '#fff', fontSize: 25, fontWeight: '700' }}>
-          NutriEasy App
-        </Title>
+        <Title style={{ color: '#fff', fontSize: 35, fontWeight: '700' }}>NutriEasy App </Title>
       </Top>
       <Icon
         name="keyboard-arrow-down"
-        size={25}
+        size={35}
         color="#fff"
         style={{
           textAlign: 'center',
           justifyContent: 'center',
           alignItems: 'center',
-          marginBottom: 20,
+          marginBottom: 10,
         }}
       />
       <Content>
-        <PanGestureHandler
-          onGestureEvent={animatedEvent}
-          onHandlerStateChange={onHandlerStateChanged}
-        >
+        <PanGestureHandler onGestureEvent={animatedEvent} onHandlerStateChange={onHandlerStateChanged}>
           <Card
             style={{
               transform: [
@@ -124,24 +113,23 @@ export default function Home() {
               ],
             }}
           >
-            <CardHeader>
+            {<CardHeader>
               <MaterialCommunityIcons name="nutrition" size={28} color="#666" />
               <MaterialCommunityIcons name="chart-bar" size={28} color="#666" />
-            </CardHeader>
+            </CardHeader>}
 
-            <CardContent>
-              {/*<Title>Lorem ipsum dolor</Title>*/}
-              {/*<Description>Lorem ipsum dolor</Description>*/}
-              <Description>Calorias: {diet.calories}</Description>
-              <Description>Carboidratos: {diet.carbohydrates}</Description>
-              <Description>Proteina: {diet.protein}</Description>
-              <Description>Lipídios: {diet.lipids}</Description>
-              <Description>Água: {diet.water}</Description>
+            <CardContent style={{marginBottom: 30}}>
+              <Title style={{fontSize: 26, color: '#000', fontWeight: '700'}}>Proposta de Dieta {diet.calories}</Title>
+              <Description style={{fontSize: 20}}>Calorias: {diet.calories}</Description>
+              <Description style={{fontSize: 20}}>Carboidratos: {diet.carbohydrates}</Description>
+              <Description style={{fontSize: 20}}>Proteina: {diet.protein}</Description>
+              <Description style={{fontSize: 20}}>Lipídios: {diet.lipids}</Description>
+              <Description style={{fontSize: 20}}>Água: {diet.water}</Description>
             </CardContent>
 
             <CardFooter>
               <Annotation>
-                Lorem ipsum dolor sit amet, consectetur adipiscing.
+                Essa é a sua proposta de dieta conforme os dados enviados pela ficha de ánalise de saúde.
               </Annotation>
             </CardFooter>
           </Card>
