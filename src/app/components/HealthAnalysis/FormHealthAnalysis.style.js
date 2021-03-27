@@ -11,22 +11,22 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '80%',
   },
-  titlePage:{
+  titlePage: {
     fontSize: 25,
     fontWeight: '700',
     marginTop: 60,
     marginBottom: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
-  sliderForm:{
+  sliderForm: {
     width: '100%',
-    height: 40
+    height: 40,
   },
-  viewBirthDay:{
-    marginBottom: 15,
-    borderColor: '#000',
-    borderWidth: 2,
-    borderRadius: 7,
+  viewBirthDay: {
+    // marginBottom: 15,
+    // borderColor: '#000',
+    // borderWidth: 2,
+    // borderRadius: 7,
   },
   radioButton: {
     color: '#0000',
@@ -52,16 +52,19 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     borderRadius: 7,
     padding: 5,
+    marginBottom: 15,
+    borderColor: '#000',
+    borderWidth: 2,
   },
   textTouchableOpacity: {
     marginLeft: 5,
     color: '#000',
     fontSize: 16,
-    textAlignVertical: 'center'
+    textAlignVertical: 'center',
   },
-  textRadioBottom:{
+  textRadioBottom: {
     fontSize: 16,
-    color: "#000"
+    color: '#000',
   },
   btnSubmit: {
     backgroundColor: '#90cc0c',

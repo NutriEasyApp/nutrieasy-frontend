@@ -2,45 +2,42 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Slider from '@react-native-community/slider';
 
-export default class SliderRangeWeight extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: 10
-        }
+export function SliderRange({ data, unitType, onChange, step, maximumValue }) {
+  const handleChange = event => {
+    onChange(event);
+  };
+  function checkTitle() {
+    switch (unitType) {
+      case 'kg':
+        return <Text style={styles.text}>{String(data)} kg</Text>;
+      case 'cm':
+        return <Text style={styles.text}>{String(data)} cm</Text>;
+      case 'h':
+        return <Text style={styles.text}>{String(data)} h</Text>;
     }
-
-    change(value) {
-        this.setState(() => {
-            return {
-                value: parseFloat(value)
-            };
-        });
-    }
-
-    render() {
-        const { value } = this.state;
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>{String(value)} kg</Text>
-                <Slider
-                    step={1}
-                    maximumValue={200}
-                    onValueChange={this.change.bind(this)}
-                    value={value} />
-            </View>
-        );
-    }
+  }
+  return (
+    <View style={styles.container}>
+      {checkTitle()}
+      <Slider
+        step={step}
+        maximumValue={maximumValue}
+        minimumValue={1}
+        onValueChange={value => handleChange(value)}
+        value={Number(data)}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center'
-    },
-    text: {
-        fontSize: 16,
-        textAlign: 'center'
-    }
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
