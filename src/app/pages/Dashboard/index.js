@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import Home from '../../pages/Home';
 import HealthAnalysis from '../../pages/HealthAnalysis';
+import Reports from '../../pages/Reports/';
 
 import AuthContext from '../../contexts/auth';
 
@@ -63,6 +64,32 @@ export default function Dashboard() {
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="hospital-box"
+                color={'#fff'}
+                size={20}
+              />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name="Sistema de Divisões de Refeições"
+          component={HealthAnalysis}
+          options={{
+            tabBarLabel: 'Refeições',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="noodles" color={'#fff'} size={20} />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name="Impressão de Relatórios"
+          component={Reports}
+          options={{
+            tabBarLabel: 'Relatórios',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="text-box-check"
                 color={'#fff'}
                 size={20}
               />
