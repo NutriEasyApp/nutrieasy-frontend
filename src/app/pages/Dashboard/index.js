@@ -28,10 +28,11 @@ export default function Dashboard() {
     <Text>Olá{user.name}!</Text>
     <Button onPress={handleSignout} title="Sign Out" />
     */
+    //independent={true} ref={createRef()}
   }
 
   return (
-    <NavigationContainer theme={MyTheme} independent={true} ref={createRef()}>
+    <NavigationContainer theme={MyTheme} independent={true}>
       <Tab.Navigator
         activeColor="#fff"
         inactiveColor="#fff"

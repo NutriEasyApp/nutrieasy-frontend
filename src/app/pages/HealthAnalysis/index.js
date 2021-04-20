@@ -1,8 +1,8 @@
 import React, { Component, useEffect, useState, useContext } from 'react';
 import { styles } from './style';
 import RadioGroup from 'react-native-radio-buttons-group';
-import Slider from '@react-native-community/slider';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Slider from '@react-native-community/slider';
 import {
   Text,
   View,
@@ -147,14 +147,14 @@ export default function HealthAnalysis() {
   const [checked, setChecked] = React.useState('first');
 
   /* Date Picker */
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
-    console.log(selectedDate);
+    //console.log(selectedDate);
     setDate(currentDate);
   };
 
@@ -170,13 +170,13 @@ export default function HealthAnalysis() {
     showMode('time');
   };
   const submitAnalysis = async () => {
-    console.log(date);
+    /*console.log(date);
     console.log('altura', height);
     console.log('peso', weight);
     console.log('genre', genre);
     console.log('bodytype', bodytype);
     console.log('objetive', objective);
-    console.log('exercisetime', exercisetime);
+    console.log('exercisetime', exercisetime);*/
     const response = await api.post('/health', {
       id_user: 'b06c35b1-9342-467c-a028-23348f9b2a47',
       genre,
@@ -187,7 +187,7 @@ export default function HealthAnalysis() {
       objective,
       exercisetime,
     });
-    console.log(response);
+    //console.log(response);
     navigator.navigate('/');
   };
 
@@ -251,9 +251,10 @@ export default function HealthAnalysis() {
                 mode={mode}
                 is24Hour={true}
                 display="default"
-                onChange={event =>
+                onChange={onChange}
+                /*onChange={event =>
                   setDate(new Date(event.nativeEvent.timestamp))
-                }
+                }*/
               />
             )}
           </View>
@@ -261,7 +262,7 @@ export default function HealthAnalysis() {
           <View>
             <Text style={styles.textRadioBottom}>Qual é o seu Peso? </Text>
             <SliderRange
-              data={weight}
+              data={100} //weight
               unitType="kg"
               step={1}
               maximumValue={300}
@@ -272,7 +273,7 @@ export default function HealthAnalysis() {
           <View>
             <Text style={styles.textRadioBottom}>Qual é a sua Altura? </Text>
             <SliderRange
-              data={height}
+              data={175} //height
               unitType="cm"
               step={1}
               maximumValue={300}
@@ -288,7 +289,7 @@ export default function HealthAnalysis() {
             <RadioGroup
               radioButtons={_rbCorporalBiotype}
               onPress={event => {
-                console.log(event);
+                //console.log(event);
                 // _onPressRBCorporalBiotype;
               }}
               layout="column"
@@ -320,7 +321,7 @@ export default function HealthAnalysis() {
               Quanto tempo de exercicio?
             </Text>
             <SliderRange
-              data={exercisetime}
+              data={120} //exercisetime
               unitType="h"
               step={0.5}
               maximumValue={24}
