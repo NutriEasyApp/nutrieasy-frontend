@@ -6,6 +6,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Home from '../../pages/Home';
 import HealthAnalysis from '../../pages/HealthAnalysis';
 import Reports from '../../pages/Reports/';
+import Recipes from '../../pages/Recipes';
 
 import AuthContext from '../../contexts/auth';
 
@@ -73,7 +74,7 @@ export default function Dashboard() {
 
         <Tab.Screen
           name="Sistema de Divisões de Refeições"
-          component={HealthAnalysis}
+          component={Recipes}
           options={{
             tabBarLabel: 'Refeições',
             tabBarIcon: ({ color, size }) => (
