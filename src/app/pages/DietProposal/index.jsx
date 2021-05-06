@@ -2,14 +2,7 @@ import React from 'react';
 import { styles } from './style';
 import { DataTable } from 'react-native-paper';
 
-import {
-  Text,
-  View,
-  KeyboardAvoidingView,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View } from 'react-native';
 
 export default function DietProposal() {
   return (
@@ -55,7 +48,6 @@ export default function DietProposal() {
           }}
           label="1-2 of 6"
         />*/}
-        
       </DataTable>
     </View>
   );

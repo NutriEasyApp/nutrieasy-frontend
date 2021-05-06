@@ -1,13 +1,23 @@
-export function Signin(){
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve({
-                token: 'ALeKk02G0qQyeFUIPxUx1xiaaCNsi_e2Yew',
-                user: {
-                    name: 'Gabriel',
-                    email: 'dev.gabriel.alonso@gmail.com'
-                }
-            })
-        }, 2000);
-    })
+import api from '../services/api';
+import { decode, encode } from 'base-64';
+
+if (!global.btoa) {
+  global.btoa = encode;
+}
+
+if (!global.atob) {
+  global.atob = decode;
+}
+
+export async function signIn(email, password) {
+  return api.post(
+    '/auth/login',
+    {},
+    {
+      auth: {
+        username: email,
+        password: password,
+      },
+    }
+  );
 }

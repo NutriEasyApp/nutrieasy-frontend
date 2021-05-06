@@ -1,41 +1,26 @@
 import React, { useContext, useState } from 'react';
-import { styles } from './style';
-
 import {
   Text,
   View,
   KeyboardAvoidingView,
   Image,
   TextInput,
-  Button,
   TouchableOpacity,
 } from 'react-native';
 
+import { styles } from './style';
 import AuthContext from '../../contexts/auth';
 
-import { emailValidator } from '../../validators/emailValidator';
-import { passwordValidator } from '../../validators/passwordValidator';
-
 export default function SignIn() {
-  const { signed, signIn } = useContext(AuthContext);
-  //console.log(signed);
+  const { auth, error } = useContext(AuthContext);
 
   function hangleForgotYourPassword() {}
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   function handleSignIn() {
-    signIn();
-
-    /*const [email, setEmail] = useState({value: '', error: ''});
-    const [password, setPassword] = useState({value: '', error: ''});
-
-    const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
-
-    if(emailError || passwordError){
-      setEmail({...email, error: emailError});
-      setPassword({...password, error: passwordError})
-      return
-    }*/
+    auth(email, password);
   }
 
   return (
@@ -57,7 +42,7 @@ export default function SignIn() {
           autoCompleteType="email"
           autoCorrect={false}
           placeholderTextColor="#222"
-          /*onChangeText={(text) => setEmail({ value: text, error: ''})}*/
+          onChangeText={text => setEmail(text)}
         />
 
         <TextInput
@@ -69,7 +54,7 @@ export default function SignIn() {
           placeholder="Senha"
           autoCorrect={false}
           placeholderTextColor="#222"
-          /*onChangeText={(text) => setPassword({value: text, error: '' })}*/
+          onChangeText={text => setPassword(text)}
         />
 
         <TouchableOpacity style={styles.btnSubmit} onPress={handleSignIn}>

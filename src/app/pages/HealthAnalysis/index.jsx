@@ -1,17 +1,13 @@
-import React, { Component, useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { styles } from './style';
 import RadioGroup from 'react-native-radio-buttons-group';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Slider from '@react-native-community/slider';
 import {
   Text,
   View,
-  Button,
   KeyboardAvoidingView,
-  TextInput,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
 } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -20,6 +16,7 @@ import { SliderRange } from '../../components/Slider/SliderRange';
 import api from '../../services/api';
 
 import AuthContext from '../../contexts/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyTheme = {
   colors: {
@@ -177,8 +174,10 @@ export default function HealthAnalysis() {
     console.log('bodytype', bodytype);
     console.log('objetive', objective);
     console.log('exercisetime', exercisetime);*/
+    const user = await AsyncStorage.getItem('@RNAuth:user');
+
     const response = await api.post('/health', {
-      id_user: 'b06c35b1-9342-467c-a028-23348f9b2a47',
+      id_user: user,
       genre,
       height,
       weight,
@@ -186,9 +185,10 @@ export default function HealthAnalysis() {
       bodytype,
       objective,
       exercisetime,
+      meals: '2',
     });
     //console.log(response);
-    navigator.navigate('/');
+    navigator.navigate('Home');
   };
 
   const [result, setResult] = useState(userDataAnalysis);
@@ -203,9 +203,9 @@ export default function HealthAnalysis() {
     //   exercisetime: '2.15',
     // };
     async function getHealth() {
-      const result = await api.get(
-        '/nutrieasy/health/b06c35b1-9342-467c-a028-23348f9b2a47'
-      );
+      const user = await AsyncStorage.getItem('@RNAuth:user');
+      console.log(user);
+      const result = await api.get(`/health/${user}`);
       // console.log(result.data);
       setGender(result.data.genre);
       setWeight(result.data.weight);
@@ -251,10 +251,10 @@ export default function HealthAnalysis() {
                 mode={mode}
                 is24Hour={true}
                 display="default"
-                onChange={onChange}
-                /*onChange={event =>
+                // onChange={onChange}
+                onChange={event =>
                   setDate(new Date(event.nativeEvent.timestamp))
-                }*/
+                }
               />
             )}
           </View>
@@ -262,7 +262,7 @@ export default function HealthAnalysis() {
           <View>
             <Text style={styles.textRadioBottom}>Qual é o seu Peso? </Text>
             <SliderRange
-              data={100} //weight
+              data={weight} //weight
               unitType="kg"
               step={1}
               maximumValue={300}
@@ -273,7 +273,7 @@ export default function HealthAnalysis() {
           <View>
             <Text style={styles.textRadioBottom}>Qual é a sua Altura? </Text>
             <SliderRange
-              data={175} //height
+              data={height} //height
               unitType="cm"
               step={1}
               maximumValue={300}
@@ -321,7 +321,7 @@ export default function HealthAnalysis() {
               Quanto tempo de exercicio?
             </Text>
             <SliderRange
-              data={120} //exercisetime
+              data={exercisetime} //exercisetime
               unitType="h"
               step={0.5}
               maximumValue={24}

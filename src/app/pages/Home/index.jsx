@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Animated, Text, TouchableOpacity } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { Animated, Text, Button, TouchableOpacity } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import api from '../../services/api';
 import logo from '../../../assets/images/logo.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   Container,
@@ -21,17 +22,20 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { statement } from '@babel/template';
-import { Button } from 'react-native-web';
 import { styles } from './style';
+import AuthContext from '../../contexts/auth';
+
 const dietData = {
-  calories: '',
-  carbohydrates: '',
-  protein: '',
-  lipids: '',
-  water: '',
+  diet: {
+    calories: '',
+    carbohydrates: '',
+    protein: '',
+    lipids: '',
+    water: '',
+  },
 };
 export default function Home() {
+  const { signOut } = useContext(AuthContext);
   const [diet, setDiet] = useState(dietData);
   let offset = 0;
   const translateY = new Animated.Value(0);
@@ -74,14 +78,18 @@ export default function Home() {
   }
 
   useEffect(() => {
-    api
-      .get('/nutrieasy/diet/b06c35b1-9342-467c-a028-23348f9b2a47')
-      .then(response => {
+    async function getDiet() {
+      const user = await AsyncStorage.getItem('@RNAuth:user');
+      api.get(`/diet/${user}`).then(response => {
         setDiet(response.data);
       });
+    }
+    getDiet();
   }, []);
   return (
     <Container>
+      <Button title="Sair" onPress={signOut} />
+
       <Top
         style={{
           textAlign: 'center',
@@ -144,24 +152,23 @@ export default function Home() {
               </Title>
 
               <Description style={{ fontSize: 20 }}>
-                Calorias: {diet.calories}
-              </Description>
-              
-              <Description style={{ fontSize: 20 }}>
-                Carboidratos: {diet.carbohydrates}
-              </Description>
-              
-              <Description style={{ fontSize: 20 }}>
-                Proteina: {diet.protein}
+                Calorias: {diet.diet.calories}
               </Description>
 
               <Description style={{ fontSize: 20 }}>
-                Lipídios: {diet.lipids}
+                Carboidratos: {diet.diet.carbohydrates}
               </Description>
-              
+
               <Description style={{ fontSize: 20 }}>
-                Água: {diet.water}
-              
+                Proteina: {diet.diet.protein}
+              </Description>
+
+              <Description style={{ fontSize: 20 }}>
+                Lipídios: {diet.diet.lipids}
+              </Description>
+
+              <Description style={{ fontSize: 20 }}>
+                Água: {diet.diet.water}
               </Description>
             </CardContent>
 
@@ -171,13 +178,9 @@ export default function Home() {
                 ficha de ánalise de saúde.
               </Annotation>
             </CardFooter>
-
           </Card>
-
         </PanGestureHandler>
-
       </Content>
-      
     </Container>
   );
 }

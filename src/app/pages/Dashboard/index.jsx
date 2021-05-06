@@ -3,10 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-import Home from '../../pages/Home';
-import HealthAnalysis from '../../pages/HealthAnalysis';
-import Reports from '../../pages/Reports/';
-import Recipes from '../../pages/Recipes';
+import Home from '../Home';
+import HealthAnalysis from '../HealthAnalysis';
+import Reports from '../Reports';
+import Recipes from '../Recipes';
 
 import AuthContext from '../../contexts/auth';
 
@@ -21,7 +21,7 @@ const Tab = createMaterialBottomTabNavigator();
 export default function Dashboard() {
   const { signed, user, signOut } = useContext(AuthContext);
 
-  function handleSignout() {
+  function handleSignOut() {
     signOut();
   }
 
