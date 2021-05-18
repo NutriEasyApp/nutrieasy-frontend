@@ -1,20 +1,19 @@
-import React, { useContext, createRef } from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
+import {
+  ThemeNutriEasy, TabBarStyle
+} from './style';
+
 import Home from '../Home';
 import HealthAnalysis from '../HealthAnalysis';
+import Graphics from '../Graphics';
 import Reports from '../Reports';
 import Recipes from '../Recipes';
 
 import AuthContext from '../../contexts/auth';
-
-const MyTheme = {
-  colors: {
-    primary: '#90cc0c',
-  },
-};
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,27 +23,14 @@ export default function Dashboard() {
   function handleSignOut() {
     signOut();
   }
-
-  {
-    /*
-    <Text>Olá{user.name}!</Text>
-    <Button onPress={handleSignout} title="Sign Out" />
-    */
-    //independent={true} ref={createRef()}
-  }
-
+  
   return (
-    <NavigationContainer theme={MyTheme} independent={true}>
+    <NavigationContainer theme={ThemeNutriEasy} independent={true}>
       <Tab.Navigator
         activeColor="#fff"
         inactiveColor="#fff"
         initialRouteName="Dashboard"
-        tabBarOptions={{
-          activeTintColor: '#fff',
-          labelStyle: {
-            color: '#fff',
-          },
-        }}
+        tabBarOptions={TabBarStyle}
       >
         <Tab.Screen
           name="Home"
@@ -61,7 +47,7 @@ export default function Dashboard() {
           name="Ficha de Análise de Saúde"
           component={HealthAnalysis}
           options={{
-            tabBarLabel: 'Análise de Saúde',
+            tabBarLabel: 'Saúde',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="hospital-box"
@@ -84,6 +70,21 @@ export default function Dashboard() {
         />
 
         <Tab.Screen
+          name="Gráficos"
+          component={Graphics}
+          options={{
+            tabBarLabel: 'Gráficos',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="chart-line"
+                color={'#fff'}
+                size={20}
+              />
+            ),
+          }}
+        />
+
+        <Tab.Screen
           name="Impressão de Relatórios"
           component={Reports}
           options={{
@@ -97,6 +98,7 @@ export default function Dashboard() {
             ),
           }}
         />
+
       </Tab.Navigator>
     </NavigationContainer>
   );
