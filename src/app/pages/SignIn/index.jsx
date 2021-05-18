@@ -1,20 +1,12 @@
 import React, { useContext, useState } from 'react';
-import {
-  Text,
-  View,
-  KeyboardAvoidingView,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { Container, Logo, Image, Wrapper, TextInput, TextInputError, Button, TextSubmit, TextRegister, TextForgotPassword, Link, TextError } from './style';
 
-import { styles } from './style';
 import AuthContext from '../../contexts/auth';
+
+const img = require('../../assets/images/logo.png');
 
 export default function SignIn() {
   const { auth, error } = useContext(AuthContext);
-
-  function hangleForgotYourPassword() {}
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,53 +16,72 @@ export default function SignIn() {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.background}>
-      <View style={styles.containerLogo}>
-        <Image
-          style={styles.logoImg}
-          source={require('../../../assets/images/logo.png')}
-        />
-      </View>
+    <Container>
+      <Logo>
+        <Image source={img} />
+      </Logo>
 
-      <View style={styles.container}>
-        <TextInput
-          style={styles.input}
+      <Wrapper>
+
+        {error ?
+          <TextInputError
           placeholder="Email"
           keyboardType="email-address"
           textContentType="emailAddress"
           autoCapitalize="none"
           autoCompleteType="email"
-          autoCorrect={false}
           placeholderTextColor="#222"
           onChangeText={text => setEmail(text)}
-        />
-
-        <TextInput
-          style={styles.input}
+          />
+        : 
+          <TextInput
+          placeholder="Email"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          autoCapitalize="none"
+          autoCompleteType="email"
+          placeholderTextColor="#222"
+          onChangeText={text => setEmail(text)}
+        />}
+        
+        
+        {error ?
+          <TextInputError
           secureTextEntry={true}
           textContentType="password"
           autoCapitalize="none"
           autoCompleteType="password"
           placeholder="Senha"
-          autoCorrect={false}
           placeholderTextColor="#222"
           onChangeText={text => setPassword(text)}
-        />
+        />  
+      : 
+        <TextInput
+          secureTextEntry={true}
+          textContentType="password"
+          autoCapitalize="none"
+          autoCompleteType="password"
+          placeholder="Senha"
+          placeholderTextColor="#222"
+          onChangeText={text => setPassword(text)}
+        />}
+        
+        {error && <TextError>Falha na Autenticação. Tente Novamente!</TextError> }
 
-        <TouchableOpacity style={styles.btnSubmit} onPress={handleSignIn}>
-          <Text style={styles.submitText}>Acessar</Text>
-        </TouchableOpacity>
+         
+        <Button onPress={handleSignIn}>
+          <TextSubmit>Acessar</TextSubmit>
+        </Button>
 
-        <TouchableOpacity style={styles.btnRegister}>
-          <Text style={styles.registerText}>Criar Conta</Text>
-        </TouchableOpacity>
+        <Link>
+          <TextRegister>Criar Conta</TextRegister>
+        </Link>
 
-        <View>
-          <TouchableOpacity onPress={hangleForgotYourPassword}>
-            <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+        <Link>
+          <TextForgotPassword>Esqueceu sua senha?</TextForgotPassword>
+        </Link>
+      </Wrapper>
+      
+    </Container>
   );
 }
