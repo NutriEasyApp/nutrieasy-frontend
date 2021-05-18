@@ -1,94 +1,84 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+import { StatusBar } from 'react-native';
 
-export const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  container: {
-    justifyContent: 'center',
-    width: '80%',
-  },
-  titlePage: {
-    fontSize: 25,
-    fontWeight: '700',
-    marginTop: 60,
-    marginBottom: 20,
-    alignSelf: 'center',
-  },
-  sliderForm: {
-    width: '100%',
-    height: 40,
-  },
-  viewBirthDay: {
-    // marginBottom: 15,
-    // borderColor: '#000',
-    // borderWidth: 2,
-    // borderRadius: 7,
-  },
-  radioButton: {
-    color: '#0000',
-  },
-  radioButtonTitle: {
-    fontSize: 16,
-    marginBottom: 10,
-    marginTop: 1,
-  },
-  input: {
-    backgroundColor: '#f9f9f9',
-    width: '100%',
-    color: '#222',
-    fontSize: 17,
-    borderRadius: 7,
-    padding: 10,
-    marginTop: 20,
-  },
-  inputTouchableOpacity: {
-    backgroundColor: '#f9f9f9',
-    width: '100%',
-    color: '#222',
-    fontSize: 17,
-    borderRadius: 7,
-    padding: 5,
-    marginBottom: 15,
-    borderColor: '#000',
-    borderWidth: 2,
-  },
-  textTouchableOpacity: {
-    marginLeft: 5,
-    color: '#000',
-    fontSize: 16,
-    textAlignVertical: 'center',
-  },
-  textRadioBottom: {
-    fontSize: 16,
-    color: '#000',
-  },
-  btnSubmit: {
-    backgroundColor: '#90cc0c',
-    width: '100%',
-    height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 7,
-    marginTop: 20,
-  },
-  submitText: {
-    color: '#FFF',
-    fontSize: 18,
-  },
-  btnRegister: {
-    marginTop: 10,
-  },
-  registerText: {
-    color: '#3b3b3b',
-  },
-  dateComponent: {
-    width: 350,
-  },
-  btnBirthday: {
-    backgroundColor: '#000',
-  },
-});
+export const Background = styled.KeyboardAvoidingView`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+`;
+
+export const Container = styled.View`
+  justify-content: center;
+  width: 100%;
+  padding: 30px;
+`;
+
+export const Title = styled.Text`
+  font-size: 25px;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  align-self: center;
+`;
+
+export const RadioButton = styled.Text`
+  color: #0000;
+`;
+
+export const InputTouchableOpacity = styled.TouchableOpacity`
+  background-color: #f9f9f9;
+  width: 100%;
+  color: #222;
+  font-size: 17px;
+  border-radius: 7px;
+  padding: 5px;
+  margin-bottom: 15px;
+  border-color: #000;
+  border-width: 2px;
+`;
+
+export const TextTouchableOpacity = styled.Text`
+  margin-left: 5px;
+  color: #000;
+  font-size: 16px;
+`;
+
+export const Label = styled.Text`
+  font-size: 16px;
+  color: #000;
+  font-weight: 700;
+`;
+
+export const Text = styled.Text`
+  color: #fff;
+  font-size: 18px;
+`;
+
+export const Button = styled.TouchableOpacity`
+  background-color: #90cc0c;
+  width: 100%;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  margin-top: 20px;
+`;
+
+export const DateInput = styled.TextInput`
+  background-color: #ececec;
+  width: 80%;
+  margin-bottom: 15px;
+  color: #222;
+  font-size: 16px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  padding: 15px;
+  height: 50px;
+`;
+
+export const SafeAreaViewStyle = {
+  flex: 1,
+  backgroundColor: 'white',
+  paddingTop: StatusBar.currentHeight,
+};

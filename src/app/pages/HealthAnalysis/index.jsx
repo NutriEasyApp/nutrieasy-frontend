@@ -1,28 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { styles } from './style';
+import { View, ScrollView, SafeAreaView } from 'react-native';
 import RadioGroup from 'react-native-radio-buttons-group';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import {
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
 
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { SliderRange } from '../../components/Slider/SliderRange';
 
+import AuthContext from '../../contexts/auth';
 import api from '../../services/api';
 
-import AuthContext from '../../contexts/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const MyTheme = {
-  colors: {
-    primary: '#90cc0c',
-  },
-};
+import { Container, Title, Label, Button, Text, DateInput, SafeAreaViewStyle } from './style';
 
 const genreTypes = [
   {
@@ -109,7 +96,6 @@ export default function HealthAnalysis() {
   const [bodytype, setBodytype] = useState('');
   const [exercisetime, setExerciseTime] = useState('');
   const [objectivePhysical, setObjectivePhysical] = useState('');
-  // onChange={value=>setGender(value)}
 
   /* Radio Button - Variaveis */
   const [_rbGender, set_rbGender] = useState(genreTypes);
@@ -151,7 +137,6 @@ export default function HealthAnalysis() {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
-    //console.log(selectedDate);
     setDate(currentDate);
   };
 
@@ -167,13 +152,6 @@ export default function HealthAnalysis() {
     showMode('time');
   };
   const submitAnalysis = async () => {
-    /*console.log(date);
-    console.log('altura', height);
-    console.log('peso', weight);
-    console.log('genre', genre);
-    console.log('bodytype', bodytype);
-    console.log('objetive', objective);
-    console.log('exercisetime', exercisetime);*/
     const user = await AsyncStorage.getItem('@RNAuth:user');
 
     const response = await api.post('/health', {
@@ -187,26 +165,16 @@ export default function HealthAnalysis() {
       exercisetime,
       meals: '2',
     });
-    //console.log(response);
+
     navigator.navigate('Home');
   };
 
   const [result, setResult] = useState(userDataAnalysis);
   useEffect(() => {
-    // const result = {
-    //   weight: '75',
-    //   height: '160',
-    //   genre: 'm',
-    //   birthdate: '18/04/1999',
-    //   bodytype: 'ECTOMORPH',
-    //   objective: 'GAIN',
-    //   exercisetime: '2.15',
-    // };
     async function getHealth() {
       const user = await AsyncStorage.getItem('@RNAuth:user');
-      console.log(user);
       const result = await api.get(`/health/${user}`);
-      // console.log(result.data);
+
       setGender(result.data.genre);
       setWeight(result.data.weight);
       setHeight(result.data.height);
@@ -218,51 +186,47 @@ export default function HealthAnalysis() {
   }, []);
 
   return (
-    <ScrollView>
-      <KeyboardAvoidingView style={styles.background}>
-        <View style={styles.container}>
-          <Text style={styles.titlePage}>Ficha de Análise de Saúde</Text>
+    <SafeAreaView style={SafeAreaViewStyle}>
+      <ScrollView>
+        <Container>
+          <Title>Ficha de Análise de Saúde</Title>
+
           <View>
-            <View style={styles.viewBirthDay}>
-              <Text style={styles.textRadioBottom}>Qual é o seu Peso? </Text>
-              <TouchableOpacity
-                style={styles.inputTouchableOpacity}
-                onPress={showDatepicker}
-              >
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                  <MaterialCommunityIcons
-                    style={{ textAlign: 'right' }}
-                    name="calendar-month"
-                    color={'#000'}
-                    size={30}
-                  />
-                  <Text style={styles.textTouchableOpacity}>
-                    {' '}
-                    Data de Nascimento
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            {show && (
-              <DateTimePicker
-                maximumDate={new Date()}
-                testID="dateTimePicker"
-                value={date}
-                mode={mode}
-                is24Hour={true}
-                display="default"
-                // onChange={onChange}
+            <Label style={{ marginBottom: 15 }}>
+              Qual é a sua Data de Nascimento?
+            </Label>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+              <DateInput
+                placeholder="DD/MM/AAAA"
                 onChange={event =>
                   setDate(new Date(event.nativeEvent.timestamp))
                 }
-              />
-            )}
+                value={date}
+                keyboardType={'numeric'}
+                maxLength={10}
+              ></DateInput>
+              <View
+                style={{
+                  backgroundColor: '#ececec',
+                  borderTopEndRadius: 7,
+                  borderBottomRightRadius: 7,
+                  height: 50,
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="calendar-month"
+                  color={'#000'}
+                  size={30}
+                  style={{ marginTop: 10, marginRight: 10 }}
+                />
+              </View>
+            </View>
           </View>
 
           <View>
-            <Text style={styles.textRadioBottom}>Qual é o seu Peso? </Text>
+            <Label>Qual é o seu Peso? </Label>
             <SliderRange
-              data={weight} //weight
+              data={weight}
               unitType="kg"
               step={1}
               maximumValue={300}
@@ -271,9 +235,9 @@ export default function HealthAnalysis() {
           </View>
 
           <View>
-            <Text style={styles.textRadioBottom}>Qual é a sua Altura? </Text>
+            <Label>Qual é a sua Altura? </Label>
             <SliderRange
-              data={height} //height
+              data={height}
               unitType="cm"
               step={1}
               maximumValue={300}
@@ -282,22 +246,16 @@ export default function HealthAnalysis() {
           </View>
 
           <View style={{ alignItems: 'flex-start' }}>
-            <Text style={styles.radioButtonTitle}>
-              Qual é o seu Biotipo Físico?
-            </Text>
-
+            <Label>Qual é o seu Biotipo Físico?</Label>
             <RadioGroup
               radioButtons={_rbCorporalBiotype}
-              onPress={event => {
-                //console.log(event);
-                // _onPressRBCorporalBiotype;
-              }}
+              onPress={event => {}}
               layout="column"
             />
           </View>
 
           <View style={{ marginTop: 10 }}>
-            <Text style={styles.radioButtonTitle}>Qual é o seu Gênero?</Text>
+            <Label>Qual é o seu Gênero?</Label>
             <RadioGroup
               radioButtons={_rbGender}
               onPress={_onPressRBGender}
@@ -306,9 +264,7 @@ export default function HealthAnalysis() {
           </View>
 
           <View style={{ marginTop: 10 }}>
-            <Text style={styles.radioButtonTitle}>
-              O que você gostaria de fazer com seu peso?
-            </Text>
+            <Label>O que você gostaria de fazer com seu peso?</Label>
             <RadioGroup
               radioButtons={_rbObjectivePhysical}
               onPress={_onPressRBObjectivePhysical}
@@ -317,11 +273,9 @@ export default function HealthAnalysis() {
           </View>
 
           <View>
-            <Text style={styles.textRadioBottom}>
-              Quanto tempo de exercicio?
-            </Text>
+            <Label>Quanto tempo de exercicio?</Label>
             <SliderRange
-              data={exercisetime} //exercisetime
+              data={exercisetime}
               unitType="h"
               step={0.5}
               maximumValue={24}
@@ -329,14 +283,12 @@ export default function HealthAnalysis() {
             />
           </View>
 
-          <TouchableOpacity
-            style={styles.btnSubmit}
-            onPress={() => submitAnalysis()}
-          >
-            <Text style={styles.submitText}>Cadastrar dados</Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
-    </ScrollView>
+          <Button onPress={() => submitAnalysis()}>
+            <Text>Cadastrar dados</Text>
+          </Button>
+          
+        </Container>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
