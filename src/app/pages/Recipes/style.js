@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StatusBar } from 'react-native';
 
 export const Button = styled.TouchableOpacity`
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -7,7 +8,11 @@ export const Button = styled.TouchableOpacity`
   margin: 0 20px;
 `;
 
-export const Divisor = styled.View``;
+export const Container = styled.View`
+  display: flex;
+  justify-content: center;
+  padding: 60px 30px;
+`;
 
 export const Content = styled.View`
   display: flex;
@@ -25,6 +30,24 @@ export const Title = styled.Text`
 `;
 
 export const TitleMain = styled.Text`
+  font-size: 32px;
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 10px;
+`;
+
+export const TextMain = styled.Text`
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+  font-weight: 200;
+  width: 100%;
+  margin-bottom: 10px;
+  color: gray;
+`;
+
+export const TitleElement = styled.Text`
   font-size: 20px;
   text-align: center;
   font-weight: bold;
@@ -38,12 +61,6 @@ export const Value = styled.Text`
   font-weight: bold;
 `;
 
-export const ViewMain = styled.View`
-  display: flex;
-  justify-content: center;
-  padding: 60px 30px;
-`;
-
 export const Icon = styled.View`
   text-align: center;
   margin-top: 10px;
@@ -55,8 +72,15 @@ export const InfoText = styled.Text`
   font-size: 20px;
 `;
 
-export const Frame = styled.View`
+export const Wrapper = styled.View`
   margin-top: 20px;
-  border: 1px solid gray;
   padding: 5px 20px;
+  background-color: whitesmoke;
+  border-radius: 20px;
 `;
+
+export const SafeAreaViewStyle = {
+  flex: 1,
+  backgroundColor: 'white',
+  paddingTop: StatusBar.currentHeight,
+};
