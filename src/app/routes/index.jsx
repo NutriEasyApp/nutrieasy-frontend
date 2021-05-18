@@ -21,6 +21,6 @@ const Routes = () => {
     );
   }
 
-  return signed ? <AppRoutes /> : <AuthRoutes />;
+  return signed ? <AuthRoutes /> : <AppRoutes />; //inverter aqui
 };
 export default Routes;

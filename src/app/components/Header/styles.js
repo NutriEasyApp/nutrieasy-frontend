@@ -13,6 +13,14 @@ export const Text = styled.Text`
   font-weight: 700;
 `;
 
+export const TextUser = styled.Text`
+  font-size: 30px;
+  color: #fff;
+  font-weight: 700;
+  text-align: left;
+  margin-top: 20px;
+`;
+
 export const StyleIcon = {
   textAlign: 'center',
   justifyContent: 'center',

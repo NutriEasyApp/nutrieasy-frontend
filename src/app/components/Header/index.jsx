@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Text, StyleIcon } from './styles';
+import { Container, Text, StyleIcon, TextUser } from './styles';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -14,6 +14,7 @@ export default function Header() {
         color="#fff"
         style={StyleIcon}
       />
+      <TextUser>Olá, Gabriel</TextUser>
     </Container>
   );
 }

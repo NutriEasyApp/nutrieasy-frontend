@@ -13,7 +13,7 @@ import {
   CardHeader,
   Card,
   Content,
-  Proposta
+  Proposta,
 } from './styles';
 
 import api from '../../services/api';
@@ -28,6 +28,8 @@ const dietData = {
     water: '',
   },
 };
+
+import Menu from '../../components/Menu';
 
 export default function DietProposal() {
   const { signOut } = useContext(AuthContext);
@@ -86,6 +88,7 @@ export default function DietProposal() {
   return (
     <Container>
       <Content>
+        <Menu translateY={translateY} />
         <PanGestureHandler
           onGestureEvent={animatedEvent}
           onHandlerStateChange={onHandlerStateChanged}
@@ -95,8 +98,8 @@ export default function DietProposal() {
               transform: [
                 {
                   translateY: translateY.interpolate({
-                    inputRange: [-300, 0, 380],
-                    outputRange: [-50, 0, 380],
+                    inputRange: [-300, 0, 260],
+                    outputRange: [-50, 0, 260],
                     extrapolate: 'clamp',
                   }),
                 },
@@ -119,14 +122,14 @@ export default function DietProposal() {
             }
 
             <Proposta>
-            <Title>Proposta de Dieta</Title>
-            <Description>Calorias:</Description>
-            <Description>Carboidratos: </Description>
-            <Description>Proteina: </Description>
-            <Description>Lipídios: </Description>
-            <Description>Água:</Description>
+              <Title>Proposta de Dieta</Title>
+              <Description>Calorias:</Description>
+              <Description>Carboidratos: </Description>
+              <Description>Proteina: </Description>
+              <Description>Lipídios: </Description>
+              <Description>Água:</Description>
             </Proposta>
-            
+
             <Info>
               <Text>
                 Essa é a sua proposta de dieta conforme os dados enviados pela
