@@ -41,6 +41,7 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-input-validator": "^1.0.12",
     "react-native-locale": "0.0.19",
     "react-native-paper": "^4.7.2",
     "react-native-radio-buttons-group": "^2.1.0",
