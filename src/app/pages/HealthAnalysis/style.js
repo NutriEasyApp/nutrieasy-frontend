@@ -11,13 +11,12 @@ export const Background = styled.KeyboardAvoidingView`
 export const Container = styled.View`
   justify-content: center;
   width: 100%;
-  padding: 30px;
+  padding: 10px 8px 10px 8px;
 `;
 
 export const Title = styled.Text`
   font-size: 25px;
   font-weight: 700;
-  margin-top: 50px;
   margin-bottom: 20px;
   align-self: center;
 `;

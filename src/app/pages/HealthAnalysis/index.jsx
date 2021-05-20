@@ -9,18 +9,26 @@ import { SliderRange } from '../../components/Slider/SliderRange';
 import AuthContext from '../../contexts/auth';
 import api from '../../services/api';
 
-import { Container, Title, Label, Button, Text, DateInput, SafeAreaViewStyle } from './style';
+import {
+  Container,
+  Title,
+  Label,
+  Button,
+  Text,
+  DateInput,
+  SafeAreaViewStyle,
+} from './style';
 
 const genreTypes = [
   {
     id: '1',
     label: 'Masculino',
-    value: 'm',
+    value: 'M',
   },
   {
     id: '2',
     label: 'Feminino',
-    value: 'f',
+    value: 'F',
   },
 ];
 
@@ -84,9 +92,10 @@ const userDataAnalysis = {
   exercisetime: '',
 };
 
-export default function HealthAnalysis() {
+export default function HealthAnalysis({ navigation }) {
   const { signed, user, signOut } = useContext(AuthContext);
 
+  const [date, setDate] = useState('');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [corporalBiotype, setCorporalBiotype] = useState('');
@@ -130,7 +139,7 @@ export default function HealthAnalysis() {
   const [checked, setChecked] = React.useState('first');
 
   /* Date Picker */
-  const [date, setDate] = useState(new Date(1598051730000));
+
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -153,37 +162,50 @@ export default function HealthAnalysis() {
   };
   const submitAnalysis = async () => {
     const user = await AsyncStorage.getItem('@RNAuth:user');
+    try {
+      await api.post('/health', {
+        id_user: '2f0e70b7-ba85-414e-ac8b-07788273f177',
+        genre: 'M',
+        height: '175',
+        weight: '70',
+        birthdate: '1999-04-18',
+        bodytype: 'ECTOMORPH',
+        objective: 'GAIN',
+        exercisetime: '6.0',
+        meals: '3',
+      });
 
-    const response = await api.post('/health', {
-      id_user: user,
-      genre,
-      height,
-      weight,
-      birthdate: '04/18/1999',
-      bodytype,
-      objective,
-      exercisetime,
-      meals: '2',
-    });
-
-    navigator.navigate('Home');
+      navigation.navigate('Home');
+    } catch (err) {
+      console.log('Ocorreu um erro: ', err);
+    }
   };
 
   const [result, setResult] = useState(userDataAnalysis);
-  useEffect(() => {
-    async function getHealth() {
-      const user = await AsyncStorage.getItem('@RNAuth:user');
-      const result = await api.get(`/health/${user}`);
-
-      setGender(result.data.genre);
-      setWeight(result.data.weight);
-      setHeight(result.data.height);
-      setObjective(result.data.objective);
-      setBodytype(result.data.bodytype);
-      setExerciseTime(result.data.exercisetime);
-    }
-    getHealth();
-  }, []);
+  // useEffect(() => {
+  //   async function getHealth() {
+  //     try {
+  //       const user = await AsyncStorage.getItem('@RNAuth:user');
+  //       const result = await api.get(`/health/${user}`);
+  //       setGender(result.data.genre);
+  //       setWeight(result.data.weight);
+  //       setHeight(result.data.height);
+  //       setObjective(result.data.objective);
+  //       setBodytype(result.data.bodytype);
+  //       setExerciseTime(result.data.exercisetime);
+  //     } catch (err) {
+  //       const { status } = err.response;
+  //       console.log(statusobject);
+  //       if (status === 404) {
+  //         console.log('Parece que você ainda não cadastrou sua ficha de saude');
+  //       }
+  //       if (status === 401) {
+  //         signOut();
+  //       }
+  //     }
+  //   }
+  //   getHealth();
+  // }, []);
 
   return (
     <SafeAreaView style={SafeAreaViewStyle}>
@@ -199,9 +221,8 @@ export default function HealthAnalysis() {
               <DateInput
                 placeholder="DD/MM/AAAA"
                 onChange={event =>
-                  setDate(new Date(event.nativeEvent.timestamp))
+                  setDate(event.nativeEvent.text.split('-').reverse().join('-'))
                 }
-                value={date}
                 keyboardType={'numeric'}
                 maxLength={10}
               ></DateInput>
@@ -283,10 +304,9 @@ export default function HealthAnalysis() {
             />
           </View>
 
-          <Button onPress={() => submitAnalysis()}>
+          <Button onPress={submitAnalysis}>
             <Text>Cadastrar dados</Text>
           </Button>
-          
         </Container>
       </ScrollView>
     </SafeAreaView>
