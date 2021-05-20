@@ -21,3 +21,7 @@ export async function signIn(email, password) {
     }
   );
 }
+
+export async function signUp(email, username, password) {
+  return api.post('/auth/signup', { email, username, password });
+}

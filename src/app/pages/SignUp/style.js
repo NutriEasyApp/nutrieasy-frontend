@@ -39,6 +39,19 @@ export const TextInput = styled.TextInput.attrs({
   height: 55px;
 `;
 
+export const TextInputError = styled.TextInput.attrs({
+  autoCorrect: false,
+})`
+  background-color: #fef1f2;
+  border: 1px solid #dc3545;
+  width: 90%;
+  margin-bottom: 15px;
+  color: #222;
+  font-size: 16px;
+  border-radius: 7px;
+  padding: 15px;
+  height: 55px;
+`;
 export const Button = styled.TouchableOpacity`
   background-color: #90cc0c;
   width: 90%;
@@ -48,7 +61,19 @@ export const Button = styled.TouchableOpacity`
   border-radius: 7px;
 `;
 
+export const TextError = styled.Text`
+  text-align: center;
+  width: 70%;
+  color: #dc3545;
+  font-size: 15px;
+  margin-bottom: 20px;
+`;
 export const Text = styled.Text`
   color: #fff;
   font-size: 18px;
+`;
+export const Back = styled.View`
+  padding: 10px 0;
+  align-self: stretch;
+  margin-left: 30px;
 `;

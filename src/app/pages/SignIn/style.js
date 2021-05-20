@@ -75,6 +75,7 @@ export const TextError = styled.Text`
 
 export const TextRegister = styled.Text`
   color: #3b3b3b;
+  font-size: 14px;
 `;
 
 export const TextForgotPassword = styled.Text`
@@ -83,5 +84,11 @@ export const TextForgotPassword = styled.Text`
 `;
 
 export const Link = styled.TouchableOpacity`
-  margin-top: 10px;
+  margin-top: 20px;
+`;
+
+export const Footer = styled.View`
+  align-items: center;
+  margin-top: 50px;
+  /* margin-top: 50px; */
 `;
