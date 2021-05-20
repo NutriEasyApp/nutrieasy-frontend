@@ -31,9 +31,10 @@ const dietData = {
 
 import Menu from '../../components/Menu';
 
-export default function DietProposal() {
+export default function DietProposal({ navigation }) {
   const { signOut } = useContext(AuthContext);
-  const [diet, setDiet] = useState(dietData);
+  const [proposed, setProposed] = useState(dietData);
+  const [diet, setDiet] = useState(false);
 
   let offset = 0;
   const translateY = new Animated.Value(0);
@@ -77,10 +78,21 @@ export default function DietProposal() {
 
   useEffect(() => {
     async function getDiet() {
-      const user = await AsyncStorage.getItem('@RNAuth:user');
-      api.get(`/diet/${user}`).then(response => {
-        setDiet(response.data);
-      });
+      try {
+        const user = await AsyncStorage.getItem('@RNAuth:user');
+        const response = await api.get(`/diet/${user}`);
+        setProposed(response.data);
+        setDiet(true);
+      } catch (err) {
+        const { status } = err.response;
+        if (status === 404) {
+          console.log('Parece que você ainda não cadastrou sua ficha de saude');
+          setDiet(false);
+        }
+        if (status === 401) {
+          signOut();
+        }
+      }
     }
     getDiet();
   }, []);
@@ -122,12 +134,24 @@ export default function DietProposal() {
             }
 
             <Proposta>
-              <Title>Proposta de Dieta</Title>
-              <Description>Calorias:</Description>
-              <Description>Carboidratos: </Description>
-              <Description>Proteina: </Description>
-              <Description>Lipídios: </Description>
-              <Description>Água:</Description>
+              <Title>Proposta de Dieta / Dia</Title>
+              {diet ? (
+                <>
+                  <Description>Calorias: {proposed.diet.calories}</Description>
+                  <Description>
+                    Carboidratos: {proposed.diet.carbohydrates}
+                  </Description>
+                  <Description>Proteina: {proposed.diet.protein}</Description>
+                  <Description>Lipídios: {proposed.diet.lipids}</Description>
+                  <Description>Água: {proposed.diet.water}</Description>
+                </>
+              ) : (
+                <>
+                  <Description>
+                    Parece que você ainda não cadastrou sua ficha de saúde.
+                  </Description>
+                </>
+              )}
             </Proposta>
 
             <Info>
