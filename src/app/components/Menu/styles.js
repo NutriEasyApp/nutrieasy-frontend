@@ -40,10 +40,11 @@ export const SignOutButton = styled.TouchableOpacity`
   align-items: center;
   padding: 12px;
   margin-top: 15px;
+  background-color: #fff;
 `;
 
 export const SignOutButtonText = styled.Text`
-  color: #fff;
+  color: #333;
   font-weight: bold;
   font-size: 13px;
 `;
