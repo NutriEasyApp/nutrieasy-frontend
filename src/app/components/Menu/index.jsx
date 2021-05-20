@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Container,
   Nav,
@@ -9,8 +9,10 @@ import {
 } from './styles';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AuthContext from '../../contexts/auth';
 
 export default function Menu({ translateY }) {
+  const { signOut } = useContext(AuthContext);
   return (
     <Container
       style={{
@@ -22,20 +24,24 @@ export default function Menu({ translateY }) {
     >
       <Nav>
         <NavItem>
-            <MaterialCommunityIcons name="lock" color={'#fff'} size={20} />
+          <MaterialCommunityIcons name="lock" color={'#fff'} size={20} />
           <NavText>Alterar Senha</NavText>
         </NavItem>
         <NavItem>
-            <MaterialCommunityIcons name="information" color={'#fff'} size={20} />
+          <MaterialCommunityIcons name="information" color={'#fff'} size={20} />
           <NavText>Sobre o aplicativo</NavText>
         </NavItem>
         <NavItem>
-            <MaterialCommunityIcons name="file-document-edit" color={'#fff'} size={20} />
+          <MaterialCommunityIcons
+            name="file-document-edit"
+            color={'#fff'}
+            size={20}
+          />
           <NavText>Termos de Uso</NavText>
         </NavItem>
       </Nav>
 
-      <SignOutButton onPress={() => {}}>
+      <SignOutButton onPress={signOut}>
         <SignOutButtonText>SAIR DO APP</SignOutButtonText>
       </SignOutButton>
     </Container>
