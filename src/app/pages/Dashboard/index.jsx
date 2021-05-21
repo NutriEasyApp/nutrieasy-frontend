@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import {
   ThemeNutriEasy, TabBarStyle
@@ -12,10 +13,15 @@ import HealthAnalysis from '../HealthAnalysis';
 import Graphics from '../Graphics';
 import Reports from '../Reports';
 import Recipes from '../Recipes';
+import ChangePassword from '../ChangePassword';
+import TermsOfUse from '../TermsOfUse';
+import AboutApp from '../AboutApp';
+
 
 import AuthContext from '../../contexts/auth';
 
 const Tab = createMaterialBottomTabNavigator();
+const MenuStack = createStackNavigator();
 
 export default function Dashboard() {
   const { signed, user, signOut } = useContext(AuthContext);
@@ -32,16 +38,25 @@ export default function Dashboard() {
         initialRouteName="Dashboard"
         tabBarOptions={TabBarStyle}
       >
-        <Tab.Screen
-          name="Home"
-          component={Home}
+        <Tab.Screen name="First" 
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={'#fff'} size={20} />
             ),
-          }}
-        />
+          }}>
+          {() => (
+            <MenuStack.Navigator screenOptions={{ headerShown: false }}>
+              <MenuStack.Screen
+                name="Home"
+                component={Home}
+              />
+              <MenuStack.Screen name="ChangePassword" component={ChangePassword} />
+              <MenuStack.Screen name="AboutApp" component={AboutApp} />
+              <MenuStack.Screen name="TermsOfUse" component={TermsOfUse} />
+            </MenuStack.Navigator>
+          )}
+        </Tab.Screen>
 
         <Tab.Screen
           name="Ficha de Análise de Saúde"

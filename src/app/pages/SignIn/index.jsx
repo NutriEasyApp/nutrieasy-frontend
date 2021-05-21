@@ -85,14 +85,17 @@ export default function SignIn({ navigation }) {
         <Button onPress={handleSignIn}>
           <TextSubmit>Acessar</TextSubmit>
         </Button>
+
         <Link>
           <TextForgotPassword>Esqueceu sua senha?</TextForgotPassword>
         </Link>
+
         <Footer>
           <Link onPress={() => navigation.navigate('SignUp')}>
             <TextRegister>Ainda não tem uma conta? Crie uma Conta</TextRegister>
           </Link>
         </Footer>
+        
       </Wrapper>
     </Container>
   );
