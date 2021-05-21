@@ -80,4 +80,6 @@ export const SafeAreaViewStyle = {
   flex: 1,
   backgroundColor: 'white',
   paddingTop: StatusBar.currentHeight,
+  paddingRight: 10,
+  paddingLeft: 10,
 };

@@ -219,7 +219,7 @@ export default function HealthAnalysis({ navigation }) {
             </Label>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
               <DateInput
-                placeholder="DD/MM/AAAA"
+                placeholder="DD-MM-AAAA"
                 onChange={event =>
                   setDate(event.nativeEvent.text.split('-').reverse().join('-'))
                 }
