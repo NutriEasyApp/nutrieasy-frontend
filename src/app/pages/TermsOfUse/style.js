@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StatusBar } from 'react-native';
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
@@ -20,7 +21,6 @@ export const Text = styled.Text`
   font-size: 16px;
   line-height: 25px;
   text-align: justify;
-  margin-bottom: 15px;
 `;
 
 export const Title = styled.Text`
@@ -34,3 +34,11 @@ export const Back = styled.View`
   align-self: stretch;
   margin-left: 30px;
 `;
+
+export const SafeAreaViewStyle = {
+  flex: 1,
+  backgroundColor: '#fff',
+  paddingTop: StatusBar.currentHeight,
+  paddingRight: 10,
+  paddingLeft: 10,
+};
