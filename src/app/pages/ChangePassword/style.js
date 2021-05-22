@@ -45,7 +45,7 @@ export const TextSubmit = styled.Text`
 export const Title = styled.Text`
   text-align: center;
   color: black;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 700;
   margin-bottom: 5px;
 `;
@@ -58,4 +58,10 @@ export const Text = styled.Text`
   width: 100%;
   margin-bottom: 30px;
   color: gray;
+`;
+
+export const Back = styled.View`
+  padding: 10px 0;
+  align-self: stretch;
+  margin-left: 30px;
 `;
