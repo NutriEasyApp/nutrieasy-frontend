@@ -7,17 +7,6 @@ export const Container = styled.KeyboardAvoidingView`
   background-color: #fff;
 `;
 
-export const Logo = styled.View`
-  justify-content: center;
-  margin-bottom: -20px;
-  margin-top: 0;
-`;
-
-export const Image = styled.Image`
-  width: 220px;
-  height: 220px;
-`;
-
 export const Wrapper = styled.View`
   align-items: center;
   justify-content: center;
@@ -39,19 +28,6 @@ export const TextInput = styled.TextInput.attrs({
   height: 55px;
 `;
 
-export const TextInputError = styled.TextInput.attrs({
-  autoCorrect: false,
-})`
-  background-color: #fef1f2;
-  border: 1px solid #dc3545;
-  width: 90%;
-  margin-bottom: 15px;
-  color: #222;
-  font-size: 16px;
-  border-radius: 7px;
-  padding: 15px;
-  height: 55px;
-`;
 export const Button = styled.TouchableOpacity`
   background-color: #90cc0c;
   width: 90%;
@@ -61,19 +37,25 @@ export const Button = styled.TouchableOpacity`
   border-radius: 7px;
 `;
 
-export const TextError = styled.Text`
-  text-align: center;
-  width: 70%;
-  color: #dc3545;
-  font-size: 15px;
-  margin-bottom: 20px;
-`;
-export const Text = styled.Text`
+export const TextSubmit = styled.Text`
   color: #fff;
   font-size: 18px;
 `;
-export const Back = styled.View`
-  padding: 10px 0;
-  align-self: stretch;
-  margin-left: 30px;
+
+export const Title = styled.Text`
+  text-align: center;
+  color: black;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 5px;
+`;
+
+export const Text = styled.Text`
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+  font-weight: 200;
+  width: 100%;
+  margin-bottom: 30px;
+  color: gray;
 `;
