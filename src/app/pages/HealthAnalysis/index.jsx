@@ -17,6 +17,10 @@ import {
   Text,
   DateInput,
   SafeAreaViewStyle,
+  CalendarMonthStyle,
+  Calendar,
+  BirthDate,
+  SliderRangeLabel
 } from './style';
 
 const genreTypes = [
@@ -106,60 +110,34 @@ export default function HealthAnalysis({ navigation }) {
   const [exercisetime, setExerciseTime] = useState('');
   const [objectivePhysical, setObjectivePhysical] = useState('');
 
-  /* Radio Button - Variaveis */
-  const [_rbGender, set_rbGender] = useState(genreTypes);
 
+  /* Radio Button - Variables */
+  const [_rbGender, set_rbGender] = useState(genreTypes);
   const [_rbCorporalBiotype, set_rbCorporalBiotype] = useState(
     physicalBiotypeTypes
   );
-
   const [_rbObjectivePhysical, set_rbObjectivePhysical] = useState(
     physicalObjectiveType
   );
-
   const [_rbEatingHabits, set_rbEatingHabits] = useState(eatingHabitsTypes);
 
-  /* Radio Button - Funções */
+
+
+  /* Radio Button - Functions */
   function _onPressRBGender(_gender) {
     set_rbGender(_gender);
   }
-
   function _onPressRBCorporalBiotype(_corporalBiotype) {
     set_rbCorporalBiotype(_corporalBiotype);
   }
-
   function _onPressRBObjectivePhysical(_cbjectivePhysical) {
     set_rbObjectivePhysical(_cbjectivePhysical);
   }
-
   function _onPressRBEatingHabits(_eatingHabits) {
     set_rbEatingHabits(_eatingHabits);
   }
 
-  const [checked, setChecked] = React.useState('first');
 
-  /* Date Picker */
-
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-  };
-
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
-  };
-
-  const showDatepicker = () => {
-    showMode('date');
-  };
-  const showTimepicker = () => {
-    showMode('time');
-  };
   const submitAnalysis = async () => {
     const user = await AsyncStorage.getItem('@RNAuth:user');
     try {
@@ -181,31 +159,34 @@ export default function HealthAnalysis({ navigation }) {
     }
   };
 
+
   const [result, setResult] = useState(userDataAnalysis);
-  // useEffect(() => {
-  //   async function getHealth() {
-  //     try {
-  //       const user = await AsyncStorage.getItem('@RNAuth:user');
-  //       const result = await api.get(`/health/${user}`);
-  //       setGender(result.data.genre);
-  //       setWeight(result.data.weight);
-  //       setHeight(result.data.height);
-  //       setObjective(result.data.objective);
-  //       setBodytype(result.data.bodytype);
-  //       setExerciseTime(result.data.exercisetime);
-  //     } catch (err) {
-  //       const { status } = err.response;
-  //       console.log(statusobject);
-  //       if (status === 404) {
-  //         console.log('Parece que você ainda não cadastrou sua ficha de saude');
-  //       }
-  //       if (status === 401) {
-  //         signOut();
-  //       }
-  //     }
-  //   }
-  //   getHealth();
-  // }, []);
+
+  useEffect(() => {
+    async function getHealth() {
+      try {
+        const user = await AsyncStorage.getItem('@RNAuth:user');
+        const result = await api.get(`/health/${user}`);
+        setGender(result.data.genre);
+        setWeight(result.data.weight);
+        setHeight(result.data.height);
+        setObjective(result.data.objective);
+        setBodytype(result.data.bodytype);
+        setExerciseTime(result.data.exercisetime);
+      } catch (err) {
+        const { status } = err.response;
+        console.log(statusobject);
+        if (status === 404) {
+          console.log('Parece que você ainda não cadastrou sua ficha de saude');
+        }
+        if (status === 401) {
+          signOut();
+        }
+      }
+    }
+    getHealth();
+  }, []);
+
 
   return (
     <SafeAreaView style={SafeAreaViewStyle}>
@@ -214,10 +195,11 @@ export default function HealthAnalysis({ navigation }) {
           <Title>Ficha de Análise de Saúde</Title>
 
           <View>
-            <Label style={{ marginBottom: 15 }}>
+            <Label>
               Qual é a sua Data de Nascimento?
             </Label>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+
+            <BirthDate>
               <DateInput
                 placeholder="DD-MM-AAAA"
                 onChange={event =>
@@ -226,26 +208,21 @@ export default function HealthAnalysis({ navigation }) {
                 keyboardType={'numeric'}
                 maxLength={10}
               ></DateInput>
-              <View
-                style={{
-                  backgroundColor: '#ececec',
-                  borderTopEndRadius: 7,
-                  borderBottomRightRadius: 7,
-                  height: 50,
-                }}
-              >
+
+              <Calendar>
                 <MaterialCommunityIcons
                   name="calendar-month"
                   color={'#000'}
                   size={30}
-                  style={{ marginTop: 10, marginRight: 10 }}
+                  style={CalendarMonthStyle}
                 />
-              </View>
-            </View>
+              </Calendar>
+            </BirthDate>
+
           </View>
 
           <View>
-            <Label>Qual é o seu Peso? </Label>
+            <SliderRangeLabel>Qual é o seu Peso? </SliderRangeLabel>
             <SliderRange
               data={weight}
               unitType="kg"
@@ -256,7 +233,7 @@ export default function HealthAnalysis({ navigation }) {
           </View>
 
           <View>
-            <Label>Qual é a sua Altura? </Label>
+            <SliderRangeLabel>Qual é a sua Altura? </SliderRangeLabel>
             <SliderRange
               data={height}
               unitType="cm"
@@ -266,16 +243,16 @@ export default function HealthAnalysis({ navigation }) {
             />
           </View>
 
-          <View style={{ alignItems: 'flex-start' }}>
+          <View>
             <Label>Qual é o seu Biotipo Físico?</Label>
             <RadioGroup
               radioButtons={_rbCorporalBiotype}
-              onPress={event => {}}
-              layout="column"
+              onPress={event => { }}
+              layout="row"
             />
           </View>
 
-          <View style={{ marginTop: 10 }}>
+          <View>
             <Label>Qual é o seu Gênero?</Label>
             <RadioGroup
               radioButtons={_rbGender}
@@ -284,7 +261,7 @@ export default function HealthAnalysis({ navigation }) {
             />
           </View>
 
-          <View style={{ marginTop: 10 }}>
+          <View>
             <Label>O que você gostaria de fazer com seu peso?</Label>
             <RadioGroup
               radioButtons={_rbObjectivePhysical}
@@ -307,6 +284,7 @@ export default function HealthAnalysis({ navigation }) {
           <Button onPress={submitAnalysis}>
             <Text>Cadastrar dados</Text>
           </Button>
+
         </Container>
       </ScrollView>
     </SafeAreaView>

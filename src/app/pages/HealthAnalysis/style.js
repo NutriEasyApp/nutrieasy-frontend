@@ -1,52 +1,31 @@
 import styled from 'styled-components/native';
 import { StatusBar } from 'react-native';
 
-export const Background = styled.KeyboardAvoidingView`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-`;
-
 export const Container = styled.View`
   justify-content: center;
   width: 100%;
-  padding: 10px 8px 10px 8px;
+  padding: 25px 8px;
 `;
 
 export const Title = styled.Text`
   font-size: 25px;
   font-weight: 700;
-  margin-bottom: 20px;
   align-self: center;
-`;
-
-export const RadioButton = styled.Text`
-  color: #0000;
-`;
-
-export const InputTouchableOpacity = styled.TouchableOpacity`
-  background-color: #f9f9f9;
-  width: 100%;
-  color: #222;
-  font-size: 17px;
-  border-radius: 7px;
-  padding: 5px;
-  margin-bottom: 15px;
-  border-color: #000;
-  border-width: 2px;
-`;
-
-export const TextTouchableOpacity = styled.Text`
-  margin-left: 5px;
-  color: #000;
-  font-size: 16px;
 `;
 
 export const Label = styled.Text`
   font-size: 16px;
   color: #000;
   font-weight: 700;
+  margin-bottom: 10px;
+  margin-top: 15px;
+`;
+
+export const SliderRangeLabel = styled.Text`
+  font-size: 16px;
+  color: #000;
+  font-weight: 700;
+  margin-top: 5px;
 `;
 
 export const Text = styled.Text`
@@ -76,10 +55,27 @@ export const DateInput = styled.TextInput`
   height: 50px;
 `;
 
+export const Calendar = styled.View`
+  background-color: #ececec;
+  border-top-end-radius: 7px;
+  border-bottom-right-radius: 7px;
+  height: 50px;
+`;
+
+export const BirthDate = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 export const SafeAreaViewStyle = {
   flex: 1,
-  backgroundColor: 'white',
+  backgroundColor: '#fff',
   paddingTop: StatusBar.currentHeight,
   paddingRight: 10,
   paddingLeft: 10,
+};
+
+export const CalendarMonthStyle = {
+  marginTop: 10,
+  marginRight: 10,
 };
