@@ -97,14 +97,30 @@ export default function SignIn({ navigation }) {
             </Icon>
           </SectionInput>
         ) : (
-          <TextInput
-            secureTextEntry={true}
-            textContentType="password"
-            autoCapitalize="none"
-            autoCompleteType="password"
-            placeholder="Senha"
-            onChangeText={text => setPassword(text)}
-          />
+          <SectionInput>
+            <TextInput
+              secureTextEntry={securePassword}
+              textContentType="password"
+              autoCapitalize="none"
+              autoCompleteType="password"
+              placeholder="Senha"
+              onChangeText={text => setPassword(text)}
+            />
+            <Icon
+              onPress={
+                securePassword
+                  ? () => setSecurePassword(false) || setIconEye('eye')
+                  : () => setSecurePassword(true) || setIconEye('eye-off')
+              }
+            >
+              <MaterialCommunityIcons
+                name={iconEye}
+                color={'black'}
+                size={25}
+                style={{ marginRight: 15 }}
+              />
+            </Icon>
+          </SectionInput>
         )}
 
         {error && (
