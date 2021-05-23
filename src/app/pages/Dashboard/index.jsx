@@ -16,6 +16,7 @@ import Recipes from '../Recipes';
 import ChangePassword from '../ChangePassword';
 import TermsOfUse from '../TermsOfUse';
 import AboutApp from '../AboutApp';
+import MealSuggestions from '../MealSuggestions';
 
 
 import AuthContext from '../../contexts/auth';
@@ -107,6 +108,21 @@ export default function Dashboard() {
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="text-box-check"
+                color={'#fff'}
+                size={20}
+              />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name="Sugestões de Refeições"
+          component={MealSuggestions}
+          options={{
+            tabBarLabel: 'Sugestões',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="food-apple"
                 color={'#fff'}
                 size={20}
               />

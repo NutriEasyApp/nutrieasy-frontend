@@ -22,9 +22,8 @@ export default function RecipesIndex() {
     <SafeAreaView style={SafeAreaViewStyle}>
       <ScrollView>
         <Container>
-
           <TitleMain>Divisão de Refeições</TitleMain>
-          <TextMain>O objetivo dessa divisão é fornecer números adequados dos nutrientes para cada montante de refeição, seja ela durante o dia ou um total por refeições. </TextMain>
+          <TextMain>O objetivo dessa divisão é fornecer números adequados dos nutrientes para cada montante de refeição, seja ela durante o dia ou um total por refeições.</TextMain>
           
           <Wrapper> 
             <Icon>

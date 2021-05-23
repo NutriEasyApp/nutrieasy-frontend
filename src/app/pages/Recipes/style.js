@@ -11,7 +11,7 @@ export const Button = styled.TouchableOpacity`
 export const Container = styled.View`
   display: flex;
   justify-content: center;
-  padding: 60px 30px;
+  padding: 25px 30px;
 `;
 
 export const Content = styled.View`
@@ -30,7 +30,7 @@ export const Title = styled.Text`
 `;
 
 export const TitleMain = styled.Text`
-  font-size: 32px;
+  font-size: 30px;
   text-align: center;
   font-weight: bold;
   width: 100%;
