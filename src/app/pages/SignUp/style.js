@@ -42,8 +42,8 @@ export const TextInput = styled.TextInput.attrs({
 export const TextInputError = styled.TextInput.attrs({
   autoCorrect: false,
 })`
-  background-color: #fef1f2;
-  border: 1px solid #dc3545;
+  background-color: #f9f9f9;
+  border: 1px solid #f02849;
   width: 90%;
   margin-bottom: 15px;
   color: #222;
@@ -52,6 +52,7 @@ export const TextInputError = styled.TextInput.attrs({
   padding: 15px;
   height: 55px;
 `;
+
 export const Button = styled.TouchableOpacity`
   background-color: #90cc0c;
   width: 90%;
@@ -76,4 +77,15 @@ export const Back = styled.View`
   padding: 10px 0;
   align-self: stretch;
   margin-left: 30px;
+`;
+
+export const Icon = styled.TouchableOpacity`
+  position: absolute;
+  padding: 15px;
+  align-self: flex-end;
+`;
+
+export const SectionInput = styled.View`
+  width: 100%;
+  align-items: center;
 `;

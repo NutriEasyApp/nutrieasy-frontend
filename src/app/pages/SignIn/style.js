@@ -42,8 +42,8 @@ export const TextInput = styled.TextInput.attrs({
 export const TextInputError = styled.TextInput.attrs({
   autoCorrect: false,
 })`
-  background-color: #fef1f2;
-  border: 1px solid #dc3545;
+  background-color: #f9f9f9;
+  border: 1px solid #f02849;
   width: 90%;
   margin-bottom: 15px;
   color: #222;
@@ -68,7 +68,7 @@ export const TextSubmit = styled.Text`
 `;
 
 export const TextError = styled.Text`
-  color: #dc3545;
+  color: #f02849;
   font-size: 15px;
   margin-bottom: 20px;
 `;
@@ -91,4 +91,15 @@ export const Footer = styled.View`
   align-items: center;
   margin-top: 50px;
   /* margin-top: 50px; */
+`;
+
+export const Icon = styled.TouchableOpacity`
+  position: absolute;
+  padding: 15px;
+  align-self: flex-end;
+`;
+
+export const SectionInput = styled.View`
+  width: 100%;
+  align-items: center;
 `;

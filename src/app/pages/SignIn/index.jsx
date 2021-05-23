@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   Container,
   Logo,
@@ -13,6 +14,8 @@ import {
   Link,
   TextError,
   Footer,
+  Icon,
+  SectionInput,
 } from './style';
 
 import AuthContext from '../../contexts/auth';
@@ -29,6 +32,8 @@ export default function SignIn({ navigation }) {
     auth(email, password);
   }
 
+  const [securePassword, setSecurePassword] = useState(true);
+  const [iconEye, setIconEye] = useState('eye-off');
   return (
     <Container behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <Logo>
@@ -37,15 +42,24 @@ export default function SignIn({ navigation }) {
 
       <Wrapper>
         {error ? (
-          <TextInputError
-            placeholder="Email"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-            autoCapitalize="none"
-            autoCompleteType="email"
-            placeholderTextColor="#dc3545"
-            onChangeText={text => setEmail(text)}
-          />
+          <SectionInput>
+            <TextInputError
+              placeholder="Email"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              autoCapitalize="none"
+              autoCompleteType="email"
+              onChangeText={text => setEmail(text)}
+            />
+            <Icon>
+              <MaterialCommunityIcons
+                name={'alert'}
+                color={'#f02849'}
+                size={25}
+                style={{ marginRight: 15 }}
+              />
+            </Icon>
+          </SectionInput>
         ) : (
           <TextInput
             placeholder="Email"
@@ -58,15 +72,30 @@ export default function SignIn({ navigation }) {
         )}
 
         {error ? (
-          <TextInputError
-            secureTextEntry={true}
-            textContentType="password"
-            autoCapitalize="none"
-            autoCompleteType="password"
-            placeholder="Senha"
-            placeholderTextColor="#dc3545"
-            onChangeText={text => setPassword(text)}
-          />
+          <SectionInput>
+            <TextInputError
+              secureTextEntry={securePassword}
+              textContentType="password"
+              autoCapitalize="none"
+              autoCompleteType="password"
+              placeholder="Senha"
+              onChangeText={text => setPassword(text)}
+            />
+            <Icon
+              onPress={
+                securePassword
+                  ? () => setSecurePassword(false) || setIconEye('eye')
+                  : () => setSecurePassword(true) || setIconEye('eye-off')
+              }
+            >
+              <MaterialCommunityIcons
+                name={iconEye}
+                color={'black'}
+                size={25}
+                style={{ marginRight: 15 }}
+              />
+            </Icon>
+          </SectionInput>
         ) : (
           <TextInput
             secureTextEntry={true}
@@ -95,7 +124,6 @@ export default function SignIn({ navigation }) {
             <TextRegister>Ainda não tem uma conta? Crie uma Conta</TextRegister>
           </Link>
         </Footer>
-        
       </Wrapper>
     </Container>
   );

@@ -12,6 +12,8 @@ import {
   Back,
   TextInputError,
   TextError,
+  Icon,
+  SectionInput,
 } from './style';
 
 import AuthContext from '../../contexts/auth';
@@ -27,6 +29,9 @@ export default function Signup({ navigation }) {
   const handleSubmit = () => {
     register(email, username, password);
   };
+
+  const [securePassword, setSecurePassword] = useState(true);
+  const [iconEye, setIconEye] = useState('eye-off');
 
   return (
     <Container>
@@ -45,12 +50,22 @@ export default function Signup({ navigation }) {
 
       <Wrapper>
         {error ? (
-          <TextInputError
-            placeholder="Apelido"
-            autoCapitalize="none"
-            placeholderTextColor="#dc3545"
-            onChangeText={text => setUsername(text)}
-          />
+          <SectionInput>
+            <TextInputError
+              placeholder="Apelido"
+              autoCapitalize="none"
+              placeholderTextColor="#90949c"
+              onChangeText={text => setUsername(text)}
+            />
+            <Icon>
+              <MaterialCommunityIcons
+                name={'alert'}
+                color={'#f02849'}
+                size={25}
+                style={{ marginRight: 15 }}
+              />
+            </Icon>
+          </SectionInput>
         ) : (
           <TextInput
             placeholder="Apelido"
@@ -60,15 +75,25 @@ export default function Signup({ navigation }) {
         )}
 
         {error ? (
-          <TextInputError
-            placeholder="Email"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-            autoCapitalize="none"
-            autoCompleteType="email"
-            placeholderTextColor="#dc3545"
-            onChangeText={text => setEmail(text)}
-          />
+          <SectionInput>
+            <TextInputError
+              placeholder="Email"
+              keyboardType="email-address"
+              textContentType="emailAddress"
+              autoCapitalize="none"
+              autoCompleteType="email"
+              placeholderTextColor="#90949c"
+              onChangeText={text => setEmail(text)}
+            />
+            <Icon>
+              <MaterialCommunityIcons
+                name={'alert'}
+                color={'#f02849'}
+                size={25}
+                style={{ marginRight: 15 }}
+              />
+            </Icon>
+          </SectionInput>
         ) : (
           <TextInput
             placeholder="Email"
@@ -80,24 +105,55 @@ export default function Signup({ navigation }) {
           />
         )}
         {error ? (
-          <TextInputError
-            secureTextEntry={true}
-            textContentType="password"
-            autoCapitalize="none"
-            autoCompleteType="password"
-            placeholder="Senha"
-            placeholderTextColor="#dc3545"
-            onChangeText={text => setPassword(text)}
-          />
+          <SectionInput>
+            <TextInputError
+              secureTextEntry={securePassword}
+              textContentType="password"
+              autoCapitalize="none"
+              autoCompleteType="password"
+              placeholder="Senha"
+              onChangeText={text => setPassword(text)}
+            />
+            <Icon
+              onPress={
+                securePassword
+                  ? () => setSecurePassword(false) || setIconEye('eye')
+                  : () => setSecurePassword(true) || setIconEye('eye-off')
+              }
+            >
+              <MaterialCommunityIcons
+                name={iconEye}
+                color={'black'}
+                size={25}
+                style={{ marginRight: 15 }}
+              />
+            </Icon>
+          </SectionInput>
         ) : (
-          <TextInput
-            secureTextEntry={true}
-            textContentType="password"
-            autoCapitalize="none"
-            autoCompleteType="password"
-            placeholder="Senha"
-            onChangeText={text => setPassword(text)}
-          />
+          <SectionInput>
+            <TextInput
+              secureTextEntry={securePassword}
+              textContentType="password"
+              autoCapitalize="none"
+              autoCompleteType="password"
+              placeholder="Senha"
+              onChangeText={text => setPassword(text)}
+            />
+            <Icon
+              onPress={
+                securePassword
+                  ? () => setSecurePassword(false) || setIconEye('eye')
+                  : () => setSecurePassword(true) || setIconEye('eye-off')
+              }
+            >
+              <MaterialCommunityIcons
+                name={iconEye}
+                color={'black'}
+                size={25}
+                style={{ marginRight: 15 }}
+              />
+            </Icon>
+          </SectionInput>
         )}
 
         {error && (
