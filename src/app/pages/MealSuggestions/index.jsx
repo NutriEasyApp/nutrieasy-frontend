@@ -56,63 +56,18 @@ export default function MealSuggestions({ navigation }) {
                   <Portion>Castanha de Caju</Portion>
                   <Value>250 gramas</Value>
                 </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Pão</Portion>
-                  <Value>5 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Atum</Portion>
-                  <Value>15 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Maionese</Portion>
-                  <Value>20 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Arroz</Portion>
-                  <Value>200 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Alcatra Grelhada</Portion>
-                  <Value>200 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Queijo</Portion>
-                  <Value>200 gramas</Value>
-                </ColumnInfo>
               </SectionInfo>
             </Wrapper>
           </Recipes>
 
           <Recipes>
-            <Title>Lanche da Manhã</Title>
+            <Title>Lanche da Manhã/Tarde</Title>
             <SectionImg>
               <Image source={ImgRecipes2}></Image>
             </SectionImg>
             <Wrapper>
               <SectionInfo>
                 <ColumnInfo>
-                  <Portion>Cereal</Portion>
-                  <Value>350 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Ovo</Portion>
-                  <Value>350 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Castanha de Caju</Portion>
-                  <Value>250 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
                   <Portion>Pão</Portion>
                   <Value>5 unidades</Value>
                 </ColumnInfo>
@@ -125,63 +80,18 @@ export default function MealSuggestions({ navigation }) {
                 <ColumnInfo>
                   <Portion>Maionese</Portion>
                   <Value>20 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Arroz</Portion>
-                  <Value>200 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Alcatra Grelhada</Portion>
-                  <Value>200 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Queijo</Portion>
-                  <Value>200 gramas</Value>
                 </ColumnInfo>
               </SectionInfo>
             </Wrapper>
           </Recipes>
 
           <Recipes>
-            <Title>Almoço</Title>
+            <Title>Almoço/Janta</Title>
             <SectionImg>
               <Image source={ImgRecipes3}></Image>
             </SectionImg>
             <Wrapper>
               <SectionInfo>
-                <ColumnInfo>
-                  <Portion>Cereal</Portion>
-                  <Value>350 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Ovo</Portion>
-                  <Value>350 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Castanha de Caju</Portion>
-                  <Value>250 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Pão</Portion>
-                  <Value>5 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Atum</Portion>
-                  <Value>15 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Maionese</Portion>
-                  <Value>20 gramas</Value>
-                </ColumnInfo>
-
                 <ColumnInfo>
                   <Portion>Arroz</Portion>
                   <Value>200 gramas</Value>
