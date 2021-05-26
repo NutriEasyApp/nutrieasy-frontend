@@ -65,3 +65,17 @@ export const Back = styled.View`
   align-self: stretch;
   margin-left: 30px;
 `;
+
+export const TextInputError = styled.TextInput.attrs({
+  autoCorrect: false,
+})`
+  background-color: #f9f9f9;
+  border: 1px solid #f02849;
+  width: 90%;
+  margin-bottom: 15px;
+  color: #222;
+  font-size: 16px;
+  border-radius: 7px;
+  padding: 15px;
+  height: 55px;
+`;

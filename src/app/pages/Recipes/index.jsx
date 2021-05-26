@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, ScrollView, SafeAreaView } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   Container,
@@ -12,20 +14,51 @@ import {
   Value,
   TitleElement,
   TextMain,
-  SafeAreaViewStyle
+  SafeAreaViewStyle,
 } from './style';
 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import api from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
-export default function RecipesIndex() {
+const mealDivisionData = {
+  water: '',
+  protein: '',
+  carbohydrates: '',
+  lipids: '',
+  fats: '',
+};
+export default function Recipes() {
+  const { signed, user, signOut } = useContext(AuthContext);
+  const [mealDivision, setMealDivision] = useState(mealDivisionData);
+
+  useEffect(() => {
+    async function getMealDivision() {
+      try {
+        const user = await AsyncStorage.getItem('@RNAuth:user');
+        const response = await api.get(`/mealDivision/${user}`);
+        setMealDivision(response.data);
+      } catch (err) {
+        const { status } = err.response;
+        if (status === 401) {
+          signOut();
+        }
+      }
+    }
+    getMealDivision();
+  }, []);
+
   return (
     <SafeAreaView style={SafeAreaViewStyle}>
       <ScrollView>
         <Container>
           <TitleMain>Divisão de Refeições</TitleMain>
-          <TextMain>O objetivo dessa divisão é fornecer números adequados dos nutrientes para cada montante de refeição, seja ela durante o dia ou um total por refeições.</TextMain>
-          
-          <Wrapper> 
+          <TextMain>
+            O objetivo dessa divisão é fornecer números adequados dos nutrientes
+            para cada montante de refeição, seja ela durante o dia ou um total
+            por refeições.
+          </TextMain>
+
+          <Wrapper>
             <Icon>
               <MaterialCommunityIcons
                 name="calendar-today"
@@ -35,24 +68,24 @@ export default function RecipesIndex() {
             </Icon>
 
             <TitleElement>Montante Nutricional por dia:</TitleElement>
-            
+
             <Content>
               <View>
                 <Info>
                   <InfoText>
-                    Água: <Value>5L</Value>
+                    Água: <Value>{mealDivision.water}</Value>
                   </InfoText>
                   <InfoText>
-                    Proteína: <Value>1500g</Value>
+                    Proteína: <Value>{mealDivision.protein}</Value>
                   </InfoText>
                   <InfoText>
-                    Caboidratos: <Value>1500g</Value>
+                    Caboidratos: <Value>{mealDivision.carbohydrates}</Value>
                   </InfoText>
                   <InfoText>
-                    Lípidios: <Value>1500g</Value>
+                    Lípidios: <Value>{mealDivision.lipids}</Value>
                   </InfoText>
                   <InfoText>
-                    Gorduras: <Value>1500g</Value>
+                    Gorduras: <Value>{mealDivision.fats}</Value>
                   </InfoText>
                 </Info>
               </View>
@@ -72,25 +105,24 @@ export default function RecipesIndex() {
               <View>
                 <Info>
                   <InfoText>
-                    Água: <Value>2L</Value>
+                    Água: <Value>{mealDivision.water}</Value>
                   </InfoText>
                   <InfoText>
-                    Proteína: <Value>500g</Value>
+                    Proteína: <Value>{mealDivision.protein}</Value>
                   </InfoText>
                   <InfoText>
-                    Caboidratos: <Value>500g</Value>
+                    Caboidratos: <Value>{mealDivision.carbohydrates}</Value>
                   </InfoText>
                   <InfoText>
-                    Lípidios: <Value>500g</Value>
+                    Lípidios: <Value>{mealDivision.lipids}</Value>
                   </InfoText>
                   <InfoText>
-                    Gorduras: <Value>500g</Value>
+                    Gorduras: <Value>{mealDivision.fats}</Value>
                   </InfoText>
                 </Info>
               </View>
             </Content>
           </Wrapper>
-
         </Container>
       </ScrollView>
     </SafeAreaView>

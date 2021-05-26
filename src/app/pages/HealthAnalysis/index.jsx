@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { View, ScrollView, SafeAreaView } from 'react-native';
 import RadioGroup from 'react-native-radio-buttons-group';
+import { RadioButton } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -20,19 +21,22 @@ import {
   CalendarMonthStyle,
   Calendar,
   BirthDate,
-  SliderRangeLabel
+  SliderRangeLabel,
 } from './style';
+
 
 const genreTypes = [
   {
     id: '1',
     label: 'Masculino',
     value: 'M',
+    selected: false
   },
   {
     id: '2',
     label: 'Feminino',
     value: 'F',
+    selected: true
   },
 ];
 
@@ -42,16 +46,19 @@ const physicalBiotypeTypes = [
     label: 'Ectomorfo',
     value: 'ECTOMORPH',
     description: 'Ganha e perde massa rapido',
+    selected: false
   },
   {
     id: '2',
     label: 'Endomorfo',
     value: 'ENDOMORPH',
+    selected: true
   },
   {
     id: '3',
     label: 'Mesomorfo',
     value: 'MESOMORPH',
+    selected: false
   },
 ];
 
@@ -60,16 +67,19 @@ const physicalObjectiveType = [
     id: '1',
     label: 'Ganhar',
     value: 'GAIN',
+    selected: false
   },
   {
     id: '2',
     label: 'Perder',
     value: 'LOSE',
+    selected: true
   },
   {
     id: '3',
     label: 'Manter',
     value: 'KEEP',
+    selected: false
   },
 ];
 
@@ -99,6 +109,8 @@ const userDataAnalysis = {
 export default function HealthAnalysis({ navigation }) {
   const { signed, user, signOut } = useContext(AuthContext);
 
+  const [selected, setSelected] = useState(true);
+
   const [date, setDate] = useState('');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
@@ -110,7 +122,6 @@ export default function HealthAnalysis({ navigation }) {
   const [exercisetime, setExerciseTime] = useState('');
   const [objectivePhysical, setObjectivePhysical] = useState('');
 
-
   /* Radio Button - Variables */
   const [_rbGender, set_rbGender] = useState(genreTypes);
   const [_rbCorporalBiotype, set_rbCorporalBiotype] = useState(
@@ -120,8 +131,6 @@ export default function HealthAnalysis({ navigation }) {
     physicalObjectiveType
   );
   const [_rbEatingHabits, set_rbEatingHabits] = useState(eatingHabitsTypes);
-
-
 
   /* Radio Button - Functions */
   function _onPressRBGender(_gender) {
@@ -137,6 +146,7 @@ export default function HealthAnalysis({ navigation }) {
     set_rbEatingHabits(_eatingHabits);
   }
 
+  const [checked, setChecked] = React.useState('first');
 
   const submitAnalysis = async () => {
     const user = await AsyncStorage.getItem('@RNAuth:user');
@@ -158,7 +168,6 @@ export default function HealthAnalysis({ navigation }) {
       console.log('Ocorreu um erro: ', err);
     }
   };
-
 
   const [result, setResult] = useState(userDataAnalysis);
 
@@ -187,7 +196,6 @@ export default function HealthAnalysis({ navigation }) {
     getHealth();
   }, []);
 
-
   return (
     <SafeAreaView style={SafeAreaViewStyle}>
       <ScrollView>
@@ -195,9 +203,7 @@ export default function HealthAnalysis({ navigation }) {
           <Title>Ficha de Análise de Saúde</Title>
 
           <View>
-            <Label>
-              Qual é a sua Data de Nascimento?
-            </Label>
+            <Label>Qual é a sua Data de Nascimento?</Label>
 
             <BirthDate>
               <DateInput
@@ -218,7 +224,6 @@ export default function HealthAnalysis({ navigation }) {
                 />
               </Calendar>
             </BirthDate>
-
           </View>
 
           <View>
@@ -247,8 +252,9 @@ export default function HealthAnalysis({ navigation }) {
             <Label>Qual é o seu Biotipo Físico?</Label>
             <RadioGroup
               radioButtons={_rbCorporalBiotype}
-              onPress={event => { }}
+              onPress={_onPressRBCorporalBiotype}
               layout="row"
+              
             />
           </View>
 
@@ -284,7 +290,6 @@ export default function HealthAnalysis({ navigation }) {
           <Button onPress={submitAnalysis}>
             <Text>Cadastrar dados</Text>
           </Button>
-
         </Container>
       </ScrollView>
     </SafeAreaView>

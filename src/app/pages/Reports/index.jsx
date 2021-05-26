@@ -1,65 +1,55 @@
-import * as React from 'react';
-import { Image, TextInput, TouchableHighlight, View } from 'react-native';
-import { Container, Button, Title, Text, TextButton, Wrapper } from './style';
+import React, { Component } from 'react';
+import { Image, TextInput } from 'react-native';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
-import Pdf from 'react-native-pdf';
+import * as Print from 'expo-print';
+
+import { Container, Button, Title, Text, TextButton, Wrapper } from './style';
 import img from '../../assets/images/reports-img300.png';
+export default class Reports extends Component {
 
-/*
- * Gerar String HTML.
- */
-//const generateHTML = value =>
-  /*`<div>
-  <span>Hi ${value}, how are you?
-  </span>
-  </div>`;*/
-//const html = generateHTML(this.state.value);
+  async createPDF() {
+    let options = {
+      html: '<h1>PDF TEST</h1>',
+      fileName: 'test',
+      directory: 'Documents',
+    };
 
-const html =`<div><span>Hi how are you?</span></div>`;
+    try {
+      let file = await RNHTMLtoPDF.convert(options);
+      console.log('Success', file);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-/*
- * Criar PDF e Conversão do HTML para o PDF.
- */
-const options = {
-  html,
-  fileName: 'NomeDoArquivo',
-  directory: 'DiretorioDoArquivo',
-};
-const file = async function convertOptions(){
-  await RNHTMLtoPDF.convert(options)
-};
-
-/*
- * Exibir o PDF na tela.
- */
-const pdfSource = { uri: file.filePath };
-
-export default function Reports() {
-  return (
-    <Container>
-      <Wrapper>
-        <Image source={img}></Image>
-        <Title>Relatórios</Title>
-        <Text>Gráficos e Refeições</Text>
-        {/*<TextInput
-          onChangeText={text =>
-            this.setState({
-              value: text,
-            })
-          }
-          value={this.state.value}
+  render() {
+    return (
+      <Container>
+        <Wrapper>
+          <Image source={img}></Image>
+          <Title>Relatórios</Title>
+          <Text>Gráficos e Refeições</Text>
+          {/*<TextInput
+          onChangeText={value => setValue(value)}
+          placeholder="useless placeholder"
         />
-        
+         <TextInput
+            onChangeText={convertOptions()}
+            placeholder="useless placeholder"
+          />
+        */}
+
+          {/*
         <Pdf source={pdfSource} /> 
         */}
-      </Wrapper>
+        </Wrapper>
 
-
-      <Wrapper>
-        <Button>
-          <TextButton>Gerar Relatório</TextButton>
-        </Button>
-      </Wrapper>
-    </Container>
-  );
+        <Wrapper>
+          <Button onPress={this.createPDF}>
+            <TextButton>Gerar Relatório</TextButton>
+          </Button>
+        </Wrapper>
+      </Container>
+    );
+  }
 }
