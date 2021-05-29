@@ -10,6 +10,9 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const [errorRegister, setErrorRegister] = useState(false);
+  const [routeName, setRouteName] = useState('SignIn');
+
   useEffect(() => {
     async function loadStoragedData() {
       const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
@@ -20,6 +23,7 @@ export const AuthProvider = ({ children }) => {
         setUser(storagedUser);
       }
       setLoading(false);
+      setRouteName('SignIn');
     }
     loadStoragedData();
   }, []);
@@ -36,9 +40,11 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem('@RNAuth:user', user);
       await AsyncStorage.setItem('@RNAuth:token', token);
       setLoading(false);
+      setRouteName('SignIn');
     } catch (e) {
       setError(true);
       setLoading(false);
+      setRouteName('SignIn');
     }
   }
 
@@ -54,9 +60,11 @@ export const AuthProvider = ({ children }) => {
       await AsyncStorage.setItem('@RNAuth:user', user);
       await AsyncStorage.setItem('@RNAuth:token', token);
       setLoading(false);
+      setRouteName('SignIn');
     } catch (e) {
-      setError(true);
       setLoading(false);
+      setErrorRegister(true);
+      setRouteName('SignUp');
     }
   }
 
@@ -65,6 +73,7 @@ export const AuthProvider = ({ children }) => {
     await AsyncStorage.clear();
     setUser(null);
     setLoading(false);
+    setRouteName('SignIn');
   }
 
   return (
@@ -78,6 +87,8 @@ export const AuthProvider = ({ children }) => {
         signOut,
         error,
         setError,
+        errorRegister,
+        routeName
       }}
     >
       {children}

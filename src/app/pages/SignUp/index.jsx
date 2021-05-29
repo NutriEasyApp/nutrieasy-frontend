@@ -20,7 +20,7 @@ import AuthContext from '../../contexts/auth';
 const img = require('../../assets/images/logo.png');
 
 export default function Signup({ navigation }) {
-  const { register, error } = useContext(AuthContext);
+  const { register, error, errorRegister} = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -44,12 +44,12 @@ export default function Signup({ navigation }) {
           name="arrow-left"
           size={30}
           color="#90cc0c"
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('SignIn')}
         />
       </Back>
 
       <Wrapper>
-        {error ? (
+        {errorRegister ? (
           <SectionInput>
             <TextInputError
               placeholder="Apelido"
@@ -74,7 +74,7 @@ export default function Signup({ navigation }) {
           />
         )}
 
-        {error ? (
+        {errorRegister ? (
           <SectionInput>
             <TextInputError
               placeholder="Email"
@@ -104,7 +104,7 @@ export default function Signup({ navigation }) {
             onChangeText={text => setEmail(text)}
           />
         )}
-        {error ? (
+        {errorRegister ? (
           <SectionInput>
             <TextInputError
               secureTextEntry={securePassword}
@@ -156,7 +156,7 @@ export default function Signup({ navigation }) {
           </SectionInput>
         )}
 
-        {error && (
+        {errorRegister && (
           <TextError>Falha na criação da sua conta. Tente Novamente!</TextError>
         )}
 
