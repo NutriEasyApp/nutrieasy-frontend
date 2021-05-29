@@ -21,21 +21,23 @@ import api from '../../services/api';
 import AuthContext from '../../contexts/auth';
 
 const dietData = {
-  diet: {
-    calories: '',
-    carbohydrates: '',
-    lipids: '',
-    meals: '',
-    protein: '',
-    water: '',
-  },
-  dietPerMeal: {
-    calories: '',
-    carbohydrates: '',
-    lipids: '',
-    protein: '',
-    water: '',
-  },
+  diet:{
+    diet: {
+      calories: '',
+      carbohydrates: '',
+      lipids: '',
+      meals: '',
+      protein: '',
+      water: '',
+    },
+    dietPerMeal: {
+      calories: '',
+      carbohydrates: '',
+      lipids: '',
+      protein: '',
+      water: '',
+    },
+  }
 };
 export default function Recipes() {
   const { signed, user, signOut } = useContext(AuthContext);
@@ -91,19 +93,19 @@ export default function Recipes() {
               <View>
                 <Info>
                   <InfoText>
-                    Água: <Value>{proposed.diet.water}</Value>
+                    Água: <Value>{proposed.diet.diet.water}</Value>
                   </InfoText>
                   <InfoText>
-                    Proteína: <Value>{proposed.diet.protein}</Value>
+                    Proteína: <Value>{proposed.diet.diet.protein}</Value>
                   </InfoText>
                   <InfoText>
-                    Caboidratos: <Value>{proposed.diet.carbohydrates}</Value>
+                    Caboidratos: <Value>{proposed.diet.diet.carbohydrates}</Value>
                   </InfoText>
                   <InfoText>
-                    Lípidios: <Value>{proposed.diet.lipids}</Value>
+                    Lípidios: <Value>{proposed.diet.diet.lipids}</Value>
                   </InfoText>
                   <InfoText>
-                    Calorias: <Value>{proposed.diet.calories}</Value>
+                    Calorias: <Value>{proposed.diet.diet.calories}</Value>
                   </InfoText>
                 </Info>
               </View>
@@ -123,19 +125,19 @@ export default function Recipes() {
               <View>
                 <Info>
                   <InfoText>
-                    Água: <Value>{proposed.dietPerMeal.water}</Value>
+                    Água: <Value>{proposed.diet.dietPerMeal.water}</Value>
                   </InfoText>
                   <InfoText>
-                    Proteína: <Value>{proposed.dietPerMeal.protein}</Value>
+                    Proteína: <Value>{proposed.diet.dietPerMeal.protein}</Value>
                   </InfoText>
                   <InfoText>
-                    Caboidratos: <Value>{proposed.dietPerMeal.carbohydrates}</Value>
+                    Caboidratos: <Value>{proposed.diet.dietPerMeal.carbohydrates}</Value>
                   </InfoText>
                   <InfoText>
-                    Lípidios: <Value>{proposed.dietPerMeal.lipids}</Value>
+                    Lípidios: <Value>{proposed.diet.dietPerMeal.lipids}</Value>
                   </InfoText>
                   <InfoText>
-                    Calorias: <Value>{proposed.dietPerMeal.calories}</Value>
+                    Calorias: <Value>{proposed.diet.dietPerMeal.calories}</Value>
                   </InfoText>
                 </Info>
               </View>

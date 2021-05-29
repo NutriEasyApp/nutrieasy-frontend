@@ -21,12 +21,14 @@ import AuthContext from '../../contexts/auth';
 
 const dietData = {
   diet: {
-    calories: '',
-    carbohydrates: '',
-    protein: '',
-    lipids: '',
-    water: '',
-  },
+    diet: {
+      calories: '',
+      carbohydrates: '',
+      protein: '',
+      lipids: '',
+      water: '',
+    },
+  }
 };
 
 import Menu from '../../components/Menu';
@@ -139,13 +141,13 @@ export default function DietProposal({ navigation }) {
               <Title>Proposta de Dieta / Dia</Title>
               {diet ? (
                 <>
-                  <Description>Calorias: {proposed.diet.calories}</Description>
+                  <Description>Calorias: {proposed.diet.diet.calories}</Description>
                   <Description>
-                    Carboidratos: {proposed.diet.carbohydrates}
+                    Carboidratos: {proposed.diet.diet.carbohydrates}
                   </Description>
-                  <Description>Proteina: {proposed.diet.protein}</Description>
-                  <Description>Lipídios: {proposed.diet.lipids}</Description>
-                  <Description>Água: {proposed.diet.water}</Description>
+                  <Description>Proteina: {proposed.diet.diet.protein}</Description>
+                  <Description>Lipídios: {proposed.diet.diet.lipids}</Description>
+                  <Description>Água: {proposed.diet.diet.water}</Description>
                 </>
               ) : (
                 <>
