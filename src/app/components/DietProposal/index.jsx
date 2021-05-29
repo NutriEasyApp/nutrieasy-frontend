@@ -83,7 +83,9 @@ export default function DietProposal({ navigation }) {
         const response = await api.get(`/diet/${user}`);
         setProposed(response.data);
         setDiet(true);
+        console.log(response.data);
       } catch (err) {
+        console.log('error');
         const { status } = err.response;
         if (status === 404) {
           //console.log('Parece que você ainda não cadastrou sua ficha de saude');

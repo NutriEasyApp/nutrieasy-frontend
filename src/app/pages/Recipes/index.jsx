@@ -20,31 +20,49 @@ import {
 import api from '../../services/api';
 import AuthContext from '../../contexts/auth';
 
-const mealDivisionData = {
-  water: '',
-  protein: '',
-  carbohydrates: '',
-  lipids: '',
-  fats: '',
+const dietData = {
+  diet: {
+    calories: '',
+    carbohydrates: '',
+    lipids: '',
+    meals: '',
+    protein: '',
+    water: '',
+  },
+  dietPerMeal: {
+    calories: '',
+    carbohydrates: '',
+    lipids: '',
+    protein: '',
+    water: '',
+  },
 };
 export default function Recipes() {
   const { signed, user, signOut } = useContext(AuthContext);
-  const [mealDivision, setMealDivision] = useState(mealDivisionData);
+  const [proposed, setProposed] = useState(dietData);
+  const [diet, setDiet] = useState(false);
 
   useEffect(() => {
-    async function getMealDivision() {
+    async function getDiet() {
       try {
         const user = await AsyncStorage.getItem('@RNAuth:user');
-        const response = await api.get(`/mealDivision/${user}`);
-        setMealDivision(response.data);
+        const response = await api.get(`/diet/${user}`);
+        setProposed(response.data);
+        setDiet(true);
+        console.log(response.data);
       } catch (err) {
+        console.log('error');
         const { status } = err.response;
+        if (status === 404) {
+          //console.log('Parece que você ainda não cadastrou sua ficha de saude');
+          setDiet(false);
+        }
         if (status === 401) {
           signOut();
         }
       }
     }
-    getMealDivision();
+    getDiet();
   }, []);
 
   return (
@@ -73,19 +91,19 @@ export default function Recipes() {
               <View>
                 <Info>
                   <InfoText>
-                    Água: <Value>{mealDivision.water}</Value>
+                    Água: <Value>{proposed.diet.water}</Value>
                   </InfoText>
                   <InfoText>
-                    Proteína: <Value>{mealDivision.protein}</Value>
+                    Proteína: <Value>{proposed.diet.protein}</Value>
                   </InfoText>
                   <InfoText>
-                    Caboidratos: <Value>{mealDivision.carbohydrates}</Value>
+                    Caboidratos: <Value>{proposed.diet.carbohydrates}</Value>
                   </InfoText>
                   <InfoText>
-                    Lípidios: <Value>{mealDivision.lipids}</Value>
+                    Lípidios: <Value>{proposed.diet.lipids}</Value>
                   </InfoText>
                   <InfoText>
-                    Gorduras: <Value>{mealDivision.fats}</Value>
+                    Calorias: <Value>{proposed.diet.calories}</Value>
                   </InfoText>
                 </Info>
               </View>
@@ -105,19 +123,19 @@ export default function Recipes() {
               <View>
                 <Info>
                   <InfoText>
-                    Água: <Value>{mealDivision.water}</Value>
+                    Água: <Value>{proposed.dietPerMeal.water}</Value>
                   </InfoText>
                   <InfoText>
-                    Proteína: <Value>{mealDivision.protein}</Value>
+                    Proteína: <Value>{proposed.dietPerMeal.protein}</Value>
                   </InfoText>
                   <InfoText>
-                    Caboidratos: <Value>{mealDivision.carbohydrates}</Value>
+                    Caboidratos: <Value>{proposed.dietPerMeal.carbohydrates}</Value>
                   </InfoText>
                   <InfoText>
-                    Lípidios: <Value>{mealDivision.lipids}</Value>
+                    Lípidios: <Value>{proposed.dietPerMeal.lipids}</Value>
                   </InfoText>
                   <InfoText>
-                    Gorduras: <Value>{mealDivision.fats}</Value>
+                    Calorias: <Value>{proposed.dietPerMeal.calories}</Value>
                   </InfoText>
                 </Info>
               </View>

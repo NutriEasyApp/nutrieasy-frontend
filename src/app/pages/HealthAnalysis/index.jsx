@@ -184,7 +184,6 @@ export default function HealthAnalysis({ navigation }) {
         setExerciseTime(result.data.exercisetime);
       } catch (err) {
         const { status } = err.response;
-        console.log(statusobject);
         if (status === 404) {
           console.log('Parece que você ainda não cadastrou sua ficha de saude');
         }

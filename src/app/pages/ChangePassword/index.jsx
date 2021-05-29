@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Wrapper,
@@ -35,7 +35,7 @@ export default function ChangePassword({ navigation }) {
         const user = await AsyncStorage.getItem('@RNAuth:user');
         const response = await api.get(`/users/${user}`);
         setPassword(response.data.password);
-        //console.log(password);
+        console.log(response.data);
       } catch (err) {
         const { status } = err.response;
         if (status === 401) {
