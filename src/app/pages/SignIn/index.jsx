@@ -131,7 +131,7 @@ export default function SignIn({ navigation }) {
           <TextSubmit>Acessar</TextSubmit>
         </Button>
 
-        <Link>
+        <Link onPress={() => navigation.navigate('ForgotPassword')}>
           <TextForgotPassword>Esqueceu sua senha?</TextForgotPassword>
         </Link>
 
