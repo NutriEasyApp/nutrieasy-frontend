@@ -3,8 +3,6 @@ import { StatusBar } from 'react-native';
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
-  align-items: center;
-  justify-content: center;
   background-color: #8ac908;
   padding: 10px;
 `;
@@ -77,6 +75,7 @@ export const Recipes = styled.View`
 export const SectionImg = styled.View`
   width: 100%;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const SectionInfo = styled.View`
