@@ -25,6 +25,9 @@ export function SliderRange({ data, unitType, onChange, step, maximumValue }) {
         minimumValue={1}
         onValueChange={value => handleChange(value)}
         value={Number(data)}
+        minimumTrackTintColor="#2C632D"
+        maximumTrackTintColor="#000000"
+        thumbTintColor="#2C632D"
       />
     </View>
   );

@@ -30,6 +30,7 @@
     "chart.js": "^3.2.1",
     "dotenv": "^8.2.0",
     "expo": "^41.0.1",
+    "expo-print": "~10.1.0",
     "expo-status-bar": "~1.0.4",
     "jsonwebtoken": "^8.5.1",
     "node-modules": "^1.0.1",
@@ -47,6 +48,7 @@
     "react-native-html-to-pdf": "^0.9.1",
     "react-native-input-validator": "^1.0.12",
     "react-native-locale": "0.0.19",
+    "react-native-masked-text": "^1.13.0",
     "react-native-paper": "^4.7.2",
     "react-native-pdf": "^6.3.0",
     "react-native-radio-buttons-group": "^2.1.0",
@@ -63,8 +65,7 @@
     "react-router-dom": "^5.2.0",
     "react-router-native": "^5.2.0",
     "rn-fetch-blob": "^0.12.0",
-    "styled-components": "^5.2.3",
-    "expo-print": "~10.1.0"
+    "styled-components": "^5.2.3"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
