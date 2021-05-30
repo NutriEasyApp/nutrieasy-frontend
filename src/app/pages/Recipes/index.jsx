@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { View, ScrollView, SafeAreaView } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState, useContext } from "react";
+import { View, ScrollView, SafeAreaView } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
   Container,
@@ -15,29 +15,29 @@ import {
   TitleElement,
   TextMain,
   SafeAreaViewStyle,
-} from './style';
+} from "./style";
 
-import api from '../../services/api';
-import AuthContext from '../../contexts/auth';
+import api from "../../services/api";
+import AuthContext from "../../contexts/auth";
 
 const dietData = {
-  diet:{
+  diet: {
     diet: {
-      calories: '',
-      carbohydrates: '',
-      lipids: '',
-      meals: '',
-      protein: '',
-      water: '',
+      calories: "",
+      carbohydrates: "",
+      lipids: "",
+      meals: "",
+      protein: "",
+      water: "",
     },
     dietPerMeal: {
-      calories: '',
-      carbohydrates: '',
-      lipids: '',
-      protein: '',
-      water: '',
+      calories: "",
+      carbohydrates: "",
+      lipids: "",
+      protein: "",
+      water: "",
     },
-  }
+  },
 };
 export default function Recipes() {
   const { signed, user, signOut } = useContext(AuthContext);
@@ -47,13 +47,13 @@ export default function Recipes() {
   useEffect(() => {
     async function getDiet() {
       try {
-        const user = await AsyncStorage.getItem('@RNAuth:user');
+        const user = await AsyncStorage.getItem("@RNAuth:user");
         const response = await api.get(`/diet/${user}`);
         setProposed(response.data);
         setDiet(true);
         console.log(response.data);
       } catch (err) {
-        console.log('error');
+        console.log("error");
         const { status } = err.response;
         if (status === 404) {
           //console.log('Parece que você ainda não cadastrou sua ficha de saude');
@@ -73,18 +73,13 @@ export default function Recipes() {
         <Container>
           <TitleMain>Divisão de Refeições</TitleMain>
           <TextMain>
-            O objetivo dessa divisão é fornecer números adequados dos nutrientes
-            para cada montante de refeição, seja ela durante o dia ou um total
-            por refeições.
+            O objetivo dessa divisão é fornecer números adequados dos nutrientes para cada montante
+            de refeição, seja ela durante o dia ou um total por refeições.
           </TextMain>
 
           <Wrapper>
             <Icon>
-              <MaterialCommunityIcons
-                name="calendar-today"
-                color={'#90cc0c'}
-                size={65}
-              />
+              <MaterialCommunityIcons name="calendar-today" color={"#90cc0c"} size={65} />
             </Icon>
 
             <TitleElement>Montante Nutricional por dia:</TitleElement>
@@ -114,11 +109,7 @@ export default function Recipes() {
 
           <Wrapper style={{ marginTop: 40 }}>
             <Icon>
-              <MaterialCommunityIcons
-                name="noodles"
-                color={'#90cc0c'}
-                size={65}
-              />
+              <MaterialCommunityIcons name="noodles" color={"#90cc0c"} size={65} />
             </Icon>
             <TitleElement>Montante Nutricional por refeições:</TitleElement>
             <Content>

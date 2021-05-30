@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Wrapper,
@@ -9,30 +9,29 @@ import {
   Title,
   Back,
   TextInputError,
-} from './style';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+} from "./style";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import api from '../../services/api';
-import AuthContext from '../../contexts/auth';
+import api from "../../services/api";
 
 const usersData = {
-  water: '',
-  protein: '',
-  carbohydrates: '',
-  lipids: '',
-  fats: '',
+  water: "",
+  protein: "",
+  carbohydrates: "",
+  lipids: "",
+  fats: "",
 };
 export default function ChangePassword({ navigation }) {
-  const [passwordCurrent, setPasswordCurrent] = useState('');
-  const [passwordNew, setPasswordNew] = useState('');
-  const [passwordNewConfirm, setPasswordNewConfirm] = useState('');
+  const [passwordCurrent, setPasswordCurrent] = useState("");
+  const [passwordNew, setPasswordNew] = useState("");
+  const [passwordNewConfirm, setPasswordNewConfirm] = useState("");
 
   const [password, setPassword] = useState(usersData);
   useEffect(() => {
     async function getPassword() {
       try {
-        const user = await AsyncStorage.getItem('@RNAuth:user');
+        const user = await AsyncStorage.getItem("@RNAuth:user");
         const response = await api.get(`/users/${user}`);
         setPassword(response.data.password);
         console.log(response.data);
@@ -45,7 +44,6 @@ export default function ChangePassword({ navigation }) {
     }
     getPassword();
   }, []);
-
 
   const updatePassword = async () => {
     /*const user = await AsyncStorage.getItem('@RNAuth:user');
@@ -73,18 +71,19 @@ export default function ChangePassword({ navigation }) {
 
         <Title>Alterar Senha</Title>
         <Text>
-          Crie uma senha mais forte. Recomendamos usar uma senha que você não
-          esteja usando em nenhum outro lugar.
+          Crie uma senha mais forte. Recomendamos usar uma senha que você não esteja usando em
+          nenhum outro lugar.
         </Text>
         {passwordCurrent !== password ? (
-          <TextInputError
-            secureTextEntry={true}
-            textContentType="password"
-            autoCapitalize="none"
-            autoCompleteType="password"
-            placeholder="Senha Atual"
-            onChangeText={text => setPasswordCurrent(text)}
-          />
+          /*TextInputError */
+          <TextInput
+          secureTextEntry={true}
+          textContentType="password"
+          autoCapitalize="none"
+          autoCompleteType="password"
+          placeholder="Senha Atual"
+          onChangeText={(text) => setPasswordCurrent(text)}
+        />
         ) : (
           <TextInput
             secureTextEntry={true}
@@ -92,18 +91,19 @@ export default function ChangePassword({ navigation }) {
             autoCapitalize="none"
             autoCompleteType="password"
             placeholder="Senha Atual"
-            onChangeText={text => setPasswordCurrent(text)}
+            onChangeText={(text) => setPasswordCurrent(text)}
           />
         )}
 
         {passwordCurrent !== password ? (
-          <TextInputError
+           /*TextInputError */
+          <TextInput
             secureTextEntry={true}
             textContentType="password"
             autoCapitalize="none"
             autoCompleteType="password"
             placeholder="Nova Senha"
-            onChangeText={text => setPasswordNew(text)}
+            onChangeText={(text) => setPasswordNew(text)}
           />
         ) : (
           <TextInput
@@ -112,18 +112,19 @@ export default function ChangePassword({ navigation }) {
             autoCapitalize="none"
             autoCompleteType="password"
             placeholder="Nova Senha"
-            onChangeText={text => setPasswordNew(text)}
+            onChangeText={(text) => setPasswordNew(text)}
           />
         )}
 
         {passwordCurrent !== password ? (
-          <TextInputError
+          /*TextInputError */
+          <TextInput
             secureTextEntry={true}
             textContentType="password"
             autoCapitalize="none"
             autoCompleteType="password"
             placeholder="Confirmar Nova Senha"
-            onChangeText={text => setPasswordNewConfirm(text)}
+            onChangeText={(text) => setPasswordNewConfirm(text)}
           />
         ) : (
           <TextInput
@@ -132,7 +133,7 @@ export default function ChangePassword({ navigation }) {
             autoCapitalize="none"
             autoCompleteType="password"
             placeholder="Confirmar Nova Senha"
-            onChangeText={text => setPasswordNewConfirm(text)}
+            onChangeText={(text) => setPasswordNewConfirm(text)}
           />
         )}
 

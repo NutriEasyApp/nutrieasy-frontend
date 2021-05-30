@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Animated } from 'react-native';
-import { PanGestureHandler, State } from 'react-native-gesture-handler';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React, { useContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Animated } from "react-native";
+import { PanGestureHandler, State } from "react-native-gesture-handler";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import {
   Container,
@@ -14,24 +14,24 @@ import {
   Card,
   Content,
   Proposta,
-} from './styles';
+} from "./styles";
 
-import api from '../../services/api';
-import AuthContext from '../../contexts/auth';
+import api from "../../services/api";
+import AuthContext from "../../contexts/auth";
 
 const dietData = {
   diet: {
     diet: {
-      calories: '',
-      carbohydrates: '',
-      protein: '',
-      lipids: '',
-      water: '',
+      calories: "",
+      carbohydrates: "",
+      protein: "",
+      lipids: "",
+      water: "",
     },
-  }
+  },
 };
 
-import Menu from '../../components/Menu';
+import Menu from "../../components/Menu";
 
 export default function DietProposal({ navigation }) {
   const { signOut } = useContext(AuthContext);
@@ -81,13 +81,12 @@ export default function DietProposal({ navigation }) {
   useEffect(() => {
     async function getDiet() {
       try {
-        const user = await AsyncStorage.getItem('@RNAuth:user');
+        const user = await AsyncStorage.getItem("@RNAuth:user");
         const response = await api.get(`/diet/${user}`);
         setProposed(response.data);
         setDiet(true);
         console.log(response.data);
       } catch (err) {
-        console.log('error');
         const { status } = err.response;
         if (status === 404) {
           //console.log('Parece que você ainda não cadastrou sua ficha de saude');
@@ -116,7 +115,7 @@ export default function DietProposal({ navigation }) {
                   translateY: translateY.interpolate({
                     inputRange: [-300, 0, 260],
                     outputRange: [-50, 0, 260],
-                    extrapolate: 'clamp',
+                    extrapolate: "clamp",
                   }),
                 },
               ],
@@ -124,16 +123,8 @@ export default function DietProposal({ navigation }) {
           >
             {
               <CardHeader>
-                <MaterialCommunityIcons
-                  name="nutrition"
-                  size={28}
-                  color="#666"
-                />
-                <MaterialCommunityIcons
-                  name="chart-bar"
-                  size={28}
-                  color="#666"
-                />
+                <MaterialCommunityIcons name="nutrition" size={28} color="#666" />
+                <MaterialCommunityIcons name="chart-bar" size={28} color="#666" />
               </CardHeader>
             }
 
@@ -142,26 +133,22 @@ export default function DietProposal({ navigation }) {
               {diet ? (
                 <>
                   <Description>Calorias: {proposed.diet.diet.calories}</Description>
-                  <Description>
-                    Carboidratos: {proposed.diet.diet.carbohydrates}
-                  </Description>
+                  <Description>Carboidratos: {proposed.diet.diet.carbohydrates}</Description>
                   <Description>Proteina: {proposed.diet.diet.protein}</Description>
                   <Description>Lipídios: {proposed.diet.diet.lipids}</Description>
                   <Description>Água: {proposed.diet.diet.water}</Description>
                 </>
               ) : (
                 <>
-                  <Description>
-                    Parece que você ainda não cadastrou sua ficha de saúde.
-                  </Description>
+                  <Description>Parece que você ainda não cadastrou sua ficha de saúde.</Description>
                 </>
               )}
             </Proposta>
 
             <Info>
               <Text>
-                Essa é a sua proposta de dieta conforme os dados enviados pela
-                ficha de ánalise de saúde.
+                Essa é a sua proposta de dieta conforme os dados enviados pela ficha de ánalise de
+                saúde.
               </Text>
             </Info>
           </Card>

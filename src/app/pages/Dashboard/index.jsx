@@ -1,25 +1,22 @@
-import React, { useContext } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { useContext } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import {
-  ThemeNutriEasy, TabBarStyle
-} from './style';
+import { ThemeNutriEasy, TabBarStyle } from "./style";
 
-import Home from '../Home';
-import HealthAnalysis from '../HealthAnalysis';
-import Graphics from '../Graphics';
-import Reports from '../Reports';
-import Recipes from '../Recipes';
-import ChangePassword from '../ChangePassword';
-import TermsOfUse from '../TermsOfUse';
-import AboutApp from '../AboutApp';
-import MealSuggestions from '../MealSuggestions';
+import Home from "../Home";
+import HealthAnalysis from "../HealthAnalysis";
+import Graphics from "../Graphics";
+import Reports from "../Reports";
+import Recipes from "../Recipes";
+import ChangePassword from "../ChangePassword";
+import TermsOfUse from "../TermsOfUse";
+import AboutApp from "../AboutApp";
+import MealSuggestions from "../MealSuggestions";
 
-
-import AuthContext from '../../contexts/auth';
+import AuthContext from "../../contexts/auth";
 
 const Tab = createMaterialBottomTabNavigator();
 const MenuStack = createStackNavigator();
@@ -30,7 +27,7 @@ export default function Dashboard() {
   function handleSignOut() {
     signOut();
   }
-  
+
   return (
     <NavigationContainer theme={ThemeNutriEasy} independent={true}>
       <Tab.Navigator
@@ -39,19 +36,18 @@ export default function Dashboard() {
         initialRouteName="Dashboard"
         tabBarOptions={TabBarStyle}
       >
-        <Tab.Screen name="First" 
+        <Tab.Screen
+          name="First"
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: "Home",
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={'#fff'} size={20} />
+              <MaterialCommunityIcons name="home" color={"#fff"} size={20} />
             ),
-          }}>
+          }}
+        >
           {() => (
             <MenuStack.Navigator screenOptions={{ headerShown: false }}>
-              <MenuStack.Screen
-                name="Home"
-                component={Home}
-              />
+              <MenuStack.Screen name="Home" component={Home} />
               <MenuStack.Screen name="ChangePassword" component={ChangePassword} />
               <MenuStack.Screen name="AboutApp" component={AboutApp} />
               <MenuStack.Screen name="TermsOfUse" component={TermsOfUse} />
@@ -63,13 +59,9 @@ export default function Dashboard() {
           name="Ficha de Análise de Saúde"
           component={HealthAnalysis}
           options={{
-            tabBarLabel: 'Saúde',
+            tabBarLabel: "Saúde",
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="hospital-box"
-                color={'#fff'}
-                size={20}
-              />
+              <MaterialCommunityIcons name="hospital-box" color={"#fff"} size={20} />
             ),
           }}
         />
@@ -78,9 +70,9 @@ export default function Dashboard() {
           name="Sistema de Divisões de Refeições"
           component={Recipes}
           options={{
-            tabBarLabel: 'Refeições',
+            tabBarLabel: "Refeições",
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="noodles" color={'#fff'} size={20} />
+              <MaterialCommunityIcons name="noodles" color={"#fff"} size={20} />
             ),
           }}
         />
@@ -89,13 +81,9 @@ export default function Dashboard() {
           name="Gráficos"
           component={Graphics}
           options={{
-            tabBarLabel: 'Gráficos',
+            tabBarLabel: "Gráficos",
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="chart-line"
-                color={'#fff'}
-                size={20}
-              />
+              <MaterialCommunityIcons name="chart-line" color={"#fff"} size={20} />
             ),
           }}
         />
@@ -104,13 +92,9 @@ export default function Dashboard() {
           name="Impressão de Relatórios"
           component={Reports}
           options={{
-            tabBarLabel: 'Relatórios',
+            tabBarLabel: "Relatórios",
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="text-box-check"
-                color={'#fff'}
-                size={20}
-              />
+              <MaterialCommunityIcons name="text-box-check" color={"#fff"} size={20} />
             ),
           }}
         />
@@ -119,17 +103,12 @@ export default function Dashboard() {
           name="Sugestões de Refeições"
           component={MealSuggestions}
           options={{
-            tabBarLabel: 'Sugestões',
+            tabBarLabel: "Sugestões",
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="food-apple"
-                color={'#fff'}
-                size={20}
-              />
+              <MaterialCommunityIcons name="food-apple" color={"#fff"} size={20} />
             ),
           }}
         />
-
       </Tab.Navigator>
     </NavigationContainer>
   );

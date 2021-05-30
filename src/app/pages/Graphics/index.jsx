@@ -1,13 +1,12 @@
-import React from 'react';
-import { View, ScrollView, SafeAreaView } from 'react-native';
-import { Container, Wrapper, Graph, Title, Text, LineChartStyle, SafeAreaViewStyle } from './style';
+import React from "react";
+import { View, ScrollView, SafeAreaView } from "react-native";
+import { Container, Wrapper, Graph, Title, Text, LineChartStyle, SafeAreaViewStyle } from "./style";
 
-import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts';
+import { Grid, LineChart, XAxis, YAxis } from "react-native-svg-charts";
 
 export default function Graphics() {
-
   const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80];
-  const axesSvg = { fontSize: 10, fill: 'grey' };
+  const axesSvg = { fontSize: 10, fill: "grey" };
   const verticalContentInset = { top: 10, bottom: 10 };
   const xAxisHeight = 30;
 
@@ -16,7 +15,7 @@ export default function Graphics() {
       <ScrollView>
         <Container>
           <Title>Gráficos</Title>
-          
+
           <View>
             <Text>Peso</Text>
             <Wrapper>
@@ -31,7 +30,7 @@ export default function Graphics() {
                   style={LineChartStyle}
                   data={data}
                   contentInset={verticalContentInset}
-                  svg={{ stroke: '#FC9401' }}
+                  svg={{ stroke: "#FC9401" }}
                 >
                   <Grid />
                 </LineChart>
@@ -45,7 +44,7 @@ export default function Graphics() {
               </Graph>
             </Wrapper>
           </View>
-          
+
           <View>
             <Text>Caloria Total</Text>
             <Wrapper>
@@ -60,7 +59,7 @@ export default function Graphics() {
                   style={LineChartStyle}
                   data={data}
                   contentInset={verticalContentInset}
-                  svg={{ stroke: '#FC9401' }}
+                  svg={{ stroke: "#FC9401" }}
                 >
                   <Grid />
                 </LineChart>
@@ -74,7 +73,7 @@ export default function Graphics() {
               </Graph>
             </Wrapper>
           </View>
-          
+
           <View>
             <Text>Tempo de Exercício</Text>
             <Wrapper>
@@ -89,7 +88,7 @@ export default function Graphics() {
                   style={LineChartStyle}
                   data={data}
                   contentInset={verticalContentInset}
-                  svg={{ stroke: '#FC9401' }}
+                  svg={{ stroke: "#FC9401" }}
                 >
                   <Grid />
                 </LineChart>
@@ -103,7 +102,6 @@ export default function Graphics() {
               </Graph>
             </Wrapper>
           </View>
-          
         </Container>
       </ScrollView>
     </SafeAreaView>

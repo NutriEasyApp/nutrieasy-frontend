@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Image, ScrollView, SafeAreaView } from 'react-native';
+import * as React from "react";
+import { Image, ScrollView, SafeAreaView } from "react-native";
 import {
   Container,
   Wrapper,
@@ -13,13 +13,13 @@ import {
   SectionImg,
   SectionInfo,
   ColumnInfo,
-} from './style';
+} from "./style";
 
-const ImgRecipes1 = require('../../assets/images/recipes-1.jpg');
-const ImgRecipes2 = require('../../assets/images/recipes-2.jpg');
-const ImgRecipes3 = require('../../assets/images/recipes-3.jpg');
-const ImgRecipes4 = require('../../assets/images/recipes-4.jpg');
-const ImgRecipes5 = require('../../assets/images/recipes-5.jpg');
+const ImgRecipes1 = require("../../assets/images/recipes-1.jpg");
+const ImgRecipes2 = require("../../assets/images/recipes-2.jpg");
+const ImgRecipes3 = require("../../assets/images/recipes-3.jpg");
+const ImgRecipes4 = require("../../assets/images/recipes-4.jpg");
+const ImgRecipes5 = require("../../assets/images/recipes-5.jpg");
 
 export default function MealSuggestions({ navigation }) {
   return (
@@ -28,10 +28,9 @@ export default function MealSuggestions({ navigation }) {
         <Container>
           <TitlePage>Sugestões de Refeições</TitlePage>
           <Text>
-            Separamos para você, sugestões de refeições com objetivo de obter
-            uma alimentação equilibrada e saudável. Estão divididos em 5
-            refeições ao dia, com a quantidade de porção exata de cada alimento
-            para ingerir.
+            Separamos para você, sugestões de refeições com objetivo de obter uma alimentação
+            equilibrada e saudável. Estão divididos em 5 refeições ao dia, com a quantidade de
+            porção exata de cada alimento para ingerir.
           </Text>
 
           <Recipes>

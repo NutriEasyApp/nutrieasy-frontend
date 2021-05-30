@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Container,
-  TextInput,
-  Button,
-  Text,
-  Title,
-  TextButton,
-  Back,
-} from "./style";
+import { Container, TextInput, Button, Text, Title, TextButton, Back } from "./style";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -25,9 +17,8 @@ export default function ForgotPassword({ navigation }) {
 
       <Title>Esqueceu sua senha</Title>
       <Text>
-        Esqueceu sua Senha? Não se preocupe. É só nos dizer seu e-mail que
-        enviaremos um link e um código de acesso para você cadastrar uma nova
-        senha.
+        Esqueceu sua Senha? Não se preocupe. É só nos dizer seu e-mail que enviaremos um link e um
+        código de acesso para você cadastrar uma nova senha.
       </Text>
       <TextInput placeholder="E-mail" />
       <Button>
