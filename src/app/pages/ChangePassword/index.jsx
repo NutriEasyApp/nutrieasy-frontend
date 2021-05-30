@@ -34,7 +34,6 @@ export default function ChangePassword({ navigation }) {
         const user = await AsyncStorage.getItem("@RNAuth:user");
         const response = await api.get(`/users/${user}`);
         setPassword(response.data.password);
-        console.log(response.data);
       } catch (err) {
         const { status } = err.response;
         if (status === 401) {
