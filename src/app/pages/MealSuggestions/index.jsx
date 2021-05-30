@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Image, ScrollView, SafeAreaView } from "react-native";
 import {
   Container,
@@ -21,16 +21,85 @@ const ImgRecipes3 = require("../../assets/images/recipes-3.jpg");
 const ImgRecipes4 = require("../../assets/images/recipes-4.jpg");
 const ImgRecipes5 = require("../../assets/images/recipes-5.jpg");
 
-export default function MealSuggestions({ navigation }) {
+const dietData = {
+  getMeals: {
+    lunchAndDinner: {
+      portionRice: {
+        amount: "",
+        type: "",
+      },
+      portionGrilledRump: {
+        amount: "",
+        type: "",
+      },
+      portionChesse: {
+        amount: "",
+        type: "",
+      },
+    },
+    breakfast: {
+      portionCereal: {
+        amount: "",
+        type: "",
+      },
+      portionEgg: {
+        amount: "",
+        type: "",
+      },
+      portionCashewNut: {
+        amount: "",
+        type: "",
+      },
+    },
+    morningAndAfterSnack: {
+      portionBread: {
+        amount: "",
+        type: "",
+      },
+      portionTuna: {
+        amount: "",
+        type: "",
+      },
+      portionMayonnaise: {
+        amount: "",
+        type: "",
+      },
+    },
+  },
+};
+
+export default function MealSuggestions() {
+  const [proposed, setProposed] = useState(dietData);
+  const [diet, setDiet] = useState(false);
+  useEffect(() => {
+    async function getDiet() {
+      try {
+        const user = await AsyncStorage.getItem("@RNAuth:user");
+        const response = await api.get(`/diet/${user}`);
+        setProposed(response.data);
+        setDiet(true);
+      } catch (err) {
+        console.log("error");
+        const { status } = err.response;
+        if (status === 404) {
+          //console.log('Parece que você ainda não cadastrou sua ficha de saude');
+          setDiet(false);
+        }
+        if (status === 401) {
+          signOut();
+        }
+      }
+    }
+    getDiet();
+  }, []);
   return (
     <SafeAreaView style={SafeAreaViewStyle}>
       <ScrollView>
         <Container>
           <TitlePage>Sugestões de Refeições</TitlePage>
           <Text>
-            Separamos para você, sugestões de refeições com objetivo de obter uma alimentação
-            equilibrada e saudável. Estão divididos em 5 refeições ao dia, com a quantidade de
-            porção exata de cada alimento para ingerir.
+            Separamos para você, sugestões de refeições com objetivo de obter uma alimentação equilibrada e saudável. Estão divididos em 5
+            refeições ao dia, com a quantidade de porção exata de cada alimento para ingerir.
           </Text>
 
           <Recipes>
@@ -38,29 +107,28 @@ export default function MealSuggestions({ navigation }) {
             <SectionImg>
               <Image source={ImgRecipes1}></Image>
             </SectionImg>
-
             <Wrapper>
               <SectionInfo>
                 <ColumnInfo>
                   <Portion>Cereal</Portion>
-                  <Value>350 unidades</Value>
+                  <Value>{proposed.getMeals.breakfast.portionCereal.amount} unidades</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Ovo</Portion>
-                  <Value>350 unidades</Value>
+                  <Value>{proposed.getMeals.breakfast.portionEgg.amount} unidades</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Castanha de Caju</Portion>
-                  <Value>250 gramas</Value>
+                  <Value>{proposed.getMeals.breakfast.portionCashewNut.amount} gramas</Value>
                 </ColumnInfo>
               </SectionInfo>
             </Wrapper>
           </Recipes>
 
           <Recipes>
-            <Title>Lanche da Manhã/Tarde</Title>
+            <Title>Lanche da Manhã</Title>
             <SectionImg>
               <Image source={ImgRecipes2}></Image>
             </SectionImg>
@@ -68,24 +136,24 @@ export default function MealSuggestions({ navigation }) {
               <SectionInfo>
                 <ColumnInfo>
                   <Portion>Pão</Portion>
-                  <Value>5 unidades</Value>
+                  <Value>{proposed.getMeals.morningAndAfterSnack.portionBread.amount} unidades</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Atum</Portion>
-                  <Value>15 gramas</Value>
+                  <Value>{proposed.getMeals.morningAndAfterSnack.portionTuna.amount} gramas</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Maionese</Portion>
-                  <Value>20 gramas</Value>
+                  <Value>{proposed.getMeals.morningAndAfterSnack.portionMayonnaise.amount} gramas</Value>
                 </ColumnInfo>
               </SectionInfo>
             </Wrapper>
           </Recipes>
 
           <Recipes>
-            <Title>Almoço/Janta</Title>
+            <Title>Almoço</Title>
             <SectionImg>
               <Image source={ImgRecipes3}></Image>
             </SectionImg>
@@ -93,17 +161,17 @@ export default function MealSuggestions({ navigation }) {
               <SectionInfo>
                 <ColumnInfo>
                   <Portion>Arroz</Portion>
-                  <Value>200 gramas</Value>
+                  <Value>{proposed.getMeals.lunchAndDinner.portionRice.amount} gramas</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Alcatra Grelhada</Portion>
-                  <Value>200 gramas</Value>
+                  <Value>{proposed.getMeals.lunchAndDinner.portionGrilledRump.amount} gramas</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Queijo</Portion>
-                  <Value>200 gramas</Value>
+                  <Value>{proposed.getMeals.lunchAndDinner.portionChesse.amount} gramas</Value>
                 </ColumnInfo>
               </SectionInfo>
             </Wrapper>
@@ -117,53 +185,22 @@ export default function MealSuggestions({ navigation }) {
             <Wrapper>
               <SectionInfo>
                 <ColumnInfo>
-                  <Portion>Cereal</Portion>
-                  <Value>350 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Ovo</Portion>
-                  <Value>350 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Castanha de Caju</Portion>
-                  <Value>250 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
                   <Portion>Pão</Portion>
-                  <Value>5 unidades</Value>
+                  <Value>{proposed.getMeals.morningAndAfterSnack.portionBread.amount} unidades</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Atum</Portion>
-                  <Value>15 gramas</Value>
+                  <Value>{proposed.getMeals.morningAndAfterSnack.portionTuna.amount} gramas</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Maionese</Portion>
-                  <Value>20 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Arroz</Portion>
-                  <Value>200 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Alcatra Grelhada</Portion>
-                  <Value>200 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Queijo</Portion>
-                  <Value>200 gramas</Value>
+                  <Value>{proposed.getMeals.morningAndAfterSnack.portionMayonnaise.amount} gramas</Value>
                 </ColumnInfo>
               </SectionInfo>
             </Wrapper>
           </Recipes>
-
           <Recipes>
             <Title>Janta</Title>
             <SectionImg>
@@ -172,48 +209,18 @@ export default function MealSuggestions({ navigation }) {
             <Wrapper>
               <SectionInfo>
                 <ColumnInfo>
-                  <Portion>Cereal</Portion>
-                  <Value>350 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Ovo</Portion>
-                  <Value>350 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Castanha de Caju</Portion>
-                  <Value>250 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Pão</Portion>
-                  <Value>5 unidades</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Atum</Portion>
-                  <Value>15 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
-                  <Portion>Maionese</Portion>
-                  <Value>20 gramas</Value>
-                </ColumnInfo>
-
-                <ColumnInfo>
                   <Portion>Arroz</Portion>
-                  <Value>200 gramas</Value>
+                  <Value>{proposed.getMeals.lunchAndDinner.portionRice.amount} gramas</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Alcatra Grelhada</Portion>
-                  <Value>200 gramas</Value>
+                  <Value>{proposed.getMeals.lunchAndDinner.portionGrilledRump.amount} gramas</Value>
                 </ColumnInfo>
 
                 <ColumnInfo>
                   <Portion>Queijo</Portion>
-                  <Value>200 gramas</Value>
+                  <Value>{proposed.getMeals.lunchAndDinner.portionChesse.amount} gramas</Value>
                 </ColumnInfo>
               </SectionInfo>
             </Wrapper>
