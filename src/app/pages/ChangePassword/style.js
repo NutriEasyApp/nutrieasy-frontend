@@ -79,3 +79,14 @@ export const TextInputError = styled.TextInput.attrs({
   padding: 15px;
   height: 55px;
 `;
+
+export const Icon = styled.TouchableOpacity`
+  position: absolute;
+  padding: 15px;
+  align-self: flex-end;
+`;
+
+export const SectionInput = styled.View`
+  width: 100%;
+  align-items: center;
+`;

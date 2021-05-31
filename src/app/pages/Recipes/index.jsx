@@ -51,7 +51,6 @@ export default function Recipes() {
         const response = await api.get(`/diet/${user}`);
         setProposed(response.data);
         setDiet(true);
-        console.log(response.data);
       } catch (err) {
         const { status } = err.response;
         if (status === 404) {
