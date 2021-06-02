@@ -88,7 +88,7 @@ export default function Dashboard() {
           }}
         />
 
-        <Tab.Screen
+        {/*<Tab.Screen
           name="Impressão de Relatórios"
           component={Reports}
           options={{
@@ -97,7 +97,7 @@ export default function Dashboard() {
               <MaterialCommunityIcons name="text-box-check" color={"#fff"} size={20} />
             ),
           }}
-        />
+        />*/}
 
         <Tab.Screen
           name="Sugestões de Refeições"
