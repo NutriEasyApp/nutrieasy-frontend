@@ -4,7 +4,9 @@
     "slug": "nutrieasyapp",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./src/app/assets/images/icon.png",
     "splash": {
+      "image": "./src/app/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -12,16 +14,12 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
-    "notification": {
-      "icon": "./src/app/assets/images/notificationIcon.png"
-    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "package": "com.nutrieasy.app",
       "useNextNotificationsApi": true,
-      "icon": "./src/app/assets/images/notificationIcon.png",
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
       }
