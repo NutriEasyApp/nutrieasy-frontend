@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Wrapper,
-  TextSubmit,
-  Button,
-  TextInput,
-  Text,
-  Title,
-  Back,
-  Icon,
-  TextInputError,
-  SectionInput,
-} from "./style";
+import React, { useEffect, useState, useContext } from "react";
+import { Container, Wrapper, TextSubmit, Button, TextInput, Text, Title, Back, Icon, TextInputError, SectionInput } from "./style";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import api from "../../services/api";
+import AuthContext from "../../contexts/auth";
 
 export default function ChangePassword({ navigation }) {
+  const { auth, error, setError } = useContext(AuthContext);
+
   const [passwordCurrent, setPasswordCurrent] = useState("");
   const [passwordNew, setPasswordNew] = useState("");
   const [passwordNewConfirm, setPasswordNewConfirm] = useState("");
@@ -31,8 +22,10 @@ export default function ChangePassword({ navigation }) {
         newpassword: passwordNew,
         repeatnewpassword: passwordNewConfirm,
       });
+      setError(false);
       navigation.navigate("Home");
     } catch (err) {
+      setError(false);
       console.log("Ocorreu um erro: ", err);
     }
   };
@@ -62,13 +55,7 @@ export default function ChangePassword({ navigation }) {
             placeholder="Senha Atual"
             onChangeText={(text) => setPasswordCurrent(text)}
           />
-          <Icon
-            onPress={
-              securePassword1
-                ? () => setSecurePassword1(false) || setIconEye1("eye")
-                : () => setSecurePassword1(true) || setIconEye1("eye-off")
-            }
-          >
+          <Icon onPress={securePassword1 ? () => setSecurePassword1(false) || setIconEye1("eye") : () => setSecurePassword1(true) || setIconEye1("eye-off")}>
             <MaterialCommunityIcons name={iconEye1} color={"black"} size={25} style={{ marginRight: 15 }} />
           </Icon>
         </SectionInput>
@@ -82,13 +69,7 @@ export default function ChangePassword({ navigation }) {
             placeholder="Nova Senha"
             onChangeText={(text) => setPasswordNew(text)}
           />
-          <Icon
-            onPress={
-              securePassword2
-                ? () => setSecurePassword2(false) || setIconEye2("eye")
-                : () => setSecurePassword2(true) || setIconEye2("eye-off")
-            }
-          >
+          <Icon onPress={securePassword2 ? () => setSecurePassword2(false) || setIconEye2("eye") : () => setSecurePassword2(true) || setIconEye2("eye-off")}>
             <MaterialCommunityIcons name={iconEye2} color={"black"} size={25} style={{ marginRight: 15 }} />
           </Icon>
         </SectionInput>
@@ -102,13 +83,7 @@ export default function ChangePassword({ navigation }) {
             placeholder="Confirmar Nova Senha"
             onChangeText={(text) => setPasswordNewConfirm(text)}
           />
-          <Icon
-            onPress={
-              securePassword3
-                ? () => setSecurePassword3(false) || setIconEye3("eye")
-                : () => setSecurePassword3(true) || setIconEye3("eye-off")
-            }
-          >
+          <Icon onPress={securePassword3 ? () => setSecurePassword3(false) || setIconEye3("eye") : () => setSecurePassword3(true) || setIconEye3("eye-off")}>
             <MaterialCommunityIcons name={iconEye3} color={"black"} size={25} style={{ marginRight: 15 }} />
           </Icon>
         </SectionInput>
