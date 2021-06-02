@@ -102,20 +102,28 @@ export default function MealSuggestions() {
               </SectionImg>
               <Wrapper>
                 <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Cereal</Portion>
-                    <Value>{proposed.breakfast.portionCereal.amount} unidades</Value>
-                  </ColumnInfo>
+                  {diet ? (
+                    <>
+                      <ColumnInfo>
+                        <Portion>Cereal</Portion>
+                        <Value>{proposed.breakfast.portionCereal.amount} unidades</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Peito de Peru</Portion>
-                    <Value>{proposed.breakfast.portionTurkeyBreast.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Peito de Peru</Portion>
+                        <Value>{proposed.breakfast.portionTurkeyBreast.amount} gramas</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Castanha de Caju</Portion>
-                    <Value>{proposed.breakfast.portionCashewNut.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Castanha de Caju</Portion>
+                        <Value>{proposed.breakfast.portionCashewNut.amount} gramas</Value>
+                      </ColumnInfo>
+                    </>
+                  ) : (
+                    <>
+                      <Value>Parece que você ainda não cadastrou sua ficha de saúde.</Value>
+                    </>
+                  )}
                 </SectionInfo>
               </Wrapper>
             </Recipes>
@@ -127,20 +135,28 @@ export default function MealSuggestions() {
               </SectionImg>
               <Wrapper>
                 <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Pão</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionBread.amount} unidades</Value>
-                  </ColumnInfo>
+                  {diet ? (
+                    <>
+                      <ColumnInfo>
+                        <Portion>Pão</Portion>
+                        <Value>{proposed.morningAndAfterSnack.portionBread.amount} unidades</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Atum</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionTuna.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Atum</Portion>
+                        <Value>{proposed.morningAndAfterSnack.portionTuna.amount} gramas</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Maionese</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionMayonnaise.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Maionese</Portion>
+                        <Value>{proposed.morningAndAfterSnack.portionMayonnaise.amount} gramas</Value>
+                      </ColumnInfo>
+                    </>
+                  ) : (
+                    <>
+                      <Value>Parece que você ainda não cadastrou sua ficha de saúde.</Value>
+                    </>
+                  )}
                 </SectionInfo>
               </Wrapper>
             </Recipes>
@@ -152,20 +168,28 @@ export default function MealSuggestions() {
               </SectionImg>
               <Wrapper>
                 <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Arroz</Portion>
-                    <Value>{proposed.lunchAndDinner.portionRice.amount} gramas</Value>
-                  </ColumnInfo>
+                  {diet ? (
+                    <>
+                      <ColumnInfo>
+                        <Portion>Arroz</Portion>
+                        <Value>{proposed.lunchAndDinner.portionRice.amount} gramas</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Alcatra Grelhada</Portion>
-                    <Value>{proposed.lunchAndDinner.portionGrilledRump.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Alcatra Grelhada</Portion>
+                        <Value>{proposed.lunchAndDinner.portionGrilledRump.amount} gramas</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Queijo</Portion>
-                    <Value>{proposed.lunchAndDinner.portionChesse.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Queijo</Portion>
+                        <Value>{proposed.lunchAndDinner.portionChesse.amount} gramas</Value>
+                      </ColumnInfo>
+                    </>
+                  ) : (
+                    <>
+                      <Value>Parece que você ainda não cadastrou sua ficha de saúde.</Value>
+                    </>
+                  )}
                 </SectionInfo>
               </Wrapper>
             </Recipes>
@@ -176,20 +200,28 @@ export default function MealSuggestions() {
               </SectionImg>
               <Wrapper>
                 <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Pão</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionBread.amount} unidades</Value>
-                  </ColumnInfo>
+                  {diet ? (
+                    <>
+                      <ColumnInfo>
+                        <Portion>Pão</Portion>
+                        <Value>{proposed.morningAndAfterSnack.portionBread.amount} unidades</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Atum</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionTuna.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Atum</Portion>
+                        <Value>{proposed.morningAndAfterSnack.portionTuna.amount} gramas</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Maionese</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionMayonnaise.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Maionese</Portion>
+                        <Value>{proposed.morningAndAfterSnack.portionMayonnaise.amount} gramas</Value>
+                      </ColumnInfo>
+                    </>
+                  ) : (
+                    <>
+                      <Value>Parece que você ainda não cadastrou sua ficha de saúde.</Value>
+                    </>
+                  )}
                 </SectionInfo>
               </Wrapper>
             </Recipes>
@@ -200,20 +232,28 @@ export default function MealSuggestions() {
               </SectionImg>
               <Wrapper>
                 <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Arroz</Portion>
-                    <Value>{proposed.lunchAndDinner.portionRice.amount} gramas</Value>
-                  </ColumnInfo>
+                  {diet ? (
+                    <>
+                      <ColumnInfo>
+                        <Portion>Arroz</Portion>
+                        <Value>{proposed.lunchAndDinner.portionRice.amount} gramas</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Alcatra Grelhada</Portion>
-                    <Value>{proposed.lunchAndDinner.portionGrilledRump.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Alcatra Grelhada</Portion>
+                        <Value>{proposed.lunchAndDinner.portionGrilledRump.amount} gramas</Value>
+                      </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Queijo</Portion>
-                    <Value>{proposed.lunchAndDinner.portionChesse.amount} gramas</Value>
-                  </ColumnInfo>
+                      <ColumnInfo>
+                        <Portion>Queijo</Portion>
+                        <Value>{proposed.lunchAndDinner.portionChesse.amount} gramas</Value>
+                      </ColumnInfo>
+                    </>
+                  ) : (
+                    <>
+                      <Value>Parece que você ainda não cadastrou sua ficha de saúde.</Value>
+                    </>
+                  )}
                 </SectionInfo>
               </Wrapper>
             </Recipes>
