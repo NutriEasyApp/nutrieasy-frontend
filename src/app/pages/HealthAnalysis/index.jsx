@@ -74,7 +74,6 @@ export default function HealthAnalysis({ navigation }) {
   const [exercisetime, setExerciseTime] = useState("");
   const [meals, setMeals] = useState(5);
 
-  
   const postHealth = async () => {
     const user = await AsyncStorage.getItem("@RNAuth:user");
     try {
@@ -90,7 +89,9 @@ export default function HealthAnalysis({ navigation }) {
         meals: meals,
       });
       navigation.navigate("Home");
+      console.foi("Fooi");
     } catch (err) {
+      console.foi("Não foi");
       console.log("Ocorreu um erro: ", err);
     }
   };
@@ -121,6 +122,9 @@ export default function HealthAnalysis({ navigation }) {
     getHealth();
   }, []);
 
+  {
+    console.log(meals);
+  }
   return (
     <SafeAreaView style={SafeAreaViewStyle}>
       <ScrollView>
@@ -141,56 +145,29 @@ export default function HealthAnalysis({ navigation }) {
               />
 
               <Calendar>
-                <MaterialCommunityIcons
-                  name="calendar-month"
-                  color={"#000"}
-                  size={30}
-                  style={CalendarMonthStyle}
-                />
+                <MaterialCommunityIcons name="calendar-month" color={"#000"} size={30} style={CalendarMonthStyle} />
               </Calendar>
             </BirthDate>
           </View>
 
           <View>
             <SliderRangeLabel>Qual é o seu Peso? </SliderRangeLabel>
-            <SliderRange
-              data={weight}
-              unitType="kg"
-              step={1}
-              maximumValue={300}
-              onChange={(event) => setWeight(event)}
-            />
+            <SliderRange data={weight} unitType="kg" step={1} maximumValue={300} onChange={(event) => setWeight(event)} />
           </View>
 
           <View>
             <SliderRangeLabel>Qual é a sua Altura? </SliderRangeLabel>
-            <SliderRange
-              data={height}
-              unitType="cm"
-              step={1}
-              maximumValue={300}
-              onChange={(event) => setHeight(event)}
-            />
+            <SliderRange data={height} unitType="cm" step={1} maximumValue={300} onChange={(event) => setHeight(event)} />
           </View>
 
           <View>
             <Label>Quanto tempo de exercicio você pratica por dia?</Label>
-            <SliderRange
-              data={exercisetime}
-              unitType="h"
-              step={0.5}
-              maximumValue={24}
-              onChange={(event) => setExerciseTime(event)}
-            />
+            <SliderRange data={exercisetime} unitType="h" step={0.5} maximumValue={24} onChange={(event) => setExerciseTime(event)} />
           </View>
 
           <View style={Flex}>
             <Label>Qual é o seu Gênero?</Label>
-            <RadioButton.Group
-              onValueChange={(event) => setGenre(event)}
-              value={genre}
-              style={RadioButtonGroupStyle}
-            >
+            <RadioButton.Group onValueChange={(event) => setGenre(event)} value={genre} style={RadioButtonGroupStyle}>
               <Radio>
                 <RadioButton value="M" color="#fb9300" />
                 <ValueRadioButton>Masculino</ValueRadioButton>
@@ -219,11 +196,7 @@ export default function HealthAnalysis({ navigation }) {
           )}
 
           <View>
-            <RadioButton.Group
-              onValueChange={(event) => setBodytype(event)}
-              value={bodytype}
-              style={RadioButtonGroupStyle}
-            >
+            <RadioButton.Group onValueChange={(event) => setBodytype(event)} value={bodytype} style={RadioButtonGroupStyle}>
               <Radio>
                 <RadioButton value="ECTOMORPH" color="#fb9300" />
                 <ValueRadioButton>1- Ectomorfo</ValueRadioButton>
@@ -241,11 +214,7 @@ export default function HealthAnalysis({ navigation }) {
 
           <View>
             <Label>O que você gostaria de fazer com seu peso?</Label>
-            <RadioButton.Group
-              onValueChange={(event) => setObjective(event)}
-              value={objective}
-              style={RadioButtonGroupStyle}
-            >
+            <RadioButton.Group onValueChange={(event) => setObjective(event)} value={objective} style={RadioButtonGroupStyle}>
               <Radio>
                 <RadioButton value="GAIN" color="#fb9300" />
                 <ValueRadioButton>Ganhar</ValueRadioButton>
