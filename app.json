@@ -4,6 +4,7 @@
     "slug": "nutrieasyapp",
     "version": "1.0.0",
     "orientation": "portrait",
+    "userInterfaceStyle": "light",
     "icon": "./src/app/assets/images/icon.png",
     "splash": {
       "image": "./src/app/assets/images/splash.png",

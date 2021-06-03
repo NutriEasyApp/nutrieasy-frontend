@@ -1,73 +1,86 @@
-import React, { useState, useEffect, useContext } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Image, ScrollView, SafeAreaView, View } from "react-native";
-import { Container, Wrapper, Text, TitlePage, Title, Recipes, SafeAreaViewStyle, Portion, Value, SectionImg, SectionInfo, ColumnInfo } from "./style";
+import React, { useState, useEffect, useContext } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Image, ScrollView, SafeAreaView, View } from 'react-native';
+import {
+  Container,
+  Wrapper,
+  Text,
+  TitlePage,
+  Title,
+  Recipes,
+  SafeAreaViewStyle,
+  Portion,
+  Value,
+  SectionImg,
+  SectionInfo,
+  ColumnInfo,
+} from './style';
 
-import api from "../../services/api";
-import AuthContext from "../../contexts/auth";
+import api from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
-const ImgRecipes1 = require("../../assets/images/recipes-1.jpg");
-const ImgRecipes2 = require("../../assets/images/recipes-2.jpg");
-const ImgRecipes3 = require("../../assets/images/recipes-3.jpg");
-const ImgRecipes4 = require("../../assets/images/recipes-4.jpg");
-const ImgRecipes5 = require("../../assets/images/recipes-5.jpg");
+const ImgRecipes1 = require('../../assets/images/recipes-1.jpg');
+const ImgRecipes2 = require('../../assets/images/recipes-2.jpg');
+const ImgRecipes3 = require('../../assets/images/recipes-3.jpg');
+const ImgRecipes4 = require('../../assets/images/recipes-4.jpg');
+const ImgRecipes5 = require('../../assets/images/recipes-5.jpg');
 
 const dietData = {
   breakfast: {
     portionCashewNut: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionCereal: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
-    portionTurkeyBreast: {
-      amount: "",
-      type: "",
+    portionYogurt: {
+      amount: '',
+      type: '',
     },
   },
 
   lunchAndDinner: {
     portionRice: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionGrilledRump: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionChesse: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
   },
 
   morningAndAfterSnack: {
     portionBread: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionTuna: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionMayonnaise: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
   },
 };
 
 export default function MealSuggestions() {
   const { signOut } = useContext(AuthContext);
-  const [proposed, setProposed] = useState(dietData);
+  const [proposed, setProposed] = useState({});
   const [diet, setDiet] = useState(false);
 
   useEffect(() => {
     async function getDietMeals() {
       try {
-        const user = await AsyncStorage.getItem("@RNAuth:user");
+        const user = await AsyncStorage.getItem('@RNAuth:user');
         const response = await api.get(`/diet/meals/${user}`);
         setProposed(response.data);
         setDiet(true);
@@ -75,11 +88,11 @@ export default function MealSuggestions() {
         const { status } = err.response;
         if (status === 404) {
           //console.log('Parece que você ainda não cadastrou sua ficha de saude');
-          setDiet(false);
+          return setDiet(false);
         }
-        if (status === 401) {
-          signOut();
-        }
+        // if (status === 401) {
+        return signOut();
+        // }
       }
     }
     getDietMeals();
@@ -90,134 +103,144 @@ export default function MealSuggestions() {
         <Container>
           <TitlePage>Sugestões de Refeições</TitlePage>
           <Text>
-            Separamos para você, sugestões de refeições com objetivo de obter uma alimentação equilibrada e saudável. Estão divididos entre 2 a 5, com a quantidade de porção exata de cada alimento
-            para ingerir.
+            Separamos para você, sugestões de refeições com objetivo de obter
+            uma alimentação equilibrada e saudável. Estão divididos entre 2 a 5,
+            com a quantidade de porção exata de cada alimento para ingerir.
           </Text>
+          {diet ? (
+            <View>
+              {proposed.breakfast && (
+                <Recipes>
+                  <Title>Café da Manhã</Title>
+                  <SectionImg>
+                    <Image source={ImgRecipes1}></Image>
+                  </SectionImg>
 
-          <View>
-            <Recipes>
-              <Title>Café da Manhã</Title>
-              <SectionImg>
-                <Image source={ImgRecipes1}></Image>
-              </SectionImg>
-              <Wrapper>
-                <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Cereal</Portion>
-                    <Value>{proposed.breakfast.portionCereal.amount} unidades</Value>
-                  </ColumnInfo>
+                  <Wrapper>
+                    <SectionInfo>
+                      {proposed.breakfast && (
+                        <>
+                          <ColumnInfo>
+                            <Portion>Cereal</Portion>
+                            <Value>
+                              {proposed.breakfast.portionCereal.amount}g
+                            </Value>
+                          </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Peito de Peru</Portion>
-                    <Value>{proposed.breakfast.portionTurkeyBreast.amount} gramas</Value>
-                  </ColumnInfo>
+                          <ColumnInfo>
+                            <Portion>Iogurte</Portion>
+                            <Value>
+                              {proposed.breakfast.portionYogurt.amount}ml
+                            </Value>
+                          </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Castanha de Caju</Portion>
-                    <Value>{proposed.breakfast.portionCashewNut.amount} gramas</Value>
-                  </ColumnInfo>
-                </SectionInfo>
-              </Wrapper>
-            </Recipes>
+                          <ColumnInfo>
+                            <Portion>Castanha de Caju</Portion>
+                            <Value>
+                              {proposed.breakfast.portionCashewNut.amount}g
+                            </Value>
+                          </ColumnInfo>
+                        </>
+                      )}
+                    </SectionInfo>
+                  </Wrapper>
+                </Recipes>
+              )}
+              {proposed.morningAndAfterSnack && (
+                <Recipes>
+                  <Title>Lanche da Manhã / Tarde</Title>
+                  <SectionImg>
+                    <Image source={ImgRecipes2}></Image>
+                  </SectionImg>
+                  <Wrapper>
+                    <SectionInfo>
+                      {proposed.morningAndAfterSnack && (
+                        <>
+                          <ColumnInfo>
+                            <Portion>Pão</Portion>
+                            <Value>
+                              {
+                                proposed.morningAndAfterSnack.portionBread
+                                  .amount
+                              }
+                              un
+                            </Value>
+                          </ColumnInfo>
 
-            <Recipes>
-              <Title>Lanche da Manhã</Title>
-              <SectionImg>
-                <Image source={ImgRecipes2}></Image>
-              </SectionImg>
-              <Wrapper>
-                <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Pão</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionBread.amount} unidades</Value>
-                  </ColumnInfo>
+                          <ColumnInfo>
+                            <Portion>Atum</Portion>
+                            <Value>
+                              {proposed.morningAndAfterSnack.portionTuna.amount}
+                              g
+                            </Value>
+                          </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Atum</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionTuna.amount} gramas</Value>
-                  </ColumnInfo>
+                          <ColumnInfo>
+                            <Portion>Maionese</Portion>
+                            <Value>
+                              {
+                                proposed.morningAndAfterSnack.portionMayonnaise
+                                  .amount
+                              }
+                              g
+                            </Value>
+                          </ColumnInfo>
+                        </>
+                      )}
+                    </SectionInfo>
+                  </Wrapper>
+                </Recipes>
+              )}
+              <Recipes>
+                <Title>Almoço / Jantar</Title>
+                <SectionImg>
+                  <Image source={ImgRecipes3}></Image>
+                </SectionImg>
+                <Wrapper>
+                  <SectionInfo>
+                    {proposed.lunchAndDinner && (
+                      <>
+                        <ColumnInfo>
+                          <Portion>Arroz</Portion>
+                          <Value>
+                            {proposed.lunchAndDinner.portionRice.amount}g
+                          </Value>
+                        </ColumnInfo>
 
-                  <ColumnInfo>
-                    <Portion>Maionese</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionMayonnaise.amount} gramas</Value>
-                  </ColumnInfo>
-                </SectionInfo>
-              </Wrapper>
-            </Recipes>
+                        <ColumnInfo>
+                          <Portion>Alcatra Grelhada</Portion>
+                          <Value>
+                            {proposed.lunchAndDinner.portionGrilledRump.amount}g
+                          </Value>
+                        </ColumnInfo>
 
-            <Recipes>
-              <Title>Almoço</Title>
-              <SectionImg>
-                <Image source={ImgRecipes3}></Image>
-              </SectionImg>
-              <Wrapper>
-                <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Arroz</Portion>
-                    <Value>{proposed.lunchAndDinner.portionRice.amount} gramas</Value>
-                  </ColumnInfo>
-
-                  <ColumnInfo>
-                    <Portion>Alcatra Grelhada</Portion>
-                    <Value>{proposed.lunchAndDinner.portionGrilledRump.amount} gramas</Value>
-                  </ColumnInfo>
-
-                  <ColumnInfo>
-                    <Portion>Queijo</Portion>
-                    <Value>{proposed.lunchAndDinner.portionChesse.amount} gramas</Value>
-                  </ColumnInfo>
-                </SectionInfo>
-              </Wrapper>
-            </Recipes>
-            <Recipes>
-              <Title>Lanche da Tarde</Title>
-              <SectionImg>
-                <Image source={ImgRecipes4}></Image>
-              </SectionImg>
-              <Wrapper>
-                <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Pão</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionBread.amount} unidades</Value>
-                  </ColumnInfo>
-
-                  <ColumnInfo>
-                    <Portion>Atum</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionTuna.amount} gramas</Value>
-                  </ColumnInfo>
-
-                  <ColumnInfo>
-                    <Portion>Maionese</Portion>
-                    <Value>{proposed.morningAndAfterSnack.portionMayonnaise.amount} gramas</Value>
-                  </ColumnInfo>
-                </SectionInfo>
-              </Wrapper>
-            </Recipes>
-            <Recipes>
-              <Title>Janta</Title>
-              <SectionImg>
-                <Image source={ImgRecipes5}></Image>
-              </SectionImg>
-              <Wrapper>
-                <SectionInfo>
-                  <ColumnInfo>
-                    <Portion>Arroz</Portion>
-                    <Value>{proposed.lunchAndDinner.portionRice.amount} gramas</Value>
-                  </ColumnInfo>
-
-                  <ColumnInfo>
-                    <Portion>Alcatra Grelhada</Portion>
-                    <Value>{proposed.lunchAndDinner.portionGrilledRump.amount} gramas</Value>
-                  </ColumnInfo>
-
-                  <ColumnInfo>
-                    <Portion>Queijo</Portion>
-                    <Value>{proposed.lunchAndDinner.portionChesse.amount} gramas</Value>
-                  </ColumnInfo>
-                </SectionInfo>
-              </Wrapper>
-            </Recipes>
-          </View>
+                        <ColumnInfo>
+                          <Portion>Queijo</Portion>
+                          <Value>
+                            {proposed.lunchAndDinner.portionChesse.amount}g
+                          </Value>
+                        </ColumnInfo>
+                      </>
+                    )}
+                  </SectionInfo>
+                </Wrapper>
+              </Recipes>
+            </View>
+          ) : (
+            <View>
+              <Recipes>
+                <Wrapper>
+                  <SectionInfo>
+                    <>
+                      <Value>
+                        Parece que você ainda não cadastrou sua ficha de saúde.
+                      </Value>
+                    </>
+                  </SectionInfo>
+                </Wrapper>
+              </Recipes>
+            </View>
+          )}
         </Container>
       </ScrollView>
     </SafeAreaView>

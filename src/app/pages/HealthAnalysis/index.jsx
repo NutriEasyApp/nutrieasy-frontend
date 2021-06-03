@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
-import { View, ScrollView, SafeAreaView, Image } from "react-native";
-import { TextInputMask } from "react-native-masked-text";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { RadioButton } from "react-native-paper";
+import React, { useEffect, useState, useContext } from 'react';
+import { View, ScrollView, SafeAreaView, Image } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { RadioButton } from 'react-native-paper';
 
-import { SliderRange } from "../../components/Slider/SliderRange";
+import { SliderRange } from '../../components/Slider/SliderRange';
 
-import AuthContext from "../../contexts/auth";
-import api from "../../services/api";
+import AuthContext from '../../contexts/auth';
+import api from '../../services/api';
 
 import {
   Container,
@@ -27,71 +27,73 @@ import {
   Flex,
   Radio,
   ImgBodytype,
-} from "./style";
+} from './style';
 
-const EctomorfoF = require("../../assets/images/Ectomorfo-f.png");
-const EctomorfoM = require("../../assets/images/Ectomorfo-m.png");
-const EndomorfoF = require("../../assets/images/Endomorfo-f.png");
-const EndomorfoM = require("../../assets/images/Endomorfo-m.png");
-const MesomorfoF = require("../../assets/images/Mesomorfo-f.png");
-const MesomorfoM = require("../../assets/images/Mesomorfo-m.png");
+const EctomorfoF = require('../../assets/images/Ectomorfo-f.png');
+const EctomorfoM = require('../../assets/images/Ectomorfo-m.png');
+const EndomorfoF = require('../../assets/images/Endomorfo-f.png');
+const EndomorfoM = require('../../assets/images/Endomorfo-m.png');
+const MesomorfoF = require('../../assets/images/Mesomorfo-f.png');
+const MesomorfoM = require('../../assets/images/Mesomorfo-m.png');
 
 function FormatStringDateBrToEua(data) {
-  var dia = data.split("/")[0];
-  var mes = data.split("/")[1];
-  var ano = data.split("/")[2];
-
-  return ano + "-" + ("0" + mes).slice(-2) + "-" + ("0" + dia).slice(-2);
+  console.log(data);
+  var dia = data.split('-')[0];
+  var mes = data.split('-')[1];
+  var ano = data.split('-')[2];
+  const date = ano + '-' + ('0' + mes).slice(-2) + '-' + ('0' + dia).slice(-2);
+  console.log(date);
+  return date;
 }
 
 function FormatStringDateEuaToBr(data) {
-  var dia = data.split("-")[0];
-  var mes = data.split("-")[1];
-  var ano = data.split("-")[2];
+  var dia = data.split('-')[0];
+  var mes = data.split('-')[1];
+  var ano = data.split('-')[2];
 
-  return ano + "-" + mes + "-" + dia;
+  return ano + '-' + mes + '-' + dia;
 }
 
 const userDataAnalysis = {
-  weight: "",
-  height: "",
-  genre: "",
-  birthdate: "",
-  bodytype: "",
-  objective: "",
-  exercisetime: "",
+  weight: '',
+  height: '',
+  genre: '',
+  birthdate: '',
+  bodytype: '',
+  objective: '',
+  exercisetime: '',
+  meals: '',
 };
 
 export default function HealthAnalysis({ navigation }) {
   const { signed, user, signOut } = useContext(AuthContext);
 
-  const [genre, setGenre] = React.useState("");
-  const [objective, setObjective] = React.useState("");
-  const [bodytype, setBodytype] = React.useState("");
-  const [date, setDate] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [exercisetime, setExerciseTime] = useState("");
-  const [meals, setMeals] = useState(5);
+  const [genre, setGenre] = React.useState('');
+  const [objective, setObjective] = React.useState('');
+  const [bodytype, setBodytype] = React.useState('');
+  const [date, setDate] = useState('');
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [exercisetime, setExerciseTime] = useState('');
+  const [meals, setMeals] = useState('');
 
-  
   const postHealth = async () => {
-    const user = await AsyncStorage.getItem("@RNAuth:user");
+    const user = await AsyncStorage.getItem('@RNAuth:user');
     try {
-      await api.post("/health", {
+      await api.post('/health', {
         id_user: `${user}`,
-        genre: genre,
-        height: height,
-        weight: weight,
-        birthdate: FormatStringDateBrToEua(date),
-        bodytype: bodytype,
-        objective: objective,
-        exercisetime: exercisetime,
-        meals: meals,
+        genre: String(genre),
+        height: String(height),
+        weight: String(weight),
+        birthdate: String(FormatStringDateBrToEua(date)),
+        bodytype: String(bodytype),
+        objective: String(objective),
+        exercisetime: String(exercisetime),
+        meals: String(meals),
       });
-      navigation.navigate("Home");
+      navigation.navigate('Home');
     } catch (err) {
-      console.log("Ocorreu um erro: ", err);
+      console.log('Ocorreu um erro: ', err);
     }
   };
 
@@ -99,7 +101,7 @@ export default function HealthAnalysis({ navigation }) {
   useEffect(() => {
     async function getHealth() {
       try {
-        const user = await AsyncStorage.getItem("@RNAuth:user");
+        const user = await AsyncStorage.getItem('@RNAuth:user');
         const result = await api.get(`/health/${user}`);
         setDate(FormatStringDateEuaToBr(result.data.birthdate));
         setGenre(result.data.genre);
@@ -108,14 +110,17 @@ export default function HealthAnalysis({ navigation }) {
         setObjective(result.data.objective);
         setBodytype(result.data.bodytype);
         setExerciseTime(result.data.exercisetime);
+        setMeals(result.data.meals);
+        console.log(result.data);
       } catch (err) {
         const { status } = err.response;
         if (status === 404) {
-          console.log("Parece que você ainda não cadastrou sua ficha de saude");
+          console.log('Parece que você ainda não cadastrou sua ficha de saude');
+          return;
         }
-        if (status === 401) {
-          signOut();
-        }
+        // if (status === 401) {
+        return signOut();
+        // }
       }
     }
     getHealth();
@@ -130,20 +135,20 @@ export default function HealthAnalysis({ navigation }) {
             <Label>Qual é a sua Data de Nascimento?</Label>
             <BirthDate>
               <TextInputMask
-                type={"datetime"}
+                type={'datetime'}
                 options={{
-                  format: "DD/MM/YYYY",
+                  format: 'DD-MM-YYYY',
                 }}
                 value={date}
-                placeholder="DD/MM/AAAA"
-                onChangeText={(event) => setDate(event)}
+                placeholder="DD-MM-AAAA"
+                onChangeText={event => setDate(event)}
                 style={DateInputStyle}
               />
 
               <Calendar>
                 <MaterialCommunityIcons
                   name="calendar-month"
-                  color={"#000"}
+                  color={'#000'}
                   size={30}
                   style={CalendarMonthStyle}
                 />
@@ -158,7 +163,7 @@ export default function HealthAnalysis({ navigation }) {
               unitType="kg"
               step={1}
               maximumValue={300}
-              onChange={(event) => setWeight(event)}
+              onChange={event => setWeight(event)}
             />
           </View>
 
@@ -169,7 +174,7 @@ export default function HealthAnalysis({ navigation }) {
               unitType="cm"
               step={1}
               maximumValue={300}
-              onChange={(event) => setHeight(event)}
+              onChange={event => setHeight(event)}
             />
           </View>
 
@@ -180,14 +185,29 @@ export default function HealthAnalysis({ navigation }) {
               unitType="h"
               step={0.5}
               maximumValue={24}
-              onChange={(event) => setExerciseTime(event)}
+              onChange={event => setExerciseTime(event)}
+            />
+          </View>
+
+          <View>
+            <Label>Quantas refeições você faz por dia?</Label>
+            <SliderRange
+              data={meals}
+              unitType="qtd"
+              step={1}
+              minimumValue={2}
+              maximumValue={5}
+              onChange={event => {
+                setMeals(event);
+                console.log(event);
+              }}
             />
           </View>
 
           <View style={Flex}>
             <Label>Qual é o seu Gênero?</Label>
             <RadioButton.Group
-              onValueChange={(event) => setGenre(event)}
+              onValueChange={event => setGenre(event)}
               value={genre}
               style={RadioButtonGroupStyle}
             >
@@ -202,7 +222,7 @@ export default function HealthAnalysis({ navigation }) {
             </RadioButton.Group>
           </View>
 
-          {genre == "M" ? (
+          {genre == 'M' ? (
             <ImgBodytype>
               <Label>Qual é o seu Biotipo Físico?</Label>
               <Image source={EctomorfoM} />
@@ -220,7 +240,7 @@ export default function HealthAnalysis({ navigation }) {
 
           <View>
             <RadioButton.Group
-              onValueChange={(event) => setBodytype(event)}
+              onValueChange={event => setBodytype(event)}
               value={bodytype}
               style={RadioButtonGroupStyle}
             >
@@ -242,7 +262,7 @@ export default function HealthAnalysis({ navigation }) {
           <View>
             <Label>O que você gostaria de fazer com seu peso?</Label>
             <RadioButton.Group
-              onValueChange={(event) => setObjective(event)}
+              onValueChange={event => setObjective(event)}
               value={objective}
               style={RadioButtonGroupStyle}
             >

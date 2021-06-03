@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { signIn, signUp } from "../services/auth.js";
-import api from "../services/api.js";
+import React, { createContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signIn, signUp, pushNotificationRegister } from '../services/auth.js';
+import api from '../services/api.js';
 
 const AuthContext = createContext({});
 
@@ -11,19 +11,19 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const [errorRegister, setErrorRegister] = useState(false);
-  const [routeName, setRouteName] = useState("SignIn");
+  const [routeName, setRouteName] = useState('SignIn');
 
   useEffect(() => {
     async function loadStoragedData() {
-      const storagedUser = await AsyncStorage.getItem("@RNAuth:user");
-      const storagedToken = await AsyncStorage.getItem("@RNAuth:token");
+      const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
+      const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
       if (storagedUser && storagedToken) {
-        api.defaults.headers["Authorization"] = `Bearer ${storagedToken}`;
+        api.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
 
         setUser(storagedUser);
       }
       setLoading(false);
-      setRouteName("SignIn");
+      setRouteName('SignIn');
     }
     loadStoragedData();
   }, []);
@@ -35,16 +35,17 @@ export const AuthProvider = ({ children }) => {
       const { token, user } = response.data;
       setUser(user);
 
-      api.defaults.headers["Authorization"] = `Bearer ${token}`;
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
-      await AsyncStorage.setItem("@RNAuth:user", user);
-      await AsyncStorage.setItem("@RNAuth:token", token);
+      await AsyncStorage.setItem('@RNAuth:user', user);
+      await AsyncStorage.setItem('@RNAuth:token', token);
+
       setLoading(false);
-      setRouteName("SignIn");
+      setRouteName('SignIn');
     } catch (e) {
       setError(true);
       setLoading(false);
-      setRouteName("SignIn");
+      setRouteName('SignIn');
     }
   }
 
@@ -55,16 +56,21 @@ export const AuthProvider = ({ children }) => {
       const { token, user } = response.data;
       setUser(user);
 
-      api.defaults.headers["Authorization"] = `Bearer ${token}`;
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
-      await AsyncStorage.setItem("@RNAuth:user", user);
-      await AsyncStorage.setItem("@RNAuth:token", token);
+      await AsyncStorage.setItem('@RNAuth:user', user);
+      await AsyncStorage.setItem('@RNAuth:token', token);
+
+      const pushNotificationToken = await AsyncStorage.getItem(
+        '@PushNotificationToken:token'
+      );
+      await pushNotificationRegister({ id: user, pushNotificationToken });
       setLoading(false);
-      setRouteName("SignIn");
+      setRouteName('SignIn');
     } catch (e) {
       setLoading(false);
+      setRouteName('SignUp');
       setErrorRegister(true);
-      setRouteName("SignUp");
     }
   }
 
@@ -73,7 +79,7 @@ export const AuthProvider = ({ children }) => {
     await AsyncStorage.clear();
     setUser(null);
     setLoading(false);
-    setRouteName("SignIn");
+    setRouteName('SignIn');
   }
 
   return (
@@ -88,6 +94,7 @@ export const AuthProvider = ({ children }) => {
         error,
         setError,
         errorRegister,
+        setErrorRegister,
         routeName,
       }}
     >

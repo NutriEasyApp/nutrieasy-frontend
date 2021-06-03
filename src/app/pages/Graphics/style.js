@@ -1,10 +1,8 @@
-import styled from 'styled-components/native';
-import { StatusBar } from 'react-native';
+import styled from "styled-components/native";
+import { StatusBar } from "react-native";
 
 export const Container = styled.View`
   margin-top: 40px;
-  padding-right: 5px;
-  padding-left: 5px;
 `;
 
 export const Wrapper = styled.View`
@@ -38,6 +36,6 @@ export const LineChartStyle = {
 
 export const SafeAreaViewStyle = {
   flex: 1,
-  backgroundColor: 'white',
+  backgroundColor: "white",
   paddingTop: StatusBar.currentHeight,
 };
