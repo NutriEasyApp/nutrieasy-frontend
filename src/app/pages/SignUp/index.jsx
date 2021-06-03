@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useState, useContext } from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import {
   Container,
@@ -14,24 +14,27 @@ import {
   TextError,
   Icon,
   SectionInput,
-} from "./style";
+} from './style';
 
-import AuthContext from "../../contexts/auth";
-const img = require("../../assets/images/logo.png");
+import AuthContext from '../../contexts/auth';
+const img = require('../../assets/images/logo.png');
 
 export default function Signup({ navigation }) {
-  const { register, error, errorRegister } = useContext(AuthContext);
+  const { register, error, setErrorRegister, errorRegister } = useContext(
+    AuthContext
+  );
 
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [cleanError, setCleanError] = useState(errorRegister);
 
   const handleSubmit = () => {
     register(email, username, password);
   };
 
   const [securePassword, setSecurePassword] = useState(true);
-  const [iconEye, setIconEye] = useState("eye-off");
+  const [iconEye, setIconEye] = useState('eye-off');
 
   return (
     <Container>
@@ -44,23 +47,25 @@ export default function Signup({ navigation }) {
           name="arrow-left"
           size={30}
           color="#90cc0c"
-          onPress={() => navigation.navigate("SignIn")}
+          onPress={() => navigation.navigate('SignIn')}
         />
       </Back>
 
       <Wrapper>
-        {errorRegister ? (
+        {cleanError ? (
           <SectionInput>
             <TextInputError
               placeholder="Apelido"
               autoCapitalize="none"
-              placeholderTextColor="#90949c"
-              onChangeText={(text) => setUsername(text)}
+              placeholderTextColor="#f02849"
+              onChangeText={text => setUsername(text)}
+              onFocus={() => setCleanError(false)}
             />
+
             <Icon>
               <MaterialCommunityIcons
-                name={"alert"}
-                color={"#f02849"}
+                name={'alert'}
+                color={'#f02849'}
                 size={25}
                 style={{ marginRight: 15 }}
               />
@@ -70,11 +75,11 @@ export default function Signup({ navigation }) {
           <TextInput
             placeholder="Apelido"
             autoCapitalize="none"
-            onChangeText={(text) => setUsername(text)}
+            onChangeText={text => setUsername(text)}
           />
         )}
 
-        {errorRegister ? (
+        {cleanError ? (
           <SectionInput>
             <TextInputError
               placeholder="Email"
@@ -82,13 +87,14 @@ export default function Signup({ navigation }) {
               textContentType="emailAddress"
               autoCapitalize="none"
               autoCompleteType="email"
-              placeholderTextColor="#90949c"
-              onChangeText={(text) => setEmail(text)}
+              placeholderTextColor="#f02849"
+              onChangeText={text => setEmail(text)}
+              onFocus={() => setCleanError(false)}
             />
             <Icon>
               <MaterialCommunityIcons
-                name={"alert"}
-                color={"#f02849"}
+                name={'alert'}
+                color={'#f02849'}
                 size={25}
                 style={{ marginRight: 15 }}
               />
@@ -101,10 +107,10 @@ export default function Signup({ navigation }) {
             textContentType="emailAddress"
             autoCapitalize="none"
             autoCompleteType="email"
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={text => setEmail(text)}
           />
         )}
-        {errorRegister ? (
+        {cleanError ? (
           <SectionInput>
             <TextInputError
               secureTextEntry={securePassword}
@@ -112,18 +118,20 @@ export default function Signup({ navigation }) {
               autoCapitalize="none"
               autoCompleteType="password"
               placeholder="Senha"
-              onChangeText={(text) => setPassword(text)}
+              placeholderTextColor={'#f02849'}
+              onChangeText={text => setPassword(text)}
+              onFocus={() => setCleanError(false)}
             />
             <Icon
               onPress={
                 securePassword
-                  ? () => setSecurePassword(false) || setIconEye("eye")
-                  : () => setSecurePassword(true) || setIconEye("eye-off")
+                  ? () => setSecurePassword(false) || setIconEye('eye')
+                  : () => setSecurePassword(true) || setIconEye('eye-off')
               }
             >
               <MaterialCommunityIcons
                 name={iconEye}
-                color={"black"}
+                color={'#f02849'}
                 size={25}
                 style={{ marginRight: 15 }}
               />
@@ -137,18 +145,18 @@ export default function Signup({ navigation }) {
               autoCapitalize="none"
               autoCompleteType="password"
               placeholder="Senha"
-              onChangeText={(text) => setPassword(text)}
+              onChangeText={text => setPassword(text)}
             />
             <Icon
               onPress={
                 securePassword
-                  ? () => setSecurePassword(false) || setIconEye("eye")
-                  : () => setSecurePassword(true) || setIconEye("eye-off")
+                  ? () => setSecurePassword(false) || setIconEye('eye')
+                  : () => setSecurePassword(true) || setIconEye('eye-off')
               }
             >
               <MaterialCommunityIcons
                 name={iconEye}
-                color={"black"}
+                color={'black'}
                 size={25}
                 style={{ marginRight: 15 }}
               />
@@ -156,7 +164,9 @@ export default function Signup({ navigation }) {
           </SectionInput>
         )}
 
-        {errorRegister && <TextError>Falha na criação da sua conta. Tente Novamente!</TextError>}
+        {cleanError && (
+          <TextError>Falha na criação da sua conta. Tente Novamente!</TextError>
+        )}
 
         <Button onPress={handleSubmit}>
           <Text>Cadastrar conta</Text>

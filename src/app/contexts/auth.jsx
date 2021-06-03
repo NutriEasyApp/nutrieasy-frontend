@@ -69,8 +69,8 @@ export const AuthProvider = ({ children }) => {
       setRouteName('SignIn');
     } catch (e) {
       setLoading(false);
-      setErrorRegister(true);
       setRouteName('SignUp');
+      setErrorRegister(true);
     }
   }
 
@@ -94,6 +94,7 @@ export const AuthProvider = ({ children }) => {
         error,
         setError,
         errorRegister,
+        setErrorRegister,
         routeName,
       }}
     >
