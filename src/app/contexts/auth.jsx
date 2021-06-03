@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
       const pushNotificationToken = await AsyncStorage.getItem(
         '@PushNotificationToken:token'
       );
-      await pushNotificationRegister({ email, pushNotificationToken });
+      await pushNotificationRegister({ id: user, pushNotificationToken });
       setLoading(false);
       setRouteName('SignIn');
     } catch (e) {
