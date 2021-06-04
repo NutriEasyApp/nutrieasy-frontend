@@ -1,32 +1,17 @@
-import React, { useState, useContext } from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React, { useState, useContext } from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import {
-  Container,
-  Logo,
-  Image,
-  Wrapper,
-  TextInput,
-  Button,
-  Text,
-  Back,
-  TextInputError,
-  TextError,
-  Icon,
-  SectionInput,
-} from './style';
+import { Container, Logo, Image, Wrapper, TextInput, Button, Text, Back, TextInputError, TextError, Icon, SectionInput } from "./style";
 
-import AuthContext from '../../contexts/auth';
-const img = require('../../assets/images/logo.png');
+import AuthContext from "../../contexts/auth";
+const img = require("../../assets/images/logo.png");
 
 export default function Signup({ navigation }) {
-  const { register, error, setErrorRegister, errorRegister } = useContext(
-    AuthContext
-  );
+  const { register, error, setErrorRegister, errorRegister } = useContext(AuthContext);
 
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [cleanError, setCleanError] = useState(errorRegister);
 
   const handleSubmit = () => {
@@ -34,7 +19,7 @@ export default function Signup({ navigation }) {
   };
 
   const [securePassword, setSecurePassword] = useState(true);
-  const [iconEye, setIconEye] = useState('eye-off');
+  const [iconEye, setIconEye] = useState("eye-off");
 
   return (
     <Container>
@@ -43,12 +28,7 @@ export default function Signup({ navigation }) {
       </Logo>
 
       <Back>
-        <MaterialCommunityIcons
-          name="arrow-left"
-          size={30}
-          color="#90cc0c"
-          onPress={() => navigation.navigate('SignIn')}
-        />
+        <MaterialCommunityIcons name="arrow-left" size={30} color="#90cc0c" onPress={() => navigation.navigate("SignIn")} />
       </Back>
 
       <Wrapper>
@@ -58,56 +38,42 @@ export default function Signup({ navigation }) {
               placeholder="Apelido"
               autoCapitalize="none"
               placeholderTextColor="#f02849"
-              onChangeText={text => setUsername(text)}
+              onChangeText={(text) => setUsername(text)}
               onFocus={() => setCleanError(false)}
             />
 
             <Icon>
-              <MaterialCommunityIcons
-                name={'alert'}
-                color={'#f02849'}
-                size={25}
-                style={{ marginRight: 15 }}
-              />
+              <MaterialCommunityIcons name={"alert"} color={"#f02849"} size={25} style={{ marginRight: 15 }} />
             </Icon>
           </SectionInput>
         ) : (
-          <TextInput
-            placeholder="Apelido"
-            autoCapitalize="none"
-            onChangeText={text => setUsername(text)}
-          />
+          <TextInput placeholder="Apelido" autoCapitalize="none" onChangeText={(text) => setUsername(text)} />
         )}
 
         {cleanError ? (
           <SectionInput>
             <TextInputError
-              placeholder="Email"
+              placeholder="E-mail"
               keyboardType="email-address"
               textContentType="emailAddress"
               autoCapitalize="none"
               autoCompleteType="email"
               placeholderTextColor="#f02849"
-              onChangeText={text => setEmail(text)}
+              onChangeText={(text) => setEmail(text)}
               onFocus={() => setCleanError(false)}
             />
             <Icon>
-              <MaterialCommunityIcons
-                name={'alert'}
-                color={'#f02849'}
-                size={25}
-                style={{ marginRight: 15 }}
-              />
+              <MaterialCommunityIcons name={"alert"} color={"#f02849"} size={25} style={{ marginRight: 15 }} />
             </Icon>
           </SectionInput>
         ) : (
           <TextInput
-            placeholder="Email"
+            placeholder="E-mail"
             keyboardType="email-address"
             textContentType="emailAddress"
             autoCapitalize="none"
             autoCompleteType="email"
-            onChangeText={text => setEmail(text)}
+            onChangeText={(text) => setEmail(text)}
           />
         )}
         {cleanError ? (
@@ -118,23 +84,14 @@ export default function Signup({ navigation }) {
               autoCapitalize="none"
               autoCompleteType="password"
               placeholder="Senha"
-              placeholderTextColor={'#f02849'}
-              onChangeText={text => setPassword(text)}
+              placeholderTextColor={"#f02849"}
+              onChangeText={(text) => setPassword(text)}
               onFocus={() => setCleanError(false)}
             />
             <Icon
-              onPress={
-                securePassword
-                  ? () => setSecurePassword(false) || setIconEye('eye')
-                  : () => setSecurePassword(true) || setIconEye('eye-off')
-              }
+              onPress={securePassword ? () => setSecurePassword(false) || setIconEye("eye") : () => setSecurePassword(true) || setIconEye("eye-off")}
             >
-              <MaterialCommunityIcons
-                name={iconEye}
-                color={'#f02849'}
-                size={25}
-                style={{ marginRight: 15 }}
-              />
+              <MaterialCommunityIcons name={iconEye} color={"#f02849"} size={25} style={{ marginRight: 15 }} />
             </Icon>
           </SectionInput>
         ) : (
@@ -145,28 +102,17 @@ export default function Signup({ navigation }) {
               autoCapitalize="none"
               autoCompleteType="password"
               placeholder="Senha"
-              onChangeText={text => setPassword(text)}
+              onChangeText={(text) => setPassword(text)}
             />
             <Icon
-              onPress={
-                securePassword
-                  ? () => setSecurePassword(false) || setIconEye('eye')
-                  : () => setSecurePassword(true) || setIconEye('eye-off')
-              }
+              onPress={securePassword ? () => setSecurePassword(false) || setIconEye("eye") : () => setSecurePassword(true) || setIconEye("eye-off")}
             >
-              <MaterialCommunityIcons
-                name={iconEye}
-                color={'black'}
-                size={25}
-                style={{ marginRight: 15 }}
-              />
+              <MaterialCommunityIcons name={iconEye} color={"black"} size={25} style={{ marginRight: 15 }} />
             </Icon>
           </SectionInput>
         )}
 
-        {cleanError && (
-          <TextError>Falha na criação da sua conta. Tente Novamente!</TextError>
-        )}
+        {cleanError && <TextError>Falha na criação da sua conta. Tente Novamente!</TextError>}
 
         <Button onPress={handleSubmit}>
           <Text>Cadastrar conta</Text>

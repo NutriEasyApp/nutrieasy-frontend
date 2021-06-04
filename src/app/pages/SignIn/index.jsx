@@ -27,6 +27,7 @@ export default function SignIn({ navigation }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cleanError, setCleanError] = useState(error);
 
   function handleSignIn() {
     auth(email, password);
@@ -41,28 +42,25 @@ export default function SignIn({ navigation }) {
       </Logo>
 
       <Wrapper>
-        {error ? (
+        {cleanError ? (
           <SectionInput>
             <TextInputError
-              placeholder="Email"
+              placeholder="E-mail"
               keyboardType="email-address"
               textContentType="emailAddress"
               autoCapitalize="none"
               autoCompleteType="email"
+              placeholderTextColor={"#f02849"}
               onChangeText={(text) => setEmail(text)}
+              onFocus={() => setCleanError(false)}
             />
             <Icon>
-              <MaterialCommunityIcons
-                name={"alert"}
-                color={"#f02849"}
-                size={25}
-                style={{ marginRight: 15 }}
-              />
+              <MaterialCommunityIcons name={"alert"} color={"#f02849"} size={25} style={{ marginRight: 15 }} />
             </Icon>
           </SectionInput>
         ) : (
           <TextInput
-            placeholder="Email"
+            placeholder="E-mail"
             keyboardType="email-address"
             textContentType="emailAddress"
             autoCapitalize="none"
@@ -71,7 +69,7 @@ export default function SignIn({ navigation }) {
           />
         )}
 
-        {error ? (
+        {cleanError ? (
           <SectionInput>
             <TextInputError
               secureTextEntry={securePassword}
@@ -79,21 +77,14 @@ export default function SignIn({ navigation }) {
               autoCapitalize="none"
               autoCompleteType="password"
               placeholder="Senha"
+              placeholderTextColor={"#f02849"}
               onChangeText={(text) => setPassword(text)}
+              onFocus={() => setCleanError(false)}
             />
             <Icon
-              onPress={
-                securePassword
-                  ? () => setSecurePassword(false) || setIconEye("eye")
-                  : () => setSecurePassword(true) || setIconEye("eye-off")
-              }
+              onPress={securePassword ? () => setSecurePassword(false) || setIconEye("eye") : () => setSecurePassword(true) || setIconEye("eye-off")}
             >
-              <MaterialCommunityIcons
-                name={iconEye}
-                color={"black"}
-                size={25}
-                style={{ marginRight: 15 }}
-              />
+              <MaterialCommunityIcons name={iconEye} color={"#f02849"} size={25} style={{ marginRight: 15 }} />
             </Icon>
           </SectionInput>
         ) : (
@@ -107,23 +98,14 @@ export default function SignIn({ navigation }) {
               onChangeText={(text) => setPassword(text)}
             />
             <Icon
-              onPress={
-                securePassword
-                  ? () => setSecurePassword(false) || setIconEye("eye")
-                  : () => setSecurePassword(true) || setIconEye("eye-off")
-              }
+              onPress={securePassword ? () => setSecurePassword(false) || setIconEye("eye") : () => setSecurePassword(true) || setIconEye("eye-off")}
             >
-              <MaterialCommunityIcons
-                name={iconEye}
-                color={"black"}
-                size={25}
-                style={{ marginRight: 15 }}
-              />
+              <MaterialCommunityIcons name={iconEye} color={"black"} size={25} style={{ marginRight: 15 }} />
             </Icon>
           </SectionInput>
         )}
 
-        {error && <TextError>Falha na Autenticação. Tente Novamente!</TextError>}
+        {cleanError && <TextError>Falha na Autenticação. Tente Novamente!</TextError>}
 
         <Button onPress={handleSignIn}>
           <TextSubmit>Acessar</TextSubmit>
