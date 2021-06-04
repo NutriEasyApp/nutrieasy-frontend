@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
-import { StatusBar } from 'react-native';
+import styled from "styled-components/native";
+import { StatusBar } from "react-native";
 
 export const Button = styled.TouchableOpacity`
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -61,6 +61,20 @@ export const Value = styled.Text`
   font-weight: bold;
 `;
 
+export const Message = styled.Text`
+  color: #f02849;
+  font-weight: bold;
+  text-align: center;
+`;
+
+export const WrapperError = styled.View`
+  margin-top: 20px;
+  padding: 5px 30px 25px 30px;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  border: 1px solid #f02849;
+`;
+
 export const Icon = styled.View`
   text-align: center;
   margin-top: 10px;
@@ -81,6 +95,6 @@ export const Wrapper = styled.View`
 
 export const SafeAreaViewStyle = {
   flex: 1,
-  backgroundColor: 'white',
+  backgroundColor: "white",
   paddingTop: StatusBar.currentHeight,
 };

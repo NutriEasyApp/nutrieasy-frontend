@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
-import { StatusBar } from 'react-native';
+import styled from "styled-components/native";
+import { StatusBar } from "react-native";
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
@@ -53,7 +53,7 @@ export const Portion = styled.Text`
 
 export const SafeAreaViewStyle = {
   flex: 1,
-  backgroundColor: '#8ac908',
+  backgroundColor: "#8ac908",
   paddingTop: StatusBar.currentHeight,
   paddingRight: 10,
   paddingLeft: 10,
@@ -92,4 +92,17 @@ export const SectionInfo = styled.View`
 export const ColumnInfo = styled.View`
   width: 50%;
   margin-bottom: 10px;
+`;
+
+export const Message = styled.Text`
+  color: #f02849;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 10px;
+`;
+
+export const Icon = styled.View`
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 `;
