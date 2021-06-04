@@ -22,6 +22,18 @@ export const Label = styled.Text`
   width: 100%;
 `;
 
+export const TitleTooltip = styled.Text`
+  font-size: 16px;
+  color: #000;
+  font-weight: 700;
+`;
+
+export const TextTooltip = styled.Text`
+  font-size: 15px;
+  color: #fff;
+  font-weight: 700;
+`;
+
 export const SliderRangeLabel = styled.Text`
   font-size: 16px;
   color: #000;

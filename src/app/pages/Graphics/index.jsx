@@ -1,32 +1,42 @@
-import React, { useState, useEffect, useContext } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View, ScrollView, SafeAreaView, Dimensions } from 'react-native';
-import { Container, Title, Text, SafeAreaViewStyle } from './style';
-import { LineChart } from 'react-native-chart-kit';
+import React, { useState, useEffect, useContext } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, ScrollView, SafeAreaView, Dimensions } from "react-native";
+import { Container, TitleMain, Text, SafeAreaViewStyle, TextMain } from "./style";
+import { LineChart } from "react-native-chart-kit";
 
-import api from '../../services/api';
-import AuthContext from '../../contexts/auth';
+import api from "../../services/api";
+import AuthContext from "../../contexts/auth";
 function convertDateStringToBRFormat(dateString) {
   let date = new Date(dateString);
   let year = date.getFullYear();
 
-  (month = ('0' + (date.getMonth() + 1)).slice(-2)),
-    (day = ('0' + date.getDate()).slice(-2));
+  (month = ("0" + (date.getMonth() + 1)).slice(-2)), (day = ("0" + date.getDate()).slice(-2));
 
-  return [day, month, year].join('/');
+  return [day, month, year].join("/");
 }
 
 const historyHealthData = {
-  _id: '',
+  _id: "",
   history: [
     {
-      _id: '',
-      date: '',
-      weight: '',
-      exercisetime: '',
+      _id: "",
+      date: "",
+      weight: "",
+      exercisetime: "",
     },
   ],
-  __v: '',
+  __v: "",
+};
+
+const chartConfig = {
+  backgroundGradientFrom: "#fff",
+  backgroundGradientFromOpacity: 0,
+  backgroundGradientTo: "#fff",
+  backgroundGradientToOpacity: 0.5,
+  color: (opacity = 1) => `rgba(255,167,38, ${opacity})`,
+  strokeWidth: 2, // optional, default 3
+  barPercentage: 0.5,
+  useShadowColorFromDataset: false, // optional
 };
 export default function Graphics() {
   const { signOut } = useContext(AuthContext);
@@ -34,27 +44,21 @@ export default function Graphics() {
   const [weight, setWeight] = useState([1, 1, 1, 1, 1, 1]);
   const [exercisetime, setExercisetime] = useState([1, 1, 1, 1, 1, 1]);
   //["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"]
-  const [date, setDate] = useState([' ', ' ', ' ', ' ', ' ', ' ']);
+  const [date, setDate] = useState([" ", " ", " ", " ", " ", " "]);
 
   useEffect(() => {
     async function getHistoryHealth() {
       try {
-        const user = await AsyncStorage.getItem('@RNAuth:user');
+        const user = await AsyncStorage.getItem("@RNAuth:user");
         const response = await api.get(`/health/history-health/${user}`);
         setProposed(response.data);
-        setWeight(response.data.history.map(item => parseInt(item.weight)));
-        setExercisetime(
-          response.data.history.map(item => parseFloat(item.exercisetime))
-        );
-        setDate(
-          response.data.history.map(item =>
-            convertDateStringToBRFormat(item.date)
-          )
-        );
+        setWeight(response.data.history.map((item) => parseInt(item.weight)));
+        setExercisetime(response.data.history.map((item) => parseFloat(item.exercisetime)));
+        setDate(response.data.history.map((item) => convertDateStringToBRFormat(item.date)));
       } catch (err) {
         const { status } = err.response;
         if (status === 404) {
-          console.log('Error 404');
+          console.log("Error 404");
           return;
         }
         // if (status === 401) {
@@ -74,7 +78,7 @@ export default function Graphics() {
   }, []);
 
   const data = [5, 10, 15, 20, 25, 32]; //dia do m
-  const axesSvg = { fontSize: 10, fill: 'grey' };
+  const axesSvg = { fontSize: 10, fill: "grey" };
   const verticalContentInset = { top: 10, bottom: 10 };
   const xAxisHeight = 20;
 
@@ -82,8 +86,7 @@ export default function Graphics() {
     <SafeAreaView style={SafeAreaViewStyle}>
       <ScrollView>
         <Container>
-          <Title>Gráficos</Title>
-
+          <TitleMain>Gráficos</TitleMain>
           <View>
             <Text>Peso</Text>
             <LineChart
@@ -95,27 +98,12 @@ export default function Graphics() {
                   },
                 ],
               }}
-              width={Dimensions.get('window').width} // from react-native
+              width={Dimensions.get("window").width} // from react-native
               height={220}
               //yAxisLabel=""
               yAxisSuffix=" kg"
               yAxisInterval={1} // optional, defaults to 1
-              chartConfig={{
-                backgroundColor: '#e26a00',
-                backgroundGradientFrom: '#fb8c00',
-                backgroundGradientTo: '#ffa726',
-                decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                style: {
-                  borderRadius: 16,
-                },
-                propsForDots: {
-                  r: '6',
-                  strokeWidth: '2',
-                  stroke: '#ffa726',
-                },
-              }}
+              chartConfig={chartConfig}
               bezier
               style={{
                 marginVertical: 8,
@@ -135,27 +123,12 @@ export default function Graphics() {
                   },
                 ],
               }}
-              width={Dimensions.get('window').width} // from react-native
+              width={Dimensions.get("window").width} // from react-native
               height={220}
               yAxisLabel=""
               yAxisSuffix=" h"
               yAxisInterval={1} // optional, defaults to 1
-              chartConfig={{
-                backgroundColor: '#e26a00',
-                backgroundGradientFrom: '#fb8c00',
-                backgroundGradientTo: '#ffa726',
-                decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                style: {
-                  borderRadius: 16,
-                },
-                propsForDots: {
-                  r: '6',
-                  strokeWidth: '2',
-                  stroke: '#ffa726',
-                },
-              }}
+              chartConfig={chartConfig}
               bezier
               style={{
                 marginVertical: 8,

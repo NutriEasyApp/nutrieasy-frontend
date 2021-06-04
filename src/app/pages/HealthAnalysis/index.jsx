@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { View, ScrollView, SafeAreaView, Image } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { RadioButton } from 'react-native-paper';
+import React, { useEffect, useState, useContext } from "react";
+import { View, ScrollView, SafeAreaView, Image } from "react-native";
+import { TextInputMask } from "react-native-masked-text";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { RadioButton } from "react-native-paper";
+import { Tooltip } from "react-native-elements";
 
-import { SliderRange } from '../../components/Slider/SliderRange';
+import { SliderRange } from "../../components/Slider/SliderRange";
 
-import AuthContext from '../../contexts/auth';
-import api from '../../services/api';
+import AuthContext from "../../contexts/auth";
+import api from "../../services/api";
 
 import {
   Container,
@@ -27,60 +28,62 @@ import {
   Flex,
   Radio,
   ImgBodytype,
-} from './style';
+  TextTooltip,
+  TitleTooltip,
+} from "./style";
 
-const EctomorfoF = require('../../assets/images/Ectomorfo-f.png');
-const EctomorfoM = require('../../assets/images/Ectomorfo-m.png');
-const EndomorfoF = require('../../assets/images/Endomorfo-f.png');
-const EndomorfoM = require('../../assets/images/Endomorfo-m.png');
-const MesomorfoF = require('../../assets/images/Mesomorfo-f.png');
-const MesomorfoM = require('../../assets/images/Mesomorfo-m.png');
+const EctomorfoF = require("../../assets/images/Ectomorfo-f-3.png");
+const EctomorfoM = require("../../assets/images/Ectomorfo-m-3.png");
+const EndomorfoF = require("../../assets/images/Endomorfo-f-3.png");
+const EndomorfoM = require("../../assets/images/Endomorfo-m-3.png");
+const MesomorfoF = require("../../assets/images/Mesomorfo-f-3.png");
+const MesomorfoM = require("../../assets/images/Mesomorfo-m-3.png");
 
 function FormatStringDateBrToEua(data) {
   console.log(data);
-  var dia = data.split('-')[0];
-  var mes = data.split('-')[1];
-  var ano = data.split('-')[2];
-  const date = ano + '-' + ('0' + mes).slice(-2) + '-' + ('0' + dia).slice(-2);
+  var dia = data.split("-")[0];
+  var mes = data.split("-")[1];
+  var ano = data.split("-")[2];
+  const date = ano + "-" + ("0" + mes).slice(-2) + "-" + ("0" + dia).slice(-2);
   console.log(date);
   return date;
 }
 
 function FormatStringDateEuaToBr(data) {
-  var dia = data.split('-')[0];
-  var mes = data.split('-')[1];
-  var ano = data.split('-')[2];
+  var dia = data.split("-")[0];
+  var mes = data.split("-")[1];
+  var ano = data.split("-")[2];
 
-  return ano + '-' + mes + '-' + dia;
+  return ano + "-" + mes + "-" + dia;
 }
 
 const userDataAnalysis = {
-  weight: '',
-  height: '',
-  genre: '',
-  birthdate: '',
-  bodytype: '',
-  objective: '',
-  exercisetime: '',
-  meals: '',
+  weight: "",
+  height: "",
+  genre: "",
+  birthdate: "",
+  bodytype: "",
+  objective: "",
+  exercisetime: "",
+  meals: "",
 };
 
 export default function HealthAnalysis({ navigation }) {
   const { signed, user, signOut } = useContext(AuthContext);
 
-  const [genre, setGenre] = React.useState('');
-  const [objective, setObjective] = React.useState('');
-  const [bodytype, setBodytype] = React.useState('');
-  const [date, setDate] = useState('');
-  const [weight, setWeight] = useState('');
-  const [height, setHeight] = useState('');
-  const [exercisetime, setExerciseTime] = useState('');
-  const [meals, setMeals] = useState('');
+  const [genre, setGenre] = React.useState("");
+  const [objective, setObjective] = React.useState("");
+  const [bodytype, setBodytype] = React.useState("");
+  const [date, setDate] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [exercisetime, setExerciseTime] = useState("");
+  const [meals, setMeals] = useState("");
 
   const postHealth = async () => {
-    const user = await AsyncStorage.getItem('@RNAuth:user');
+    const user = await AsyncStorage.getItem("@RNAuth:user");
     try {
-      await api.post('/health', {
+      await api.post("/health", {
         id_user: `${user}`,
         genre: String(genre),
         height: String(height),
@@ -91,9 +94,9 @@ export default function HealthAnalysis({ navigation }) {
         exercisetime: String(exercisetime),
         meals: String(meals),
       });
-      navigation.navigate('Home');
+      navigation.navigate("Home");
     } catch (err) {
-      console.log('Ocorreu um erro: ', err);
+      console.log("Ocorreu um erro: ", err);
     }
   };
 
@@ -101,7 +104,7 @@ export default function HealthAnalysis({ navigation }) {
   useEffect(() => {
     async function getHealth() {
       try {
-        const user = await AsyncStorage.getItem('@RNAuth:user');
+        const user = await AsyncStorage.getItem("@RNAuth:user");
         const result = await api.get(`/health/${user}`);
         setDate(FormatStringDateEuaToBr(result.data.birthdate));
         setGenre(result.data.genre);
@@ -114,7 +117,7 @@ export default function HealthAnalysis({ navigation }) {
       } catch (err) {
         const { status } = err.response;
         if (status === 404) {
-          console.log('Parece que você ainda não cadastrou sua ficha de saude');
+          console.log("Parece que você ainda não cadastrou sua ficha de saude");
           return;
         }
         // if (status === 401) {
@@ -134,58 +137,35 @@ export default function HealthAnalysis({ navigation }) {
             <Label>Qual é a sua Data de Nascimento?</Label>
             <BirthDate>
               <TextInputMask
-                type={'datetime'}
+                type={"datetime"}
                 options={{
-                  format: 'DD-MM-YYYY',
+                  format: "DD-MM-YYYY",
                 }}
                 value={date}
                 placeholder="DD-MM-AAAA"
-                onChangeText={event => setDate(event)}
+                onChangeText={(event) => setDate(event)}
                 style={DateInputStyle}
               />
 
               <Calendar>
-                <MaterialCommunityIcons
-                  name="calendar-month"
-                  color={'#000'}
-                  size={30}
-                  style={CalendarMonthStyle}
-                />
+                <MaterialCommunityIcons name="calendar-month" color={"#000"} size={30} style={CalendarMonthStyle} />
               </Calendar>
             </BirthDate>
           </View>
 
           <View>
             <SliderRangeLabel>Qual é o seu Peso? </SliderRangeLabel>
-            <SliderRange
-              data={weight}
-              unitType="kg"
-              step={1}
-              maximumValue={300}
-              onChange={event => setWeight(event)}
-            />
+            <SliderRange data={weight} unitType="kg" step={1} maximumValue={300} onChange={(event) => setWeight(event)} />
           </View>
 
           <View>
             <SliderRangeLabel>Qual é a sua Altura? </SliderRangeLabel>
-            <SliderRange
-              data={height}
-              unitType="cm"
-              step={1}
-              maximumValue={300}
-              onChange={event => setHeight(event)}
-            />
+            <SliderRange data={height} unitType="cm" step={1} maximumValue={300} onChange={(event) => setHeight(event)} />
           </View>
 
           <View>
             <Label>Quanto tempo de exercicio você pratica por dia?</Label>
-            <SliderRange
-              data={exercisetime}
-              unitType="h"
-              step={0.5}
-              maximumValue={24}
-              onChange={event => setExerciseTime(event)}
-            />
+            <SliderRange data={exercisetime} unitType="h" step={0.5} maximumValue={24} onChange={(event) => setExerciseTime(event)} />
           </View>
 
           <View>
@@ -196,7 +176,7 @@ export default function HealthAnalysis({ navigation }) {
               step={1}
               minimumValue={2}
               maximumValue={5}
-              onChange={event => {
+              onChange={(event) => {
                 setMeals(event);
                 console.log(event);
               }}
@@ -205,11 +185,7 @@ export default function HealthAnalysis({ navigation }) {
 
           <View style={Flex}>
             <Label>Qual é o seu Gênero?</Label>
-            <RadioButton.Group
-              onValueChange={event => setGenre(event)}
-              value={genre}
-              style={RadioButtonGroupStyle}
-            >
+            <RadioButton.Group onValueChange={(event) => setGenre(event)} value={genre} style={RadioButtonGroupStyle}>
               <Radio>
                 <RadioButton value="M" color="#fb9300" />
                 <ValueRadioButton>Masculino</ValueRadioButton>
@@ -221,12 +197,29 @@ export default function HealthAnalysis({ navigation }) {
             </RadioButton.Group>
           </View>
 
-          {genre == 'M' ? (
+          {genre == "M" ? (
             <ImgBodytype>
               <Label>Qual é o seu Biotipo Físico?</Label>
               <Image source={EctomorfoM} />
               <Image source={EndomorfoM} />
               <Image source={MesomorfoM} />
+
+              <View style={{ justifyContent: "flex-end" }}>
+                <Tooltip
+                  backgroundColor={"#fb9300"}
+                  height={190}
+                  width={230}
+                  popover={
+                    <TextTooltip>
+                      O biotipo é a forma física que tem o corpo do ser humano, sendo determinado por alguns fatores que variam de pessoa para a pessoa. Os que são relevantes ao considerar os biotipos
+                      são: constituição dos ossos, massa muscular e metabolismo.
+                    </TextTooltip>
+                  }
+                >
+                  <MaterialCommunityIcons name="help-circle" color={"#90cc0c"} size={35} />
+                  <TitleTooltip>Ajuda</TitleTooltip>
+                </Tooltip>
+              </View>
             </ImgBodytype>
           ) : (
             <ImgBodytype>
@@ -234,15 +227,28 @@ export default function HealthAnalysis({ navigation }) {
               <Image source={EctomorfoF} />
               <Image source={EndomorfoF} />
               <Image source={MesomorfoF} />
+
+              <View style={{ justifyContent: "flex-end" }}>
+                <Tooltip
+                  backgroundColor={"#fb9300"}
+                  height={190}
+                  width={230}
+                  popover={
+                    <TextTooltip>
+                      O biotipo é a forma física que tem o corpo do ser humano, sendo determinado por alguns fatores que variam de pessoa para a pessoa. Os que são relevantes ao considerar os biotipos
+                      são: constituição dos ossos, massa muscular e metabolismo.
+                    </TextTooltip>
+                  }
+                >
+                  <MaterialCommunityIcons name="help-circle" color={"#90cc0c"} size={35} />
+                  <TitleTooltip>Ajuda</TitleTooltip>
+                </Tooltip>
+              </View>
             </ImgBodytype>
           )}
 
           <View>
-            <RadioButton.Group
-              onValueChange={event => setBodytype(event)}
-              value={bodytype}
-              style={RadioButtonGroupStyle}
-            >
+            <RadioButton.Group onValueChange={(event) => setBodytype(event)} value={bodytype} style={RadioButtonGroupStyle}>
               <Radio>
                 <RadioButton value="ECTOMORPH" color="#fb9300" />
                 <ValueRadioButton>1- Ectomorfo</ValueRadioButton>
@@ -260,11 +266,7 @@ export default function HealthAnalysis({ navigation }) {
 
           <View>
             <Label>O que você gostaria de fazer com seu peso?</Label>
-            <RadioButton.Group
-              onValueChange={event => setObjective(event)}
-              value={objective}
-              style={RadioButtonGroupStyle}
-            >
+            <RadioButton.Group onValueChange={(event) => setObjective(event)} value={objective} style={RadioButtonGroupStyle}>
               <Radio>
                 <RadioButton value="GAIN" color="#fb9300" />
                 <ValueRadioButton>Ganhar</ValueRadioButton>
