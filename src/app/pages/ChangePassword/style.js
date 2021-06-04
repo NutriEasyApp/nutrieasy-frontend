@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
@@ -89,4 +89,10 @@ export const Icon = styled.TouchableOpacity`
 export const SectionInput = styled.View`
   width: 100%;
   align-items: center;
+`;
+
+export const TextError = styled.Text`
+  color: #f02849;
+  font-size: 15px;
+  margin-bottom: 20px;
 `;
