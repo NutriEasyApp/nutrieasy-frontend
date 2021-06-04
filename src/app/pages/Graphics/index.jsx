@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, ScrollView, SafeAreaView, Dimensions } from 'react-native';
-import {
-  Container,
-  TitleMain,
-  Text,
-  SafeAreaViewStyle,
-  TextMain,
-} from './style';
 import { LineChart } from 'react-native-chart-kit';
 
+import { Container, TitleMain, Text, SafeAreaViewStyle } from './style';
+
 import api from '../../services/api';
+
 import AuthContext from '../../contexts/auth';
 import UpdateInfoContext from '../../contexts/updateInfo';
 
@@ -43,9 +39,9 @@ const chartConfig = {
   backgroundGradientTo: '#fff',
   backgroundGradientToOpacity: 0.5,
   color: (opacity = 1) => `rgba(255,167,38, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
+  strokeWidth: 2,
   barPercentage: 0.5,
-  useShadowColorFromDataset: false, // optional
+  useShadowColorFromDataset: false,
 };
 export default function Graphics() {
   const { signOut } = useContext(AuthContext);
@@ -93,7 +89,7 @@ export default function Graphics() {
     getHistoryHealth();
   }, [update]);
 
-  const data = [5, 10, 15, 20, 25, 32]; //dia do m
+  const data = [5, 10, 15, 20, 25, 32];
   const axesSvg = { fontSize: 10, fill: 'grey' };
   const verticalContentInset = { top: 10, bottom: 10 };
   const xAxisHeight = 20;
@@ -114,11 +110,10 @@ export default function Graphics() {
                   },
                 ],
               }}
-              width={Dimensions.get('window').width} // from react-native
+              width={Dimensions.get('window').width}
               height={220}
-              //yAxisLabel=""
               yAxisSuffix=" kg"
-              yAxisInterval={1} // optional, defaults to 1
+              yAxisInterval={1}
               chartConfig={chartConfig}
               bezier
               style={{
@@ -139,11 +134,11 @@ export default function Graphics() {
                   },
                 ],
               }}
-              width={Dimensions.get('window').width} // from react-native
+              width={Dimensions.get('window').width}
               height={220}
               yAxisLabel=""
               yAxisSuffix=" h"
-              yAxisInterval={1} // optional, defaults to 1
+              yAxisInterval={1}
               chartConfig={chartConfig}
               bezier
               style={{
