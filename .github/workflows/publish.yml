@@ -13,8 +13,9 @@ jobs:
           node-version: 14.x
       - name: print secrets
         run: |
-          echo $DEV_ENV_FILE >> google-service.json
-          cat google-service.json
+          echo $PWD
+          echo $DEV_ENV_FILE >> /Users/runner/work/nutrieasy-frontend/nutrieasy-frontend/google-services.json
+          cat /Users/runner/work/nutrieasy-frontend/nutrieasy-frontend/google-services.json
         shell: bash
         env:
           DEV_ENV_FILE : ${{ secrets.SECRET1 }}
