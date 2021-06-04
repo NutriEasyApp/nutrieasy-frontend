@@ -2,7 +2,9 @@ import styled from "styled-components/native";
 import { StatusBar } from "react-native";
 
 export const Container = styled.View`
-  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  padding: 25px 10px;
 `;
 
 export const Wrapper = styled.View`
@@ -16,9 +18,9 @@ export const Graph = styled.View`
   margin-left: 10px;
 `;
 
-export const Title = styled.Text`
-  text-align: center;
+export const TitleMain = styled.Text`
   font-size: 30px;
+  text-align: center;
   font-weight: bold;
 `;
 
@@ -39,3 +41,13 @@ export const SafeAreaViewStyle = {
   backgroundColor: "white",
   paddingTop: StatusBar.currentHeight,
 };
+
+export const TextMain = styled.Text`
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+  font-weight: 200;
+  width: 100%;
+  margin-bottom: 10px;
+  color: gray;
+`;
