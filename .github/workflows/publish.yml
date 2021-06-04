@@ -11,6 +11,18 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
+      - name: print secrets
+      run: |
+          echo $DEV_ENV_FILE >> google-service.json
+          cat google-service.json
+      shell: bash
+      env:
+        DEV_ENV_FILE : ${{ secrets.SECRET1 }}
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: DEV_ENV_FILE
+       path: google-service.json
       - uses: actions/setup-java@v1.4.3
         with:
           java-version: '9.0.4' # The JDK version to make available on the path.
@@ -24,5 +36,3 @@ jobs:
         run: yarn install
       - name: Build Android APK Bundle
         run: expo build:android
-      - name: Expo Publish
-        run: expo publish

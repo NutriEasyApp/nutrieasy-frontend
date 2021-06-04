@@ -19,8 +19,10 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "package": "com.nutrieasy.app",
       "useNextNotificationsApi": true,
+      "userInterfaceStyle": "light",
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
       }
