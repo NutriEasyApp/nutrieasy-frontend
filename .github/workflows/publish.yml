@@ -35,8 +35,7 @@ jobs:
       - name: Install deps
         run: yarn install
       - name: Build Android APK Bundle
-        run: 
-        expo build:
+        run: expo build:android
         
 
 
