@@ -114,7 +114,6 @@ export default function HealthAnalysis({ navigation }) {
         setBodytype(result.data.bodytype);
         setExerciseTime(result.data.exercisetime);
         setMeals(result.data.meals);
-        console.log(result.data);
       } catch (err) {
         const { status } = err.response;
         if (status === 404) {

@@ -26,12 +26,9 @@ export async function signUp(email, username, password) {
   return api.post('/auth/signup', { email, username, password });
 }
 
-export async function pushNotificationRegister({
-  email,
-  pushNotificationToken,
-}) {
+export async function pushNotificationRegister({ id, pushNotificationToken }) {
   return api.post('/pushnotificationregister', {
-    email,
+    id,
     pushNotificationToken,
   });
 }
