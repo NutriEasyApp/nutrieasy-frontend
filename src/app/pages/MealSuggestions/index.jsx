@@ -1,79 +1,96 @@
-import React, { useState, useEffect, useContext } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Image, ScrollView, SafeAreaView, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Container, Wrapper, Text, TitlePage, Title, Recipes, SafeAreaViewStyle, Portion, Value, SectionImg, SectionInfo, ColumnInfo, WrapperError, Message, Icon } from "./style";
+import React, { useState, useEffect, useContext } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Image, ScrollView, SafeAreaView, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {
+  Container,
+  Wrapper,
+  Text,
+  TitlePage,
+  Title,
+  Recipes,
+  SafeAreaViewStyle,
+  Portion,
+  Value,
+  SectionImg,
+  SectionInfo,
+  ColumnInfo,
+  WrapperError,
+  Message,
+  Icon,
+} from './style';
 
-import api from "../../services/api";
-import AuthContext from "../../contexts/auth";
+import api from '../../services/api';
+import AuthContext from '../../contexts/auth';
+import UpdateInfoContext from '../../contexts/updateInfo';
 
-const ImgRecipes1 = require("../../assets/images/recipes-1.jpg");
-const ImgRecipes2 = require("../../assets/images/recipes-2.jpg");
-const ImgRecipes3 = require("../../assets/images/recipes-3.jpg");
-const ImgRecipes4 = require("../../assets/images/recipes-4.jpg");
-const ImgRecipes5 = require("../../assets/images/recipes-5.jpg");
+const ImgRecipes1 = require('../../assets/images/recipes-1.jpg');
+const ImgRecipes2 = require('../../assets/images/recipes-2.jpg');
+const ImgRecipes3 = require('../../assets/images/recipes-3.jpg');
+const ImgRecipes4 = require('../../assets/images/recipes-4.jpg');
+const ImgRecipes5 = require('../../assets/images/recipes-5.jpg');
 
 const dietData = {
   breakfast: {
     portionCashewNut: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionCereal: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionYogurt: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
   },
 
   lunchAndDinner: {
     portionRice: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionGrilledRump: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionChesse: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
   },
 
   morningAndAfterSnack: {
     portionBread: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionTuna: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
     portionMayonnaise: {
-      amount: "",
-      type: "",
+      amount: '',
+      type: '',
     },
   },
 };
 
 export default function MealSuggestions() {
   const { signOut } = useContext(AuthContext);
+  const { update } = useContext(UpdateInfoContext);
   const [proposed, setProposed] = useState(dietData);
   const [diet, setDiet] = useState(false);
 
   useEffect(() => {
     async function getDietMeals() {
       try {
-        const user = await AsyncStorage.getItem("@RNAuth:user");
+        const user = await AsyncStorage.getItem('@RNAuth:user');
         const response = await api.get(`/diet/meals/${user}`);
         setProposed(response.data);
         setDiet(true);
       } catch (err) {
-        console.log("Aqui");
         const { status } = err.response;
         if (status === 404) {
           //console.log('Parece que você ainda não cadastrou sua ficha de saude');
@@ -85,15 +102,16 @@ export default function MealSuggestions() {
       }
     }
     getDietMeals();
-  }, []);
+  }, [update]);
   return (
     <SafeAreaView style={SafeAreaViewStyle}>
       <ScrollView>
         <Container>
           <TitlePage>Sugestões de Refeições</TitlePage>
           <Text>
-            Separamos para você, sugestões de refeições com objetivo de obter uma alimentação equilibrada e saudável. Estão divididos entre 2 a 5, com a quantidade de porção exata de cada alimento
-            para ingerir.
+            Separamos para você, sugestões de refeições com objetivo de obter
+            uma alimentação equilibrada e saudável. Estão divididos entre 2 a 5,
+            com a quantidade de porção exata de cada alimento para ingerir.
           </Text>
           {diet ? (
             <View>
@@ -110,17 +128,23 @@ export default function MealSuggestions() {
                         <>
                           <ColumnInfo>
                             <Portion>Cereal</Portion>
-                            <Value>{proposed.breakfast.portionCereal.amount}g</Value>
+                            <Value>
+                              {proposed.breakfast.portionCereal.amount}g
+                            </Value>
                           </ColumnInfo>
 
                           <ColumnInfo>
                             <Portion>Iogurte</Portion>
-                            <Value>{proposed.breakfast.portionYogurt.amount}ml</Value>
+                            <Value>
+                              {proposed.breakfast.portionYogurt.amount}ml
+                            </Value>
                           </ColumnInfo>
 
                           <ColumnInfo>
                             <Portion>Castanha de Caju</Portion>
-                            <Value>{proposed.breakfast.portionCashewNut.amount}g</Value>
+                            <Value>
+                              {proposed.breakfast.portionCashewNut.amount}g
+                            </Value>
                           </ColumnInfo>
                         </>
                       )}
@@ -141,19 +165,31 @@ export default function MealSuggestions() {
                           <ColumnInfo>
                             <Portion>Pão</Portion>
                             <Value>
-                              {proposed.morningAndAfterSnack.portionBread.amount}
+                              {
+                                proposed.morningAndAfterSnack.portionBread
+                                  .amount
+                              }
                               un
                             </Value>
                           </ColumnInfo>
 
                           <ColumnInfo>
                             <Portion>Atum</Portion>
-                            <Value>{proposed.morningAndAfterSnack.portionTuna.amount}g</Value>
+                            <Value>
+                              {proposed.morningAndAfterSnack.portionTuna.amount}
+                              g
+                            </Value>
                           </ColumnInfo>
 
                           <ColumnInfo>
                             <Portion>Maionese</Portion>
-                            <Value>{proposed.morningAndAfterSnack.portionMayonnaise.amount}g</Value>
+                            <Value>
+                              {
+                                proposed.morningAndAfterSnack.portionMayonnaise
+                                  .amount
+                              }
+                              g
+                            </Value>
                           </ColumnInfo>
                         </>
                       )}
@@ -172,17 +208,23 @@ export default function MealSuggestions() {
                       <>
                         <ColumnInfo>
                           <Portion>Arroz</Portion>
-                          <Value>{proposed.lunchAndDinner.portionRice.amount}g</Value>
+                          <Value>
+                            {proposed.lunchAndDinner.portionRice.amount}g
+                          </Value>
                         </ColumnInfo>
 
                         <ColumnInfo>
                           <Portion>Alcatra Grelhada</Portion>
-                          <Value>{proposed.lunchAndDinner.portionGrilledRump.amount}g</Value>
+                          <Value>
+                            {proposed.lunchAndDinner.portionGrilledRump.amount}g
+                          </Value>
                         </ColumnInfo>
 
                         <ColumnInfo>
                           <Portion>Queijo</Portion>
-                          <Value>{proposed.lunchAndDinner.portionChesse.amount}g</Value>
+                          <Value>
+                            {proposed.lunchAndDinner.portionChesse.amount}g
+                          </Value>
                         </ColumnInfo>
                       </>
                     )}
@@ -197,9 +239,15 @@ export default function MealSuggestions() {
                   <SectionInfo>
                     <>
                       <Icon>
-                        <MaterialCommunityIcons name="alert" color={"#f02849"} size={45} />
+                        <MaterialCommunityIcons
+                          name="alert"
+                          color={'#f02849'}
+                          size={45}
+                        />
                       </Icon>
-                      <Message>Parece que você ainda não cadastrou sua ficha de saúde.</Message>
+                      <Message>
+                        Parece que você ainda não cadastrou sua ficha de saúde.
+                      </Message>
                     </>
                   </SectionInfo>
                 </Wrapper>

@@ -9,6 +9,8 @@ import { Tooltip } from 'react-native-elements';
 import { SliderRange } from '../../components/Slider/SliderRange';
 
 import AuthContext from '../../contexts/auth';
+import UpdateInfoContext from '../../contexts/updateInfo';
+
 import api from '../../services/api';
 
 import {
@@ -40,12 +42,10 @@ const MesomorfoF = require('../../assets/images/Mesomorfo-f-3.png');
 const MesomorfoM = require('../../assets/images/Mesomorfo-m-3.png');
 
 function FormatStringDateBrToEua(data) {
-  console.log(data);
   var dia = data.split('-')[0];
   var mes = data.split('-')[1];
   var ano = data.split('-')[2];
   const date = ano + '-' + ('0' + mes).slice(-2) + '-' + ('0' + dia).slice(-2);
-  console.log(date);
   return date;
 }
 
@@ -70,7 +70,7 @@ const userDataAnalysis = {
 
 export default function HealthAnalysis({ navigation }) {
   const { signed, user, signOut } = useContext(AuthContext);
-
+  const { update, updateInfo } = useContext(UpdateInfoContext);
   const [genre, setGenre] = React.useState('');
   const [objective, setObjective] = React.useState('');
   const [bodytype, setBodytype] = React.useState('');
@@ -94,9 +94,12 @@ export default function HealthAnalysis({ navigation }) {
         exercisetime: String(exercisetime),
         meals: String(meals),
       });
+      updateInfo();
       navigation.navigate('Home');
     } catch (err) {
       console.log('Ocorreu um erro: ', err);
+
+      return signOut();
     }
   };
 
@@ -126,7 +129,7 @@ export default function HealthAnalysis({ navigation }) {
       }
     }
     getHealth();
-  }, []);
+  }, [update]);
 
   return (
     <SafeAreaView style={SafeAreaViewStyle}>
@@ -187,7 +190,7 @@ export default function HealthAnalysis({ navigation }) {
               unitType="h"
               step={0.5}
               minimumValue={0}
-              maximumValue={24}
+              maximumValue={8}
               onChange={event => setExerciseTime(event)}
             />
           </View>
@@ -200,10 +203,7 @@ export default function HealthAnalysis({ navigation }) {
               step={1}
               minimumValue={2}
               maximumValue={5}
-              onChange={event => {
-                setMeals(event);
-                console.log(event);
-              }}
+              onChange={event => setMeals(event)}
             />
           </View>
 
