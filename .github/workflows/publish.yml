@@ -37,7 +37,8 @@ jobs:
         run: yarn install
       - name: Build Android APK Bundle
         run: expo build:android
-        
+      - name: Expo Publish
+        run: expo publish        
 
 
 
