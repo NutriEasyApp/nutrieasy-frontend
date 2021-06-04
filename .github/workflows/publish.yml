@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: DEV_ENV_FILE
-          path: google-service.json
+          path: /Users/runner/work/nutrieasy-frontend/nutrieasy-frontend/google-services.json
       - uses: actions/setup-java@v1.4.3
         with:
           java-version: '9.0.4' # The JDK version to make available on the path.
