@@ -24,11 +24,10 @@ export default function ResetPassword({ route, navigation }) {
       navigation.navigate("ChangePassword");
     } catch (err) {
       const { status } = err.response;
-      if (status === 404 || status === 400) {
+      if (status === 404 || status === 500) {
         setCleanError(true);
         console.log("Ocorreu um erro: ", err);
-      }
-      signOut();
+      } else signOut();   
     }
   };
 

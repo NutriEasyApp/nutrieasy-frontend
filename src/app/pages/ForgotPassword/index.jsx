@@ -9,28 +9,34 @@ import api from "../../services/api";
 export default function ForgotPassword({ navigation }) {
   const [email, setEmail] = useState("");
   const [cleanError, setCleanError] = useState(false);
+  const [emptyField, setEmptyField] = useState(false);
 
   const { signOut } = useContext(AuthContext);
 
   const postEmail = async () => {
-    try {
-      const user = await AsyncStorage.getItem("@RNAuth:user");
-      await api.post("/forgotpassword", {
-        email: email,
-      });
+    if (email.trim()) {
+      try {
+        const user = await AsyncStorage.getItem("@RNAuth:user");
+        await api.post("/forgotpassword", {
+          email: email,
+        });
+        setCleanError(false);
+        setEmptyField(false);
+        navigation.navigate("ResetPassword", { email: email });
+      } catch (err) {
+        const { status } = err.response;
+        if (status === 404 || status === 500) {
+          setCleanError(true);
+          setEmptyField(false);
+          console.log("Ocorreu um erro: ", err);
+        } else signOut();
+      }
+    }else{
+      setEmptyField(true);
       setCleanError(false);
-      navigation.navigate("ResetPassword", { email: email });
-    } catch (err) {
-      const { status } = err.response;
-      console.log(status);
-      if (status === 404 || status === 500) {
-        setCleanError(true);
-        console.log("Ocorreu um erro: ", err);
-      } else signOut();
-    }
+    } 
   };
 
-  {console.log("aquuuuu  " + cleanError)}
   return (
     <Container>
       <Back>
@@ -43,7 +49,7 @@ export default function ForgotPassword({ navigation }) {
         cadastrar uma nova senha.
       </Text>
 
-      {cleanError ? (
+      {cleanError || emptyField ? (
         <SectionInput>
           <TextInputError
             placeholder="E-mail"
@@ -71,6 +77,7 @@ export default function ForgotPassword({ navigation }) {
       )}
 
       {cleanError && <TextError>E-mail não encontrado. Tente Novamente!</TextError>}
+      {emptyField && <TextError>Campo vazio! Digite o e-mail.</TextError>}
 
       <Button onPress={postEmail}>
         <TextButton>Enviar</TextButton>
