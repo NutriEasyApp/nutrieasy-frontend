@@ -6,6 +6,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider } from './src/app/contexts/auth';
+import { UpdateInfoProvider } from './src/app/contexts/updateInfo';
 import Routes from './src/app/routes';
 
 Notifications.setNotificationHandler({
@@ -56,7 +57,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <Routes />
+        <UpdateInfoProvider>
+          <Routes />
+        </UpdateInfoProvider>
       </AuthProvider>
     </NavigationContainer>
   );

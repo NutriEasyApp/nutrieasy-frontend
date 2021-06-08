@@ -25,14 +25,14 @@ export function SliderRange({
         return <Text style={styles.text}>{String(data)}</Text>;
     }
   }
-
+  minimumValue ? minimumValue : 2;
   return (
     <View style={styles.container}>
       {checkTitle()}
       <Slider
         step={step}
         maximumValue={maximumValue}
-        minimumValue={minimumValue ? minimumValue : 2}
+        minimumValue={minimumValue}
         onValueChange={value => handleChange(value)}
         value={Number(data)}
         minimumTrackTintColor="#2C632D"

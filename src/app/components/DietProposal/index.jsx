@@ -18,6 +18,7 @@ import {
 
 import api from '../../services/api';
 import AuthContext from '../../contexts/auth';
+import UpdateInfoContext from '../../contexts/updateInfo';
 
 const dietData = {
   diet: {
@@ -35,6 +36,7 @@ import Menu from '../../components/Menu';
 
 export default function DietProposal() {
   const { signOut } = useContext(AuthContext);
+  const { update } = useContext(UpdateInfoContext);
   const [proposed, setProposed] = useState(dietData);
   const [diet, setDiet] = useState(false);
 
@@ -95,7 +97,7 @@ export default function DietProposal() {
       }
     }
     getDiet();
-  }, []);
+  }, [update]);
 
   return (
     <Container>

@@ -84,3 +84,9 @@ export const SectionInput = styled.View`
   width: 100%;
   align-items: center;
 `;
+
+export const TextError = styled.Text`
+  color: #f02849;
+  font-size: 15px;
+  margin-bottom: 20px;
+`;
