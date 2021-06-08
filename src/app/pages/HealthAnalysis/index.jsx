@@ -77,7 +77,7 @@ export default function HealthAnalysis({ navigation }) {
   const [date, setDate] = useState('');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
-  const [exercisetime, setExerciseTime] = useState('');
+  const [exercisetime, setExerciseTime] = useState(0);
   const [meals, setMeals] = useState('');
 
   const postHealth = async () => {

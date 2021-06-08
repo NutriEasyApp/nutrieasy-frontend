@@ -3,6 +3,8 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
+import ChangePassword from '../pages/ChangePassword';
+
 import AuthContext from '../contexts/auth';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -21,6 +23,7 @@ export default function AuthRoutes() {
       <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="ForgotPassword" component={ForgotPassword} />
       <AuthStack.Screen name="ResetPassword" component={ResetPassword} />
+      <AuthStack.Screen name="ChangePassword" component={ChangePassword} />
     </AuthStack.Navigator>
   );
 }
