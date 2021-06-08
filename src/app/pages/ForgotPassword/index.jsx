@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Container, TextInput, Button, Text, Title, TextButton, Back, TextInputError, Icon, SectionInput } from "./style";
+import { Container, TextInput, Button, Text, Title, TextButton, Back, TextInputError, Icon, SectionInput, TextError } from "./style";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import AuthContext from "../../contexts/auth";
@@ -22,14 +22,15 @@ export default function ForgotPassword({ navigation }) {
       navigation.navigate("ResetPassword", { email: email });
     } catch (err) {
       const { status } = err.response;
-      if (status === 404 || status === 400) {
+      console.log(status);
+      if (status === 404 || status === 500) {
         setCleanError(true);
         console.log("Ocorreu um erro: ", err);
-      }
-      signOut();
+      } else signOut();
     }
   };
 
+  {console.log("aquuuuu  " + cleanError)}
   return (
     <Container>
       <Back>
@@ -68,6 +69,8 @@ export default function ForgotPassword({ navigation }) {
           onChangeText={(text) => setEmail(text)}
         />
       )}
+
+      {cleanError && <TextError>E-mail não encontrado. Tente Novamente!</TextError>}
 
       <Button onPress={postEmail}>
         <TextButton>Enviar</TextButton>
