@@ -21,7 +21,7 @@ export default function ResetPassword({ route, navigation }) {
         code: code,
       });
       setCleanError(false);
-      navigation.navigate("Home");
+      navigation.navigate("ChangePassword");
     } catch (err) {
       const { status } = err.response;
       if (status === 404 || status === 400) {
