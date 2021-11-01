@@ -71,6 +71,7 @@ As seguintes ferramentas foram usadas na construção do projeto: Javascript, Re
  <img style="border-radius: 50%;" src="https://user-images.githubusercontent.com/25436067/139539673-0901e87c-b021-46bd-b173-795d4ed94e9a.png" width="100px;" alt="Gabriel Alonso"/>
  <sub><b>Gabriel Alonso</b></sub>
  <br />
+ 
 ---
 
 ## 📝 Licença
