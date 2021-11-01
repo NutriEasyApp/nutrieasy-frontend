@@ -70,19 +70,19 @@ As seguintes ferramentas foram usadas na construção do projeto: Javascript, Re
 ## 👨‍💻 Autores
 <p style="margin-bottom: 0;">
  <img style="border-radius: 50%;" src="https://user-images.githubusercontent.com/25436067/139539673-0901e87c-b021-46bd-b173-795d4ed94e9a.png" width="100px;" alt="Gabriel Alonso"/>
- <sub><b>Gabriel Alonso</b></sub>
+ <sub style="display: block;margin-top: 10px;"><b>Gabriel Alonso</b></sub>
   </p>
  <br />
  <br />
  <p style="margin-bottom: 0;">
  <img style="border-radius: 50%;" src="https://user-images.githubusercontent.com/25436067/139607934-ccfab16e-aae7-4310-974f-cf839a57cc7d.png" width="100px;" alt="Lucas Mori"/>
- <sub><b>Lucas Mori</b></sub>
+ <sub style="display: block;margin-top: 10px;"><b>Lucas Mori</b></sub>
   </p>
  <br />
  <br />
  <p style="margin-bottom: 0;">
  <img style="border-radius: 50%;" src="https://user-images.githubusercontent.com/25436067/139607959-a19f3a25-8e0c-4b5f-99a3-3a7df7e769ed.png" width="100px;" alt="Davi Marcelino"/>
- <sub><b>Davi Marcelino</b></sub>
+ <sub style="display: block;margin-top: 10px;"><b>Davi Marcelino</b></sub>
    </p>
  <br />
  
